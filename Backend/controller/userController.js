@@ -5,7 +5,7 @@ const generateJWT = require('../helpers/jwtUser.js');
 const login = async (req, res) => {
     const { username, password } = req.body;
 
-    const userExists = await db.query('SELECT username, name, email, type, password FROM usuario WHERE username = $1', [username]);
+    const userExists = await db.query('SELECT user_id, username, name, email, type, password FROM usuario WHERE username = $1', [username]);
     let user = userExists.rows[0];
 
     if (!user) {
@@ -15,9 +15,10 @@ const login = async (req, res) => {
     }
 
     if (await bcrypt.compare(password, user.password)) {
-        let token = generateJWT(user.username);
+        let token = generateJWT(user.user_id);
 
         res.json({
+            id: user.user_id,
             username: user.username,
             name: user.name,
             email: user.email,
@@ -57,4 +58,10 @@ const createUser = async (req, res) => {
     }
 }
 
-module.exports = { login, createUser };
+const auth = async (req, res) => {
+    const { username } = req;
+
+    res.json(username.rows[0]);
+}
+
+module.exports = { login, createUser, auth };
