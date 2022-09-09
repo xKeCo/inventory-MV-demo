@@ -1,11 +1,12 @@
 const router = require('express').Router();
-const { login, createUser } = require('../controller/userController');
+const { login, createUser, auth } = require('../controller/userController');
+const checkAuth = require('../middleware/checkAuth');
 
 // Login endpoint
 router.post('/login', login);
 
 // Auth endpoint
-router.get('/auth');
+router.get('/auth', checkAuth, auth );
 
 // Create account endpoint
 router.post('/create-user', createUser);
