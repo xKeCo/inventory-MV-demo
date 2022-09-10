@@ -9,6 +9,6 @@ router.post('/login', login);
 router.get('/auth', checkAuth, auth );
 
 // Create account endpoint
-router.post('/create-user', createUser);
+router.post('/create-user', checkAuth, createUser);
 
 module.exports = router;
