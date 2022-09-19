@@ -23,10 +23,9 @@ function Navbar() {
     <div className={s.navbar}>
       <div>
         <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            children={<SearchIcon color="gray.500" />}
-          />
+          <InputLeftElement pointerEvents="none">
+            <SearchIcon color="gray.500" />
+          </InputLeftElement>
           <Input placeholder="Buscar" />
         </InputGroup>
       </div>

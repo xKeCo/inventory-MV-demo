@@ -7,8 +7,6 @@ import s from "../styles/Login.module.css";
 // Chakra UI
 import {
   FormControl,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   InputGroup,
   InputRightElement,
@@ -18,7 +16,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import axios from "axios";
 
-function login() {
+function Login() {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -116,4 +114,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;

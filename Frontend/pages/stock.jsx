@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 // Styles
 import s from "../styles/Stock.module.css";
 
-function stock() {
+function Stock() {
   return (
     <>
       <div className={s.flex}>
@@ -28,4 +28,4 @@ function stock() {
   );
 }
 
-export default stock;
+export default Stock;

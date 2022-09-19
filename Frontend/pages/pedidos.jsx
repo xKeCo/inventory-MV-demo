@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 // Styles
 import s from "../styles/Pedidos.module.css";
 
-function pedidos() {
+function Pedidos() {
   return (
     <>
       <div className={s.flex}>
@@ -28,4 +28,4 @@ function pedidos() {
   );
 }
 
-export default pedidos;
+export default Pedidos;

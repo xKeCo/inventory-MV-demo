@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 // Styles
 import s from "../styles/Reportes.module.css";
 
-function reportes() {
+function Reportes() {
   return (
     <>
       <div className={s.flex}>
@@ -28,4 +28,4 @@ function reportes() {
   );
 }
 
-export default reportes;
+export default Reportes;

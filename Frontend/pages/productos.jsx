@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 // Styles
 import s from "../styles/Productos.module.css";
 
-function productos() {
+function Productos() {
   return (
     <>
       <div className={s.flex}>
@@ -28,4 +28,4 @@ function productos() {
   );
 }
 
-export default productos;
+export default Productos;

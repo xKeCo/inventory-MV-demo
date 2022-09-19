@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 // Styles
 import s from "../styles/Proveedores.module.css";
 
-function proveedores() {
+function Proveedores() {
   return (
     <>
       <Head>
@@ -29,4 +29,4 @@ function proveedores() {
   );
 }
 
-export default proveedores;
+export default Proveedores;
