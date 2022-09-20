@@ -1,6 +1,12 @@
+// React
+
+// Next
 import Head from "next/head";
-import Image from "next/image";
+
+// Styles
 import s from "../styles/Home.module.css";
+
+// Local Components
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 

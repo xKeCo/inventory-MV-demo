@@ -1,5 +1,7 @@
-// Local Components
+// Next
 import Head from "next/head";
+
+// Local Components
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 

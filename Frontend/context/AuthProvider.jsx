@@ -1,15 +1,22 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState, useEffect, createContext } from "react";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState(null);
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const userAuth = async () => {
       const token = localStorage.getItem("token");
-      if (!token) return;
+      if (!token) {
+        router.push("/login");
+        setLoading(false);
+        return;
+      }
 
       const config = {
         headers: {
@@ -23,6 +30,7 @@ const AuthProvider = ({ children }) => {
           config
         );
         setAuth(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -38,7 +46,7 @@ const AuthProvider = ({ children }) => {
         setAuth,
       }}
     >
-      {children}
+      {loading ? <h1>Loading...</h1> : children}
     </AuthContext.Provider>
   );
 };

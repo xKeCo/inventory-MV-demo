@@ -1,5 +1,10 @@
-import { useState } from "react";
+// React
+import { useContext, useEffect, useState } from "react";
+
+// Next
 import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 // Styles
 import s from "../styles/Login.module.css";
@@ -12,19 +17,33 @@ import {
   InputRightElement,
   Button,
 } from "@chakra-ui/react";
+// Chakra UI Icons
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import Link from "next/link";
+
+// Axios
 import axios from "axios";
 
+// LocalComponents
+import AuthContext from "../context/AuthProvider.jsx";
+import { toast } from "react-hot-toast";
+
 function Login() {
+  // Show and hide password
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
+  const [loading, setloading] = useState(false);
+
+  // Router
+  const router = useRouter();
+
+  // Credentials
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
 
+  // handle input change
   const handleChange = (e) => {
     setCredentials({
       ...credentials,
@@ -32,15 +51,40 @@ function Login() {
     });
   };
 
+  // Auth data
+  const { auth, setAuth } = useContext(AuthContext);
+
+  // handle login
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setloading(true);
+
     console.log(credentials);
-    const res = await axios.post(
-      "https://mascotas-back.herokuapp.com/api/user/login",
-      credentials
-    );
-    console.log(res);
+    try {
+      const { data } = await axios.post(
+        "https://mascotas-back.herokuapp.com/api/user/login",
+        credentials
+      );
+
+      localStorage.setItem("token", data.token);
+
+      setAuth(data);
+
+      router.push("/");
+      setloading(false);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      toast.error("La contra esta mal menor");
+      setloading(false);
+    }
   };
+  useEffect(() => {
+    // redirect to home if already logged in
+    if (auth) {
+      router.push("/");
+    }
+  }, [setAuth]);
 
   return (
     <>
@@ -78,27 +122,30 @@ function Login() {
           {/* <FormLabel>Contrase&ntilde;a</FormLabel> */}
           <p>Contrase&ntilde;a</p>
 
-          <InputGroup size="md">
-            <Input
-              name="password"
-              pr="4.5rem"
-              type={show ? "text" : "password"}
-              placeholder="Ingrese su contrase&ntilde;a"
-              onChange={handleChange}
-            />
-            <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" onClick={handleClick}>
-                {show ? <ViewOffIcon /> : <ViewIcon />}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
+          <FormControl id="password" isRequired className={s.login__form}>
+            <InputGroup size="md">
+              <Input
+                name="password"
+                pr="4.5rem"
+                type={show ? "text" : "password"}
+                placeholder="Ingrese su contrase&ntilde;a"
+                onChange={handleChange}
+              />
+              <InputRightElement width="4.5rem">
+                <Button h="1.75rem" size="sm" onClick={handleClick}>
+                  {show ? <ViewOffIcon /> : <ViewIcon />}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+          </FormControl>
 
           <button
             className={s.login__form__button}
             // isLoading={props.isSubmitting}
             type="submit"
+            disabled={loading}
           >
-            Submit
+            {loading ? "Cargando..." : "Iniciar sesión"}
           </button>
         </form>
         <div className={s.forgot__password}>

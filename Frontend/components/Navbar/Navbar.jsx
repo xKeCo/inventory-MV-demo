@@ -1,3 +1,9 @@
+// React
+import { useContext } from "react";
+
+// Next
+import { useRouter } from "next/router";
+
 // Styles
 import s from "./Navbar.module.css";
 
@@ -14,11 +20,24 @@ import {
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
-
-// Icons
+// Chakra UI Icons
 import { ChevronDownIcon, SearchIcon } from "@chakra-ui/icons";
 
+// Local Components
+import AuthContext from "../../context/AuthProvider";
+
 function Navbar() {
+  let router = useRouter();
+  const { auth, setAuth } = useContext(AuthContext);
+
+  const signOut = () => {
+    localStorage.removeItem("token");
+    setAuth(null);
+    router.push("/login");
+    console.log(auth);
+    console.log(localStorage);
+  };
+
   return (
     <div className={s.navbar}>
       <div>
@@ -32,15 +51,15 @@ function Navbar() {
       <div>
         <Menu>
           <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-            Nombre persona
+            {auth ? auth.name : ""}
           </MenuButton>
           <MenuList>
-            <MenuGroup title="Admin">
+            <MenuGroup title={auth && auth.type === "A" ? "Admin" : "Empleado"}>
               <MenuItem>Mi Cuenta</MenuItem>
               <MenuItem>Configuraci&oacute;n </MenuItem>
             </MenuGroup>
             <MenuDivider />
-            <MenuItem>Cerrar sesi&oacute;n</MenuItem>
+            <MenuItem onClick={signOut}>Cerrar sesi&oacute;n</MenuItem>
           </MenuList>
         </Menu>
       </div>
