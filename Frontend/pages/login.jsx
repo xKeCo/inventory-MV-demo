@@ -72,10 +72,9 @@ function Login() {
 
       router.push("/");
       setloading(false);
-      console.log(data);
     } catch (error) {
       console.log(error);
-      toast.error("La contra esta mal menor");
+      toast.error("El usuario o la contraseña son incorrectos");
       setloading(false);
     }
   };
@@ -140,7 +139,9 @@ function Login() {
           </FormControl>
 
           <button
-            className={s.login__form__button}
+            className={
+              loading ? s.login__form__button__disabled : s.login__form__button
+            }
             // isLoading={props.isSubmitting}
             type="submit"
             disabled={loading}

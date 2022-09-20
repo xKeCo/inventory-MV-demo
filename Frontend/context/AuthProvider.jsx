@@ -1,6 +1,14 @@
-import axios from "axios";
-import { useRouter } from "next/router";
+// React
 import { useState, useEffect, createContext } from "react";
+
+// Next
+import { useRouter } from "next/router";
+
+// Axios
+import axios from "axios";
+
+// Local components
+import Loader from "../components/Loader/Loader";
 
 const AuthContext = createContext();
 
@@ -46,7 +54,7 @@ const AuthProvider = ({ children }) => {
         setAuth,
       }}
     >
-      {loading ? <h1>Loading...</h1> : children}
+      {loading ? <Loader /> : children}
     </AuthContext.Provider>
   );
 };

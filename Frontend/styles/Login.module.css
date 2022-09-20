@@ -74,6 +74,19 @@
   transition: var(--main-transition);
 }
 
+.login__form__button__disabled {
+  background-color: #9b9b9b;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--white);
+  transition: var(--main-transition);
+}
+
+.login__form__button__disabled:hover {
+  background-color: #9b9b9b;
+  transition: var(--main-transition);
+}
+
 .forgot__password {
   display: flex;
   max-width: 440px;
