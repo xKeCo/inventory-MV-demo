@@ -59,7 +59,6 @@ function Login() {
     e.preventDefault();
     setloading(true);
 
-    console.log(credentials);
     try {
       const { data } = await axios.post(
         "https://mascotas-back.herokuapp.com/api/user/login",
@@ -73,8 +72,7 @@ function Login() {
       router.push("/");
       setloading(false);
     } catch (error) {
-      console.log(error);
-      toast.error("El usuario o la contraseña son incorrectos");
+      toast.error(error.response.data.msg);
       setloading(false);
     }
   };

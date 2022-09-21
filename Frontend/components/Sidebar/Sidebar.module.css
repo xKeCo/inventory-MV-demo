@@ -6,19 +6,12 @@
   width: 100%;
   min-height: 100vh;
   transition: var(--main-transition);
-
   background-color: var(--bg-login);
 }
 
 .sidebar__small {
-  background-color: #fff;
-  color: black;
   max-width: 85px;
   min-width: 85px;
-  width: 100%;
-  min-height: 100vh;
-  transition: var(--main-transition);
-  background-color: var(--bg-login);
 }
 
 .sidebar__logo__container {
@@ -70,4 +63,12 @@
 .active {
   background-color: rgba(131, 187, 38, 0.34);
   transition: var(--main-transition);
+}
+
+/* Media queries */
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
 }

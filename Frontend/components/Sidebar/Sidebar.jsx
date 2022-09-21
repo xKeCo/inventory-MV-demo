@@ -1,5 +1,5 @@
 // React
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 // Next
 import Link from "next/link";
@@ -21,13 +21,16 @@ function Sidebar() {
   const { expanded, setExpanded } = useContext(AppContext);
 
   return (
-    <div className={expanded ? s.sidebar : s.sidebar__small}>
+    <div
+      className={expanded ? `${s.sidebar}` : `${s.sidebar} ${s.sidebar__small}`}
+    >
       {/* <Link href="/"> */}
       <div className={s.sidebar__logo__container}>
         {expanded && (
           <img src="/logo.png" alt="Logo de mascotas del valle" width="75%" />
         )}
         <IconButton
+          variant="ghost"
           icon={expanded ? <ArrowLeftIcon /> : <ArrowRightIcon />}
           onClick={() => {
             setExpanded(!expanded);

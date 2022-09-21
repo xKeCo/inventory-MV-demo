@@ -9,3 +9,20 @@
   justify-content: flex-end;
   /* margin-right: 1rem; */
 }
+
+.drawer__Button {
+  display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+  .search__Container {
+    display: none;
+  }
+  .drawer__Button {
+    display: block !important;
+  }
+
+  .navbar {
+    justify-content: space-between;
+  }
+}

@@ -6,7 +6,7 @@ import { useState, createContext } from "react";
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <AppContext.Provider
