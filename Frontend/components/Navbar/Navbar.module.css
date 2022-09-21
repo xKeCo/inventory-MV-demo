@@ -14,7 +14,12 @@
   display: none !important;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 951px) {
+  .navbar {
+    display: none;
+  }
+}
+@media screen and (max-width: 950px) {
   .search__Container {
     display: none;
   }

@@ -30,11 +30,7 @@ import {
 } from "@chakra-ui/react";
 
 // Chakra UI Icons
-import {
-  ChevronDownIcon,
-  SearchIcon,
-  TriangleDownIcon,
-} from "@chakra-ui/icons";
+import { ChevronDownIcon, SearchIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 // Local Components
 import AuthContext from "../../context/AuthProvider";
@@ -43,7 +39,6 @@ function Navbar() {
   let router = useRouter();
   const { auth, setAuth } = useContext(AuthContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
 
   const signOut = () => {
     localStorage.removeItem("token");
@@ -58,7 +53,7 @@ function Navbar() {
       <div className={s.navbar}>
         <IconButton
           className={s.drawer__Button}
-          icon={<TriangleDownIcon />}
+          icon={<HamburgerIcon />}
           onClick={onOpen}
         />
         <div className={s.search__Container}>
@@ -91,7 +86,7 @@ function Navbar() {
         placement="left"
         onClose={onClose}
         isOpen={isOpen}
-        size="full"
+        size="md"
         autoFocus={false}
         returnFocusOnClose={false}
         onOverlayClick={onClose}

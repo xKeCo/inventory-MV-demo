@@ -1,32 +1,45 @@
 .sidebar {
   background-color: #fff;
   color: black;
-  max-width: 300px;
-  min-width: 300px;
+  max-width: 250px;
+  min-width: 250px;
   width: 100%;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   transition: var(--main-transition);
   background-color: var(--bg-login);
 }
 
 .sidebar__small {
-  max-width: 85px;
-  min-width: 85px;
+  max-width: 80px;
+  min-width: 80px;
+  transition: var(--main-transition);
 }
 
 .sidebar__logo__container {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 1rem;
   height: 90px;
   width: 100%;
+  transition: var(--main-transition);
+}
+
+.sidebar__logo__container__small {
+  justify-content: center;
+  padding: 0;
+
   transition: var(--main-transition);
 }
 
 .sidebar__links__container ul {
   list-style: none;
   /* padding: 1rem 2rem; */
+  transition: var(--main-transition);
 }
 
 .sidebar__links__container li {
@@ -34,10 +47,11 @@
   font-weight: 500;
   font-size: 1.1rem;
   cursor: pointer;
+  transition: var(--main-transition);
 }
 
 .sidebar__link {
-  padding: 0.7rem 2rem;
+  padding: 0.7rem 1.86rem;
   transition: var(--main-transition);
   display: flex;
   justify-content: flex-start;
@@ -46,11 +60,47 @@
   height: 50px;
 }
 
+.sidebar__user__menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.86rem;
+  height: 70px;
+  transition: var(--main-transition);
+}
+
+.sidebar__user__menu__small {
+  justify-content: center;
+  padding: 0;
+  transition: var(--main-transition);
+}
+
+.user__name {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: start;
+  line-height: 1.2;
+  transition: var(--main-transition);
+}
+
+.user__role {
+  font-size: 13px;
+  font-weight: 500;
+  color: #616161;
+  transition: var(--main-transition);
+}
+
+.singOut__Text {
+  font-weight: 500;
+  color: red !important;
+}
+
 .icon_image {
-  max-width: 22px;
-  min-width: 22px;
-  min-height: 22px;
-  max-height: 22px;
+  max-width: 21px;
+  min-width: 21px;
+  min-height: 21px;
+  max-height: 21px;
   transition: var(--main-transition);
 }
 
@@ -67,8 +117,9 @@
 
 /* Media queries */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 950px) {
   .sidebar {
     display: none;
+    transition: var(--main-transition);
   }
 }

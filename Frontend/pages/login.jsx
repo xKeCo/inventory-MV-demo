@@ -93,7 +93,7 @@ function Login() {
       <div className={s.login}>
         <div className={s.login__image__container}>
           <img
-            src="/logoLogin.png"
+            src="/logos/logoLogin.png"
             alt="Logo de mascotas del valle"
             width="100%"
           />
