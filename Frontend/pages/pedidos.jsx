@@ -11,18 +11,15 @@ import s from "../styles/Pedidos.module.css";
 function Pedidos() {
   return (
     <>
+      <Head>
+        <title>Mascotas del Valle - Pedidos</title>
+        <meta name="description" content="Pedidos page of Mascotas del Valle" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className={s.flex}>
         <Sidebar />
         <div className={s.container}>
           <Navbar />
-          <Head>
-            <title>Mascotas del Valle - Pedidos</title>
-            <meta
-              name="description"
-              content="Pedidos page of Mascotas del Valle"
-            />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
           <h1 className={s.title}>Pedidos</h1>
         </div>
       </div>

@@ -16,6 +16,7 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(null);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [calledPush, setCalledPush] = useState(false);
 
   useEffect(() => {
     const userAuth = async () => {
@@ -45,7 +46,7 @@ const AuthProvider = ({ children }) => {
           router.push("/login");
           setLoading(false);
         }
-        console.log(error);
+        console.log("hola", error);
       }
     };
 

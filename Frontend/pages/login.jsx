@@ -25,6 +25,8 @@ import axios from "axios";
 
 // LocalComponents
 import AuthContext from "../context/AuthProvider.jsx";
+
+// Toast notifications
 import { toast } from "react-hot-toast";
 
 function Login() {
@@ -81,7 +83,7 @@ function Login() {
     if (auth) {
       router.push("/");
     }
-  }, [setAuth]);
+  }, [auth, setAuth, router]);
 
   return (
     <>

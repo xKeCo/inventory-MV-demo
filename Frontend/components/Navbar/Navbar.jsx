@@ -1,8 +1,9 @@
 // React
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 
 // Next
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 // Styles
 import s from "./Navbar.module.css";
@@ -15,7 +16,6 @@ import {
   MenuItem,
   MenuGroup,
   MenuDivider,
-  Button,
   Input,
   InputGroup,
   InputLeftElement,
@@ -27,10 +27,12 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  Avatar,
+  AvatarBadge,
 } from "@chakra-ui/react";
 
 // Chakra UI Icons
-import { ChevronDownIcon, SearchIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { SearchIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 // Local Components
 import AuthContext from "../../context/AuthProvider";
@@ -41,11 +43,13 @@ function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const signOut = () => {
-    localStorage.removeItem("token");
-    setAuth(null);
-    router.push("/login");
-    console.log(auth);
-    console.log(localStorage);
+    try {
+      localStorage.removeItem("token");
+      setAuth(null);
+      router.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -66,10 +70,12 @@ function Navbar() {
         </div>
         <div>
           <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              {auth ? auth.name : ""}
+            <MenuButton w="100%" h="100%">
+              <Avatar size="sm" name={`${auth ? auth.name : ""}`}>
+                <AvatarBadge boxSize="1.25em" bg="green.500" />
+              </Avatar>
             </MenuButton>
-            <MenuList>
+            <MenuList mt="0.8rem">
               <MenuGroup
                 title={auth && auth.type === "A" ? "Admin" : "Empleado"}
               >
@@ -77,11 +83,15 @@ function Navbar() {
                 <MenuItem>Configuraci&oacute;n </MenuItem>
               </MenuGroup>
               <MenuDivider />
-              <MenuItem onClick={signOut}>Cerrar sesi&oacute;n</MenuItem>
+              <MenuItem onClick={signOut} color="#FF0000" fontWeight="500">
+                Cerrar sesi&oacute;n
+              </MenuItem>
             </MenuList>
           </Menu>
         </div>
       </div>
+
+      {/* Drawer */}
       <Drawer
         placement="left"
         onClose={onClose}
@@ -95,13 +105,140 @@ function Navbar() {
 
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">
-            Basic Drawer
-            <DrawerCloseButton />
+            <img
+              src="/logos/logo1.png"
+              alt="Logo de mascotas del valle"
+              width="50px"
+            />
+            <DrawerCloseButton h="60px" mr="0.7rem" />
           </DrawerHeader>
-          <DrawerBody>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+          <DrawerBody padding="0">
+            <div className={s.navbar__links__container}>
+              <ul>
+                <Link href="/">
+                  <a>
+                    <li
+                      className={
+                        router.pathname == "/"
+                          ? `${s.navbar__link} ${s.active}`
+                          : `${s.navbar__link}`
+                      }
+                    >
+                      <img
+                        className={s.icon_image}
+                        src="/icons/home.svg"
+                        alt="Home"
+                        width="16px"
+                        height="16px"
+                      />
+                      <p>Inicio</p>
+                    </li>
+                  </a>
+                </Link>
+                <Link href="/proveedores">
+                  <a>
+                    <li
+                      className={
+                        router.pathname == "/proveedores"
+                          ? `${s.navbar__link} ${s.active}`
+                          : `${s.navbar__link}`
+                      }
+                    >
+                      <img
+                        className={s.icon_image}
+                        src="/icons/proveedores.svg"
+                        alt="Proveedores"
+                        width="16px"
+                        height="16px"
+                      />
+
+                      <p>Proveedores</p>
+                    </li>
+                  </a>
+                </Link>
+                <Link href="/productos">
+                  <a>
+                    <li
+                      className={
+                        router.pathname == "/productos"
+                          ? `${s.navbar__link} ${s.active}`
+                          : `${s.navbar__link}`
+                      }
+                    >
+                      <img
+                        className={s.icon_image}
+                        src="/icons/productos.svg"
+                        alt="Productos"
+                        width="16px"
+                        height="16px"
+                      />
+                      <p>Productos</p>
+                    </li>
+                  </a>
+                </Link>
+                <Link href="/stock">
+                  <a>
+                    <li
+                      className={
+                        router.pathname == "/stock"
+                          ? `${s.navbar__link} ${s.active}`
+                          : `${s.navbar__link}`
+                      }
+                    >
+                      <img
+                        className={s.icon_image}
+                        src="/icons/stock.svg"
+                        alt="Stock"
+                        width="16px"
+                        height="16px"
+                      />
+                      <p>Stock</p>
+                    </li>
+                  </a>
+                </Link>
+                <Link href="/pedidos">
+                  <a>
+                    <li
+                      className={
+                        router.pathname == "/pedidos"
+                          ? `${s.navbar__link} ${s.active}`
+                          : `${s.navbar__link}`
+                      }
+                    >
+                      <img
+                        className={s.icon_image}
+                        src="/icons/pedidos.svg"
+                        alt="Pedidos"
+                        width="16px"
+                        height="16px"
+                      />
+                      <p>Pedidos</p>
+                    </li>
+                  </a>
+                </Link>
+                <Link href="/reportes">
+                  <a>
+                    <li
+                      className={
+                        router.pathname == "/reportes"
+                          ? `${s.navbar__link} ${s.active}`
+                          : `${s.navbar__link}`
+                      }
+                    >
+                      <img
+                        className={s.icon_image}
+                        src="/icons/reportes.svg"
+                        alt="Reportes"
+                        width="16px"
+                        height="16px"
+                      />
+
+                      <p>Reportes</p>
+                    </li>
+                  </a>
+                </Link>
+              </ul>
+            </div>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

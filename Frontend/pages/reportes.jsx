@@ -13,18 +13,18 @@ import s from "../styles/Reportes.module.css";
 function Reportes() {
   return (
     <>
+      <Head>
+        <title>Mascotas del Valle - Reportes</title>
+        <meta
+          name="description"
+          content="Reportes page of Mascotas del Valle"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className={s.flex}>
         <Sidebar />
         <div className={s.container}>
           <Navbar />
-          <Head>
-            <title>Mascotas del Valle - Reportes</title>
-            <meta
-              name="description"
-              content="Reportes page of Mascotas del Valle"
-            />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
           <h1 className={s.title}>Reportes</h1>
         </div>
       </div>
