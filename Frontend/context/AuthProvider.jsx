@@ -40,6 +40,11 @@ const AuthProvider = ({ children }) => {
         setAuth(data);
         setLoading(false);
       } catch (error) {
+        if (error.response.status === 404) {
+          localStorage.removeItem("token");
+          router.push("/login");
+          setLoading(false);
+        }
         console.log(error);
       }
     };
