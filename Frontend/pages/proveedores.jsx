@@ -72,6 +72,23 @@ function Proveedores() {
     }
   };
 
+  // handle delete
+  const handleDelete = async (id, name) => {
+    try {
+      await axios.delete(
+        `https://mascotas-back.herokuapp.com/api/provider/delete/${id}`
+      );
+      getProveedores();
+      setLoading(false);
+      toast.success(`Se ha eliminado el proveedor ${name}`);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.msg);
+
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -148,7 +165,6 @@ function Proveedores() {
                             <Td>
                               <Menu>
                                 <MenuButton
-                                  isDisabled
                                   as={IconButton}
                                   aria-label="Options"
                                   backgroundColor="#e4531b"
@@ -160,13 +176,18 @@ function Proveedores() {
                                   variant="outline"
                                 />
                                 <MenuList>
-                                  <MenuItem icon={<InfoIcon />}>
+                                  <MenuItem icon={<InfoIcon />} isDisabled>
                                     Mas info
                                   </MenuItem>
-                                  <MenuItem icon={<EditIcon />}>
+                                  <MenuItem icon={<EditIcon />} isDisabled>
                                     Modificar
                                   </MenuItem>
-                                  <MenuItem icon={<DeleteIcon />}>
+                                  <MenuItem
+                                    icon={<DeleteIcon />}
+                                    onClick={() =>
+                                      handleDelete(doc.id, doc.name)
+                                    }
+                                  >
                                     Eliminar
                                   </MenuItem>
                                 </MenuList>
@@ -210,6 +231,7 @@ function Proveedores() {
                       <Input
                         name="number"
                         pr="4.5rem"
+                        type="number"
                         placeholder="Contacto del proveedor"
                         onChange={handleChange}
                       />
@@ -217,7 +239,6 @@ function Proveedores() {
 
                     <FormControl
                       id="other_contact"
-                      isRequired
                       className={s.proveedor__form}
                     >
                       <p>Otro medio de contacto</p>
