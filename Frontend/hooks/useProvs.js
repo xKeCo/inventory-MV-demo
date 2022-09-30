@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const useProvs = () => {
-  const [docs, setDocs] = useState([]);
+  const [docsProvs, setDocsProvs] = useState([]);
+
+  const [numProvs, setNumProvs] = useState(0);
 
   // loader
-  const [loading, setLoading] = useState(true);
+  const [loadingProvs, setLoadingProvs] = useState(true);
 
   // error
-  const [error, setError] = useState(null);
+  const [errorProvs, setErrorProvs] = useState(null);
 
   const getProveedores = async () => {
     try {
@@ -26,11 +28,12 @@ const useProvs = () => {
         })
       );
 
-      setDocs(docs);
-      setLoading(false);
+      setDocsProvs(docs);
+      setNumProvs(data.query.length);
+      setLoadingProvs(false);
     } catch (error) {
-      setError(error);
-      setLoading(false);
+      setErrorProvs(error);
+      setLoadingProvs(false);
       toast.error(error.message);
     }
   };
@@ -40,10 +43,11 @@ const useProvs = () => {
   }, []);
 
   return {
-    docs,
-    loading,
-    error,
-    setLoading,
+    docsProvs,
+    numProvs,
+    loadingProvs,
+    errorProvs,
+    setLoadingProvs,
     getProveedores,
   };
 };

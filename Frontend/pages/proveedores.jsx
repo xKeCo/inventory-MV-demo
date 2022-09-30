@@ -4,6 +4,9 @@ import { useState } from "react";
 // Next
 import Head from "next/head";
 
+// Axios
+import axios from "axios";
+
 // Local Components
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
@@ -15,6 +18,7 @@ import s from "../styles/Proveedores.module.css";
 // Hooks
 import useProvs from "../hooks/useProvs";
 
+// Chakra UI
 import {
   IconButton,
   Table,
@@ -32,12 +36,20 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 
+// Chakra UI Icons
 import { DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
+
+// React Toast notifications
 import { toast } from "react-hot-toast";
-import axios from "axios";
 
 function Proveedores() {
-  const { docs, loading, error, setLoading, getProveedores } = useProvs();
+  const {
+    docsProvs,
+    loadingProvs,
+    errorProvs,
+    setLoadingProvs,
+    getProveedores,
+  } = useProvs();
 
   const [provData, setProvData] = useState({
     name: "",
@@ -62,13 +74,13 @@ function Proveedores() {
         provData
       );
       getProveedores();
-      setLoading(false);
+      setLoadingProvs(false);
       toast.success("Se ha agregado el nuevo proveedor");
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.msg);
 
-      setLoading(false);
+      setLoadingProvs(false);
     }
   };
 
@@ -79,13 +91,13 @@ function Proveedores() {
         `https://mascotas-back.herokuapp.com/api/provider/delete/${id}`
       );
       getProveedores();
-      setLoading(false);
+      setLoadingProvs(false);
       toast.success(`Se ha eliminado el proveedor ${name}`);
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.msg);
 
-      setLoading(false);
+      setLoadingProvs(false);
     }
   };
 
@@ -103,9 +115,9 @@ function Proveedores() {
         <Sidebar />
         <div className={s.container}>
           <Navbar />
-          {loading ? (
+          {loadingProvs ? (
             <Loader />
-          ) : error ? (
+          ) : errorProvs ? (
             <h1>Error</h1>
           ) : (
             <>
@@ -151,7 +163,7 @@ function Proveedores() {
                         </Tr>
                       </Thead>
                       <Tbody>
-                        {docs.map((doc) => (
+                        {docsProvs.map((doc) => (
                           <Tr key={doc.id}>
                             <Td fontWeight="500" fontSize="15px">
                               {doc.name}
@@ -253,14 +265,14 @@ function Proveedores() {
 
                     <button
                       className={
-                        loading
+                        loadingProvs
                           ? s.proveedor__form__button__disabled
                           : s.proveedor__form__button
                       }
                       type="submit"
-                      disabled={loading}
+                      disabled={loadingProvs}
                     >
-                      {loading ? "Cargando..." : "Agregar proveedor"}
+                      {loadingProvs ? "Cargando..." : "Agregar proveedor"}
                     </button>
                   </form>
                 </div>
