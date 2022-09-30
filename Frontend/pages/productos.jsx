@@ -53,7 +53,7 @@ function Productos() {
             <h1>Error</h1>
           ) : (
             <>
-              <h1 className={s.products__title__text}>Products</h1>
+              <h1 className={s.products__title__text}>Productos</h1>
               <div className={s.products}>
                 <div className={s.products__table}>
                   <TableContainer w="100%" height="100%">

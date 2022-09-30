@@ -79,8 +79,11 @@ function Navbar() {
               <MenuGroup
                 title={auth && auth.type === "A" ? "Admin" : "Empleado"}
               >
-                <MenuItem>Mi Cuenta</MenuItem>
-                <MenuItem>Configuraci&oacute;n </MenuItem>
+                <Link href="/setting">
+                  <a>
+                    <MenuItem>Ajuste de cuenta</MenuItem>
+                  </a>
+                </Link>
               </MenuGroup>
               <MenuDivider />
               <MenuItem onClick={signOut} color="#FF0000" fontWeight="500">
