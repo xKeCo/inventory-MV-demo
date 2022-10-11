@@ -1,5 +1,11 @@
+// React
+import { useRef, useState } from "react";
+
 // Next
 import Head from "next/head";
+
+// Axios
+import axios from "axios";
 
 // Local Components
 import Navbar from "../components/Navbar/Navbar";
@@ -11,6 +17,9 @@ import s from "../styles/Productos.module.css";
 
 // Hooks
 import useProducts from "../hooks/useProducts";
+import useCategories from "../hooks/useCategories";
+import useProvs from "../hooks/useProvs";
+import usePets from "../hooks/usePets";
 
 // Chakra UI
 import {
@@ -21,7 +30,39 @@ import {
   Th,
   Td,
   TableContainer,
+  Button,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  Stack,
+  Box,
+  FormLabel,
+  Input,
+  DrawerFooter,
+  useDisclosure,
+  Menu,
+  MenuButton,
+  IconButton,
+  MenuList,
+  MenuItem,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Select,
+  Flex,
 } from "@chakra-ui/react";
+
+// Chakra UI Icons
+import { AddIcon, DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
+
+// React Toast notifications
+import { toast } from "react-hot-toast";
+import DrawerProducts from "../components/Drawer/DrawerProducts";
 
 function Productos() {
   const {
@@ -31,6 +72,91 @@ function Productos() {
     setLoadingProducts,
     getProducts,
   } = useProducts();
+
+  const {
+    docsProvs,
+    // loadingProvs,
+    // errorProvs,
+    // setLoadingProvs,
+    // getProveedores,
+  } = useProvs();
+
+  const {
+    docsCategories,
+    // loadingCategories,
+    // numCategories,
+    // errorCategories,
+    // setLoadingCategories,
+    // getCategories,
+  } = useCategories();
+  const {
+    docsPets,
+    // loadingCategories,
+    // numCategories,
+    // errorCategories,
+    // setLoadingCategories,
+    // getCategories,
+  } = usePets();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const firstField = useRef();
+
+  const [productData, setProductData] = useState({
+    prod_id: "",
+    name: "",
+    stock: 0,
+    peso: "",
+    unidad_medida: "",
+    price: "",
+    provider_name: "",
+    category_name: "",
+    pet_name: "",
+  });
+
+  // handle input change
+  const handleChange = (e) => {
+    setProductData({
+      ...productData,
+      [e.target.name]: e.target.value,
+    });
+    console.log(productData);
+  };
+
+  // handle submit to post data
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        "https://mascotas-back.herokuapp.com/api/product/new",
+        productData
+      );
+      getProducts();
+      setLoadingProducts(false);
+      toast.success("Se ha agregado el nuevo producto");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.msg);
+
+      setLoadingProducts(false);
+    }
+  };
+
+  // handle delete
+  const handleDelete = async (id, name) => {
+    try {
+      await axios.delete(
+        `https://mascotas-back.herokuapp.com/api/product/delete/${id}`
+      );
+      getProducts();
+      setLoadingProducts(false);
+      toast.success(`Se ha eliminado el producto ${name}`);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.msg);
+
+      setLoadingProducts(false);
+    }
+  };
 
   return (
     <>
@@ -46,14 +172,23 @@ function Productos() {
         <Sidebar />
         <div className={s.container}>
           <Navbar />
-
+          <div className={s.products__header__container}>
+            <h1 className={s.products__title__text}>Productos</h1>
+            <Button
+              leftIcon={<AddIcon />}
+              onClick={onOpen}
+              className={s.products__add__button}
+              disabled={errorProducts}
+            >
+              Nuevo producto
+            </Button>
+          </div>
           {loadingProducts ? (
             <Loader />
           ) : errorProducts ? (
             <h1>Error</h1>
           ) : (
             <>
-              <h1 className={s.products__title__text}>Productos</h1>
               <div className={s.products}>
                 <div className={s.products__table}>
                   <TableContainer w="100%" height="100%">
@@ -98,7 +233,7 @@ function Productos() {
                             fontFamily="Inter, sans-serif"
                             fontSize="14px"
                           >
-                            Precio
+                            Unidad
                           </Th>
                           <Th
                             w="100px"
@@ -106,8 +241,7 @@ function Productos() {
                             fontFamily="Inter, sans-serif"
                             fontSize="14px"
                           >
-                            Ultimo <br />
-                            Pedido
+                            Precio
                           </Th>
                           <Th
                             w="100px"
@@ -159,10 +293,10 @@ function Productos() {
                               {doc.peso}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.price}
+                              {doc.unidad_medida}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.historic}
+                              {doc.price}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
                               {doc.provName}
@@ -173,7 +307,37 @@ function Productos() {
                             <Td fontWeight="500" fontSize="15px">
                               {doc.petName}
                             </Td>
-                            <Td>A&ntilde;adir a pedidos</Td>
+                            <Td>
+                              <Menu>
+                                <MenuButton
+                                  as={IconButton}
+                                  aria-label="Options"
+                                  backgroundColor="#e4531b"
+                                  _hover={{ backgroundColor: "#83bb26" }}
+                                  _active={{ backgroundColor: "#83bb26" }}
+                                  icon={
+                                    <EditIcon color="#fff" fontSize="20px" />
+                                  }
+                                  variant="outline"
+                                />
+                                <MenuList>
+                                  <MenuItem icon={<InfoIcon />} isDisabled>
+                                    Mas info
+                                  </MenuItem>
+                                  <MenuItem icon={<EditIcon />} isDisabled>
+                                    Modificar
+                                  </MenuItem>
+                                  <MenuItem
+                                    icon={<DeleteIcon />}
+                                    onClick={() =>
+                                      handleDelete(doc.id, doc.name)
+                                    }
+                                  >
+                                    Eliminar
+                                  </MenuItem>
+                                </MenuList>
+                              </Menu>
+                            </Td>
                           </Tr>
                         ))}
                       </Tbody>
@@ -185,6 +349,18 @@ function Productos() {
           )}
         </div>
       </div>
+
+      <DrawerProducts
+        isOpen={isOpen}
+        onClose={onClose}
+        firstField={firstField}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        docsProvs={docsProvs}
+        docsCategories={docsCategories}
+        docsPets={docsPets}
+        loadingProducts={loadingProducts}
+      />
     </>
   );
 }

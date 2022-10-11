@@ -1,5 +1,5 @@
 // React
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // Next
 import Head from "next/head";
@@ -28,19 +28,31 @@ import {
   Th,
   Td,
   TableContainer,
-  FormControl,
   Input,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
+  Button,
+  useDisclosure,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  Stack,
+  Box,
+  FormLabel,
+  DrawerFooter,
 } from "@chakra-ui/react";
 
 // Chakra UI Icons
-import { DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
 
 // React Toast notifications
 import { toast } from "react-hot-toast";
+import DrawerProvs from "../components/Drawer/DrawerProvs";
 
 function Proveedores() {
   const {
@@ -50,6 +62,9 @@ function Proveedores() {
     setLoadingProvs,
     getProveedores,
   } = useProvs();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const firstField = useRef();
 
   const [provData, setProvData] = useState({
     name: "",
@@ -75,6 +90,7 @@ function Proveedores() {
       );
       getProveedores();
       setLoadingProvs(false);
+      onClose();
       toast.success("Se ha agregado el nuevo proveedor");
     } catch (error) {
       console.log(error);
@@ -115,13 +131,23 @@ function Proveedores() {
         <Sidebar />
         <div className={s.container}>
           <Navbar />
+          <div className={s.proveedores__header__container}>
+            <h1 className={s.proveedores__title__text}>Proveedores</h1>
+            <Button
+              leftIcon={<AddIcon />}
+              onClick={onOpen}
+              className={s.proveedores__add__button}
+              disabled={errorProvs}
+            >
+              Nuevo proveedor
+            </Button>
+          </div>
           {loadingProvs ? (
             <Loader />
           ) : errorProvs ? (
             <h1>Error</h1>
           ) : (
             <>
-              <h1 className={s.proveedores__title__text}>Proveedores</h1>
               <div className={s.proveedores}>
                 <div className={s.proveedores__table}>
                   <TableContainer height="100%">
@@ -211,76 +237,20 @@ function Proveedores() {
                     </Table>
                   </TableContainer>
                 </div>
-                <div className={s.proveedores__new__container}>
-                  <form
-                    className={s.proveedor__form__container}
-                    onSubmit={handleSubmit}
-                  >
-                    <h2 className={s.proveedor__form__text}>
-                      Crear nuevo proveedor
-                    </h2>
-
-                    <FormControl
-                      id="name"
-                      isRequired
-                      className={s.proveedor__form}
-                    >
-                      <p>Nombre del proveedor</p>
-                      <Input
-                        name="name"
-                        type="text"
-                        placeholder="Ingrese nombre del proveedor"
-                        onChange={handleChange}
-                      />
-                    </FormControl>
-
-                    <FormControl
-                      id="number"
-                      isRequired
-                      className={s.proveedor__form}
-                    >
-                      <p>Contacto</p>
-                      <Input
-                        name="number"
-                        pr="4.5rem"
-                        type="number"
-                        placeholder="Contacto del proveedor"
-                        onChange={handleChange}
-                      />
-                    </FormControl>
-
-                    <FormControl
-                      id="other_contact"
-                      className={s.proveedor__form}
-                    >
-                      <p>Otro medio de contacto</p>
-
-                      <Input
-                        name="other_contact"
-                        pr="4.5rem"
-                        placeholder="Otro medio de contacto"
-                        onChange={handleChange}
-                      />
-                    </FormControl>
-
-                    <button
-                      className={
-                        loadingProvs
-                          ? s.proveedor__form__button__disabled
-                          : s.proveedor__form__button
-                      }
-                      type="submit"
-                      disabled={loadingProvs}
-                    >
-                      {loadingProvs ? "Cargando..." : "Agregar proveedor"}
-                    </button>
-                  </form>
-                </div>
               </div>
             </>
           )}
         </div>
       </div>
+
+      <DrawerProvs
+        isOpen={isOpen}
+        onClose={onClose}
+        firstField={firstField}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        loadingProvs={loadingProvs}
+      />
     </>
   );
 }
