@@ -14,7 +14,7 @@ function Pedidos() {
       <Head>
         <title>Mascotas del Valle - Pedidos</title>
         <meta name="description" content="Pedidos page of Mascotas del Valle" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logos/icon_orange.png" />
       </Head>
       <div className={s.flex}>
         <Sidebar />

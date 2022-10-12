@@ -146,33 +146,33 @@ function DrawerProducts({
               </Box>
 
               <Box>
-                <FormLabel htmlFor="price">Proveedor</FormLabel>
+                <FormLabel htmlFor="provid_fk">Proveedor</FormLabel>
 
-                <Select name="provider_name" onChange={handleChange}>
+                <Select name="provid_fk" onChange={handleChange}>
                   {docsProvs.map((doc) => (
-                    <option key={doc.id} value={doc.name}>
+                    <option key={doc.id} value={doc.id}>
                       {doc.name}
                     </option>
                   ))}
                 </Select>
               </Box>
               <Box>
-                <FormLabel htmlFor="category_name">Categoria</FormLabel>
+                <FormLabel htmlFor="categid_fk">Categoria</FormLabel>
 
-                <Select name="category_name" onChange={handleChange}>
+                <Select name="categid_fk" onChange={handleChange}>
                   {docsCategories.map((doc) => (
-                    <option key={doc.id} value={doc.name}>
+                    <option key={doc.id} value={doc.id}>
                       {doc.name}
                     </option>
                   ))}
                 </Select>
               </Box>
               <Box>
-                <FormLabel htmlFor="pet_name">Mascota</FormLabel>
+                <FormLabel htmlFor="mascotaid_fk">Mascota</FormLabel>
 
-                <Select name="pet_name" onChange={handleChange}>
+                <Select name="mascotaid_fk" onChange={handleChange}>
                   {docsPets.map((doc) => (
-                    <option key={doc.id} value={doc.name}>
+                    <option key={doc.id} value={doc.id}>
                       {doc.name}
                     </option>
                   ))}

@@ -30,7 +30,7 @@ export default function Home() {
               name="description"
               content="Inventory of Mascotas del Valle"
             />
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href="/logos/icon_orange.png" />
           </Head>
           <main className={s.main}>
             <h1 className={s.title}>Inicio</h1>

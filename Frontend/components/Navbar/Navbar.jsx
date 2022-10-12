@@ -109,7 +109,7 @@ function Navbar() {
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">
             <img
-              src="/logos/logo1.png"
+              src="/logos/icon_orange.png"
               alt="Logo de mascotas del valle"
               width="50px"
             />

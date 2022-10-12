@@ -11,6 +11,7 @@ import axios from "axios";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Loader from "../components/Loader/Loader";
+import DrawerProducts from "../components/Drawer/DrawerProducts";
 
 // Styles
 import s from "../styles/Productos.module.css";
@@ -31,30 +32,12 @@ import {
   Td,
   TableContainer,
   Button,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
-  DrawerBody,
-  Stack,
-  Box,
-  FormLabel,
-  Input,
-  DrawerFooter,
   useDisclosure,
   Menu,
   MenuButton,
   IconButton,
   MenuList,
   MenuItem,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Select,
-  Flex,
 } from "@chakra-ui/react";
 
 // Chakra UI Icons
@@ -62,7 +45,6 @@ import { AddIcon, DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
 
 // React Toast notifications
 import { toast } from "react-hot-toast";
-import DrawerProducts from "../components/Drawer/DrawerProducts";
 
 function Productos() {
   const {
@@ -104,13 +86,13 @@ function Productos() {
   const [productData, setProductData] = useState({
     prod_id: "",
     name: "",
-    stock: 0,
+    stock: "",
     peso: "",
     unidad_medida: "",
     price: "",
-    provider_name: "",
-    category_name: "",
-    pet_name: "",
+    provid_fk: "",
+    categid_fk: "",
+    mascotaid_fk: "",
   });
 
   // handle input change
@@ -131,6 +113,7 @@ function Productos() {
         productData
       );
       getProducts();
+      onClose();
       setLoadingProducts(false);
       toast.success("Se ha agregado el nuevo producto");
     } catch (error) {
@@ -166,7 +149,7 @@ function Productos() {
           name="description"
           content="Productos page of Mascotas del Valle"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logos/icon_orange.png" />
       </Head>
       <div className={s.flex}>
         <Sidebar />

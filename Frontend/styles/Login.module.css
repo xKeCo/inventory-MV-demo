@@ -24,6 +24,7 @@
 
 .login__image__container {
   min-width: 240px;
+  max-width: 240px;
 }
 
 .login__form__text__container {

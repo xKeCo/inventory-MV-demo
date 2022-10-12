@@ -62,7 +62,7 @@ function Sidebar() {
           >
             {expanded && (
               <img
-                src="/logos/logo1.png"
+                src="/logos/icon_orange.png"
                 alt="Logo de mascotas del valle"
                 width="25%"
               />

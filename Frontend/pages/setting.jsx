@@ -54,7 +54,7 @@ function Setting() {
       <Head>
         <title>Mascotas del Valle - Ajustes</title>
         <meta name="description" content="Setting page of Mascotas del Valle" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logos/icon_orange.png" />
       </Head>
       <div className={s.flex}>
         <Sidebar />

@@ -11,6 +11,7 @@ import axios from "axios";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Loader from "../components/Loader/Loader";
+import DrawerProvs from "../components/Drawer/DrawerProvs";
 
 // Styles
 import s from "../styles/Proveedores.module.css";
@@ -35,16 +36,6 @@ import {
   MenuItem,
   Button,
   useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
-  DrawerBody,
-  Stack,
-  Box,
-  FormLabel,
-  DrawerFooter,
 } from "@chakra-ui/react";
 
 // Chakra UI Icons
@@ -52,7 +43,6 @@ import { AddIcon, DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
 
 // React Toast notifications
 import { toast } from "react-hot-toast";
-import DrawerProvs from "../components/Drawer/DrawerProvs";
 
 function Proveedores() {
   const {
@@ -125,7 +115,7 @@ function Proveedores() {
           name="description"
           content="Proveedores page of Mascotas del Valle"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logos/icon_orange.png" />
       </Head>
       <div className={s.flex}>
         <Sidebar />

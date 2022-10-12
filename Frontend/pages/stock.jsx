@@ -16,7 +16,7 @@ function Stock() {
       <Head>
         <title>Mascotas del Valle - Stock</title>
         <meta name="description" content="Stock page of Mascotas del Valle" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logos/icon_orange.png" />
       </Head>
       <div className={s.flex}>
         <Sidebar />
