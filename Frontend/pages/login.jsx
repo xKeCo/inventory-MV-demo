@@ -23,7 +23,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 // Axios
 import axios from "axios";
 
-// LocalComponents
+// Context
 import AuthContext from "../context/AuthProvider.jsx";
 
 // Toast notifications
@@ -153,7 +153,7 @@ function Login() {
           <p className={s.forgot__password__text}>
             ¿Olvidaste tu contrase&ntilde;a?
           </p>
-          <Link href="/">
+          <Link href="#">
             <p className={s.forgot__password__link}>Restablecer</p>
           </Link>
         </div>

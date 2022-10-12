@@ -1,8 +1,9 @@
 // React
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 // Next
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 // Axios
 import axios from "axios";
@@ -29,7 +30,6 @@ import {
   Th,
   Td,
   TableContainer,
-  Input,
   Menu,
   MenuButton,
   MenuList,
@@ -44,7 +44,20 @@ import { AddIcon, DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
 // React Toast notifications
 import { toast } from "react-hot-toast";
 
+// Context
+import AuthContext from "../context/AuthProvider";
+
 function Proveedores() {
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    // redirect to home if already logged in
+    if (!auth) {
+      router.push("/login");
+    }
+  }, [router]);
+
   const {
     docsProvs,
     loadingProvs,

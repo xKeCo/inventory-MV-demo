@@ -1,7 +1,9 @@
 // React
+import { useContext, useEffect } from "react";
 
 // Next
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 // Styles
 import s from "../styles/Home.module.css";
@@ -14,9 +16,22 @@ import Sidebar from "../components/Sidebar/Sidebar";
 import useProducts from "../hooks/useProducts";
 import useProvs from "../hooks/useProvs";
 
+// Context
+import AuthContext from "../context/AuthProvider";
+
 export default function Home() {
   const { numProducts } = useProducts();
   const { numProvs } = useProvs();
+
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    // redirect to home if already logged in
+    if (!auth) {
+      router.push("/login");
+    }
+  }, [router]);
 
   return (
     <>

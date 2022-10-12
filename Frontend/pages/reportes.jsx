@@ -1,16 +1,31 @@
 // React
+import { useContext, useEffect } from "react";
 
 // Next
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 // Local Components
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 
+// Context
+import AuthContext from "../context/AuthProvider";
+
 // Styles
 import s from "../styles/Reportes.module.css";
 
 function Reportes() {
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    // redirect to home if already logged in
+    if (!auth) {
+      router.push("/login");
+    }
+  }, [router]);
+
   return (
     <>
       <Head>

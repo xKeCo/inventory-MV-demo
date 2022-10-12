@@ -1,5 +1,11 @@
+// React
+import { useContext, useEffect } from "react";
 // Next
 import Head from "next/head";
+import { useRouter } from "next/router";
+
+// Context
+import AuthContext from "../context/AuthProvider";
 
 // Local Components
 import Navbar from "../components/Navbar/Navbar";
@@ -29,6 +35,16 @@ import { DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
 import s from "../styles/Setting.module.css";
 
 function Setting() {
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    // redirect to home if already logged in
+    if (!auth) {
+      router.push("/login");
+    }
+  }, [router]);
+
   const { docsUsers, loadingUsers, errorUsers, setLoadingUsers, getUsers } =
     useUsers();
 
