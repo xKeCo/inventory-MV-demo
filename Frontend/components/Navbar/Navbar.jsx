@@ -47,6 +47,7 @@ function Navbar() {
       localStorage.removeItem("token");
       setAuth(null);
       router.push("/login");
+      router.reload();
     } catch (error) {
       console.log(error);
     }
