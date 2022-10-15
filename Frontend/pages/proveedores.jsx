@@ -2,7 +2,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 
 // Next
-import Head from "next/head";
 import { useRouter } from "next/router";
 
 // Axios
@@ -13,6 +12,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Loader from "../components/Loader/Loader";
 import DrawerProvs from "../components/Drawer/DrawerProvs";
+import SEO from "../components/SEO/SEO";
 
 // Styles
 import s from "../styles/Proveedores.module.css";
@@ -48,7 +48,10 @@ import { toast } from "react-hot-toast";
 import AuthContext from "../context/AuthProvider";
 
 function Proveedores() {
+  // User context = User data
   const { auth } = useContext(AuthContext);
+
+  // Router = Redirect
   const router = useRouter();
 
   useEffect(() => {
@@ -58,6 +61,7 @@ function Proveedores() {
     }
   }, [router]);
 
+  // Get all providers data
   const {
     docsProvs,
     loadingProvs,
@@ -66,16 +70,19 @@ function Proveedores() {
     getProveedores,
   } = useProvs();
 
+  // Chakra UI Drawer handler
   const { isOpen, onOpen, onClose } = useDisclosure();
+  // Auto-select first input on drawer open
   const firstField = useRef();
 
+  // Provider data to send
   const [provData, setProvData] = useState({
     name: "",
     number: "",
     other_contact: "",
   });
 
-  // handle input change
+  // handle input change = get data from inputs
   const handleChange = (e) => {
     setProvData({
       ...provData,
@@ -83,7 +90,7 @@ function Proveedores() {
     });
   };
 
-  // handle submit to post data
+  // handle submit = send data to db
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -103,7 +110,7 @@ function Proveedores() {
     }
   };
 
-  // handle delete
+  // handle delete = delete provider from db
   const handleDelete = async (id, name) => {
     try {
       await axios.delete(
@@ -122,14 +129,8 @@ function Proveedores() {
 
   return (
     <>
-      <Head>
-        <title>Mascotas del Valle - Proveedores</title>
-        <meta
-          name="description"
-          content="Proveedores page of Mascotas del Valle"
-        />
-        <link rel="icon" href="/logos/icon_orange.png" />
-      </Head>
+      <SEO title={"Proveedores"} />
+
       <div className={s.flex}>
         <Sidebar />
         <div className={s.container}>

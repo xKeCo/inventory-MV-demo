@@ -2,12 +2,14 @@
 import { useContext, useEffect, useState } from "react";
 
 // Next
-import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 // Styles
 import s from "../styles/Login.module.css";
+
+// Local Components
+import SEO from "../components/SEO/SEO";
 
 // Chakra UI
 import {
@@ -34,6 +36,7 @@ function Login() {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
+  // SetLoading
   const [loading, setloading] = useState(false);
 
   // Router
@@ -53,7 +56,7 @@ function Login() {
     });
   };
 
-  // Auth data
+  // User context = User data
   const { auth, setAuth } = useContext(AuthContext);
 
   // handle login
@@ -78,6 +81,7 @@ function Login() {
       setloading(false);
     }
   };
+
   useEffect(() => {
     // redirect to home if already logged in
     if (auth) {
@@ -87,11 +91,8 @@ function Login() {
 
   return (
     <>
-      <Head>
-        <title>Mascotas del Valle - Login</title>
-        <meta name="description" content="Login page of Mascotas del Valle" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <SEO title={"Login"} />
+
       <div className={s.login}>
         <div className={s.login__image__container}>
           <img
@@ -142,7 +143,6 @@ function Login() {
             className={
               loading ? s.login__form__button__disabled : s.login__form__button
             }
-            // isLoading={props.isSubmitting}
             type="submit"
             disabled={loading}
           >
@@ -153,7 +153,7 @@ function Login() {
           <p className={s.forgot__password__text}>
             ¿Olvidaste tu contrase&ntilde;a?
           </p>
-          <Link href="#">
+          <Link href="/resetPassword">
             <p className={s.forgot__password__link}>Restablecer</p>
           </Link>
         </div>

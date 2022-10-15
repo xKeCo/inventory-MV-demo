@@ -29,9 +29,13 @@ import AppContext from "../../context/AppProvider";
 import AuthContext from "../../context/AuthProvider";
 
 function Sidebar() {
-  const router = useRouter();
+  // User context = User data
   const { auth, setAuth } = useContext(AuthContext);
 
+  // Router = Redirect
+  const router = useRouter();
+
+  // SingOut function
   const signOut = () => {
     try {
       localStorage.removeItem("token");
@@ -42,6 +46,7 @@ function Sidebar() {
     }
   };
 
+  // handle if sidebar is open or not
   const { expanded, setExpanded } = useContext(AppContext);
 
   return (
@@ -248,7 +253,7 @@ function Sidebar() {
                       <p className={s.user__name}>
                         {auth ? auth.name : ""} <br />
                         <span className={s.user__role}>
-                          {auth && auth.type === "A" ? "Admin" : "Empleado"}
+                          {auth && auth.type === "A" ? "Admin" : "Trabajador"}
                         </span>
                       </p>
                     )}
@@ -267,8 +272,8 @@ function Sidebar() {
                     })}
               >
                 <MenuGroup
-                  title={`${auth.name} - ${
-                    auth && auth.type === "A" ? "Admin" : "Empleado"
+                  title={`${auth && auth.name} - ${
+                    auth && auth.type === "A" ? "Admin" : "Trabajador"
                   }`}
                 >
                   <Link href="/setting">
@@ -276,11 +281,11 @@ function Sidebar() {
                       <MenuItem>Ajuste de cuenta</MenuItem>
                     </a>
                   </Link>
+                  <MenuDivider />
+                  <MenuItem onClick={signOut} color="#FF0000" fontWeight="500">
+                    Cerrar sesi&oacute;n
+                  </MenuItem>
                 </MenuGroup>
-                <MenuDivider />
-                <MenuItem onClick={signOut} color="#FF0000" fontWeight="500">
-                  Cerrar sesi&oacute;n
-                </MenuItem>
               </MenuList>
             </Menu>
           </ul>

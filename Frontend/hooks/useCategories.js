@@ -3,17 +3,19 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const useCategories = () => {
+  // State for categories data
   const [docsCategories, setDocsCategories] = useState([]);
 
-  // Nnumber of Category
+  // Number of categories
   const [numCategories, setNumCategories] = useState(0);
 
-  // loader
+  // Loading state
   const [loadingCategories, setLoadingCategories] = useState(true);
 
-  // error
+  // Error state
   const [errorCategories, setErrorCategories] = useState(null);
 
+  // Fetch categories data
   const getCategories = async () => {
     try {
       const { data } = await axios.get(

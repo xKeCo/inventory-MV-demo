@@ -38,10 +38,16 @@ import { SearchIcon, HamburgerIcon } from "@chakra-ui/icons";
 import AuthContext from "../../context/AuthProvider";
 
 function Navbar() {
-  let router = useRouter();
+  // User context = User data
   const { auth, setAuth } = useContext(AuthContext);
+
+  // Router = Redirect
+  const router = useRouter();
+
+  // Chakra UI Drawer handler
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  // SingOut function
   const signOut = () => {
     try {
       localStorage.removeItem("token");
@@ -77,8 +83,8 @@ function Navbar() {
             </MenuButton>
             <MenuList mt="0.8rem">
               <MenuGroup
-                title={`${auth.name} - ${
-                  auth && auth.type === "A" ? "Admin" : "Empleado"
+                title={`${auth && auth.name} - ${
+                  auth && auth.type === "A" ? "Admin" : "Trabajador"
                 }`}
               >
                 <Link href="/setting">

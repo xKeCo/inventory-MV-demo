@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const useProducts = () => {
+  // State for products data
   const [docsProducts, setDocsProducts] = useState([]);
 
-  // Nnumber of products
+  // Number of products
   const [numProducts, setNumProducts] = useState(0);
 
-  // loader
+  // Loading state
   const [loadingProducts, setLoadingProducts] = useState(true);
 
-  // error
+  // Error state
   const [errorProducts, setErrorProducts] = useState(null);
 
   const getProducts = async () => {

@@ -3,17 +3,19 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const usePets = () => {
+  // State for pets data
   const [docsPets, setDocsPets] = useState([]);
 
-  // Nnumber of Category
+  // Number of pets
   const [numPets, setNumPets] = useState(0);
 
-  // loader
+  // Loading state
   const [loadingPets, setLoadingPets] = useState(true);
 
-  // error
+  // Error state
   const [errorPets, setErrorPets] = useState(null);
 
+  // Fetch pets data
   const getCategories = async () => {
     try {
       const { data } = await axios.get(

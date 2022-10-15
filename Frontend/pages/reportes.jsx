@@ -2,12 +2,12 @@
 import { useContext, useEffect } from "react";
 
 // Next
-import Head from "next/head";
 import { useRouter } from "next/router";
 
 // Local Components
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
+import SEO from "../components/SEO/SEO";
 
 // Context
 import AuthContext from "../context/AuthProvider";
@@ -16,7 +16,10 @@ import AuthContext from "../context/AuthProvider";
 import s from "../styles/Reportes.module.css";
 
 function Reportes() {
+  // User context = User data
   const { auth } = useContext(AuthContext);
+
+  // Router = Redirect
   const router = useRouter();
 
   useEffect(() => {
@@ -28,14 +31,8 @@ function Reportes() {
 
   return (
     <>
-      <Head>
-        <title>Mascotas del Valle - Reportes</title>
-        <meta
-          name="description"
-          content="Reportes page of Mascotas del Valle"
-        />
-        <link rel="icon" href="/logos/icon_orange.png" />
-      </Head>
+      <SEO title={"Reportes"} />
+
       <div className={s.flex}>
         <Sidebar />
         <div className={s.container}>

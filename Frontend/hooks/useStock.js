@@ -3,17 +3,19 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const useStock = () => {
+  // State for stock data
   const [docsStock, setDocsStock] = useState([]);
 
-  // Nnumber of products
+  // Number of Stock
   const [numStock, setNumStock] = useState(0);
 
-  // loader
+  // Loading state
   const [loadingStock, setLoadingStock] = useState(true);
 
-  // error
+  // error state
   const [errorStock, setErrorStock] = useState(null);
 
+  // Fetch stock data
   const getStock = async () => {
     try {
       const { data } = await axios.get(

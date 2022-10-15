@@ -2,7 +2,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 
 // Next
-import Head from "next/head";
 import { useRouter } from "next/router";
 
 // Axios
@@ -13,6 +12,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Loader from "../components/Loader/Loader";
 import DrawerProducts from "../components/Drawer/DrawerProducts";
+import SEO from "../components/SEO/SEO";
 
 // Styles
 import s from "../styles/Productos.module.css";
@@ -51,7 +51,10 @@ import { toast } from "react-hot-toast";
 import AuthContext from "../context/AuthProvider";
 
 function Productos() {
+  // User context = User data
   const { auth } = useContext(AuthContext);
+
+  // Router = Redirect
   const router = useRouter();
 
   useEffect(() => {
@@ -61,6 +64,7 @@ function Productos() {
     }
   }, [router]);
 
+  // Get all products data
   const {
     docsProducts,
     loadingProducts,
@@ -69,14 +73,17 @@ function Productos() {
     getProducts,
   } = useProducts();
 
+  // Get providers, categories and pets data
   const { docsProvs } = useProvs();
-
   const { docsCategories } = useCategories();
   const { docsPets } = usePets();
 
+  // Chakra UI Drawer handler
   const { isOpen, onOpen, onClose } = useDisclosure();
+  // Auto-select first input on drawer open
   const firstField = useRef();
 
+  // Products data to send
   const [productData, setProductData] = useState({
     prod_id: "",
     name: "",
@@ -89,7 +96,7 @@ function Productos() {
     mascotaid_fk: "",
   });
 
-  // handle input change
+  // handle input change = get data from inputs
   const handleChange = (e) => {
     setProductData({
       ...productData,
@@ -97,7 +104,7 @@ function Productos() {
     });
   };
 
-  // handle submit to post data
+  // handle submit to post data = send data to db
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -117,7 +124,7 @@ function Productos() {
     }
   };
 
-  // handle delete
+  // handle delete = delete product from db
   const handleDelete = async (id, name) => {
     try {
       await axios.delete(
@@ -136,14 +143,8 @@ function Productos() {
 
   return (
     <>
-      <Head>
-        <title>Mascotas del Valle - Productos</title>
-        <meta
-          name="description"
-          content="Productos page of Mascotas del Valle"
-        />
-        <link rel="icon" href="/logos/icon_orange.png" />
-      </Head>
+      <SEO title={"Productos"} />
+
       <div className={s.flex}>
         <Sidebar />
         <div className={s.container}>

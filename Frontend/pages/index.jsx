@@ -2,7 +2,6 @@
 import { useContext, useEffect } from "react";
 
 // Next
-import Head from "next/head";
 import { useRouter } from "next/router";
 
 // Styles
@@ -11,6 +10,7 @@ import s from "../styles/Home.module.css";
 // Local Components
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
+import SEO from "../components/SEO/SEO";
 
 // Hooks
 import useProducts from "../hooks/useProducts";
@@ -21,11 +21,15 @@ import useStock from "../hooks/useStock";
 import AuthContext from "../context/AuthProvider";
 
 export default function Home() {
+  // Get number of products, providers and stock
   const { numProducts } = useProducts();
   const { numProvs } = useProvs();
   const { numStock } = useStock();
 
+  // User context = User data
   const { auth } = useContext(AuthContext);
+
+  // Router = Redirect
   const router = useRouter();
 
   useEffect(() => {
@@ -41,14 +45,8 @@ export default function Home() {
         <Sidebar />
         <div className={s.container}>
           <Navbar />
-          <Head>
-            <title>Mascotas del Valle - Home</title>
-            <meta
-              name="description"
-              content="Inventory of Mascotas del Valle"
-            />
-            <link rel="icon" href="/logos/icon_orange.png" />
-          </Head>
+          <SEO title={"Inicio"} />
+
           <main className={s.main}>
             <h1 className={s.title}>Inicio</h1>
 

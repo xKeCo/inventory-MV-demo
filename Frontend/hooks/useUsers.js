@@ -3,16 +3,16 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const useUsers = () => {
+  // State for users data
   const [docsUsers, setDocsUsers] = useState([]);
 
-  // Nnumber of Users
-
-  // loader
+  // Loading state
   const [loadingUsers, setLoadingUsers] = useState(true);
 
-  // error
+  // error state
   const [errorUsers, setErrorUsers] = useState(null);
 
+  // Fetch users data
   const getUsers = async () => {
     try {
       const { data } = await axios.get(

@@ -2,13 +2,13 @@
 import { useContext, useEffect } from "react";
 
 // Next
-import Head from "next/head";
 import { useRouter } from "next/router";
 
 // Local Components
 import Navbar from "../components/Navbar/Navbar";
 import Loader from "../components/Loader/Loader";
 import Sidebar from "../components/Sidebar/Sidebar";
+import SEO from "../components/SEO/SEO";
 
 // Context
 import AuthContext from "../context/AuthProvider";
@@ -28,22 +28,19 @@ import {
   Th,
   Td,
   TableContainer,
-  Menu,
-  MenuButton,
-  IconButton,
-  MenuList,
-  MenuItem,
   Button,
 } from "@chakra-ui/react";
 // Chakra UI Icons
-import { AddIcon, DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
 
 function Stock() {
+  // User context = User data
   const { auth } = useContext(AuthContext);
+
+  // Router = Redirect
   const router = useRouter();
 
-  const { docsStock, loadingStock, errorStock, setLoadingStock, getStock } =
-    useStock();
+  // Get stock data from db
+  const { docsStock, loadingStock, errorStock } = useStock();
 
   useEffect(() => {
     // redirect to login if it's not logged in
@@ -54,11 +51,8 @@ function Stock() {
 
   return (
     <>
-      <Head>
-        <title>Mascotas del Valle - Stock</title>
-        <meta name="description" content="Stock page of Mascotas del Valle" />
-        <link rel="icon" href="/logos/icon_orange.png" />
-      </Head>
+      <SEO title={"Stock"} />
+
       <div className={s.flex}>
         <Sidebar />
         <div className={s.container}>
