@@ -23,7 +23,7 @@ import { toast } from "react-hot-toast";
 // Axios
 import axios from "axios";
 
-function resetPassword() {
+function ResetPassword() {
   // Auth context = User data | handle if user is logged in
   const { auth } = useContext(AuthContext);
 
@@ -134,4 +134,4 @@ function resetPassword() {
   );
 }
 
-export default resetPassword;
+export default ResetPassword;

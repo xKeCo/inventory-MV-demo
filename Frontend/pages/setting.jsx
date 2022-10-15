@@ -100,13 +100,13 @@ function Setting() {
   };
 
   // handle form submit = update user data
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, id) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       await axios.put(
-        `https://mascotas-back.herokuapp.com/api/user/update/${auth.user_id}`,
+        `https://mascotas-back.herokuapp.com/api/user/update/${id}`,
         userData
       );
       // router.push("/");
@@ -142,7 +142,7 @@ function Setting() {
                   </h1>
                   <form
                     className={s.settings__update__form}
-                    onSubmit={handleSubmit}
+                    onSubmit={handleSubmit(auth && auth.user_id)}
                   >
                     <FormControl
                       id="username"
