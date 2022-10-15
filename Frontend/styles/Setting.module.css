@@ -11,7 +11,30 @@
 .title {
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin: 2rem 1rem;
   color: #000;
   transition: var(--main-transition);
+}
+
+.settings {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-start;
+}
+
+.settings__table {
+  width: 100%;
+}
+
+@media screen and (max-width: 950px) {
+  .container {
+    padding: 0;
+  }
+
+  .settings {
+    justify-content: center;
+    flex-wrap: wrap-reverse;
+    /* width: 100%; */
+    margin: 1rem;
+  }
 }

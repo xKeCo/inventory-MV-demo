@@ -77,7 +77,9 @@ function Navbar() {
             </MenuButton>
             <MenuList mt="0.8rem">
               <MenuGroup
-                title={auth && auth.type === "A" ? "Admin" : "Empleado"}
+                title={`${auth.name} - ${
+                  auth && auth.type === "A" ? "Admin" : "Empleado"
+                }`}
               >
                 <Link href="/setting">
                   <a>

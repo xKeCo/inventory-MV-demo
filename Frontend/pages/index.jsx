@@ -15,6 +15,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 // Hooks
 import useProducts from "../hooks/useProducts";
 import useProvs from "../hooks/useProvs";
+import useStock from "../hooks/useStock";
 
 // Context
 import AuthContext from "../context/AuthProvider";
@@ -22,6 +23,7 @@ import AuthContext from "../context/AuthProvider";
 export default function Home() {
   const { numProducts } = useProducts();
   const { numProvs } = useProvs();
+  const { numStock } = useStock();
 
   const { auth } = useContext(AuthContext);
   const router = useRouter();
@@ -65,7 +67,7 @@ export default function Home() {
                 <h2 className={s.summary__item_title}>
                   Productos con poco stock
                 </h2>
-                <code className={s.summary__value}> {numProvs}</code>
+                <code className={s.summary__value}> {numStock}</code>
               </div>
               <div className={s.summary__container__item}>
                 <h2 className={s.summary__item_title}>

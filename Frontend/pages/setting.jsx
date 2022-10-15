@@ -33,13 +33,14 @@ import { DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
 
 // Styles
 import s from "../styles/Setting.module.css";
+import Loader from "../components/Loader/Loader";
 
 function Setting() {
   const { auth } = useContext(AuthContext);
   const router = useRouter();
 
   useEffect(() => {
-    // redirect to home if already logged in
+    // redirect to login if it's not logged in
     if (!auth) {
       router.push("/login");
     }
@@ -77,125 +78,138 @@ function Setting() {
         <div className={s.container}>
           <Navbar />
           <h1 className={s.title}>Ajustes</h1>
-          <div className={s.products}>
-            <div className={s.products__table}>
-              <TableContainer w="100%" height="100%">
-                <Table w="100%" variant="striped" size="sm">
-                  <Thead>
-                    <Tr>
-                      <Th
-                        w="200px"
-                        color="#000"
-                        fontFamily="Inter, sans-serif"
-                        fontSize="14px"
-                      >
-                        ID
-                      </Th>
-                      <Th
-                        w="260px"
-                        color="#000"
-                        fontFamily="Inter, sans-serif"
-                        fontSize="14px"
-                      >
-                        Nombre
-                      </Th>
-                      <Th
-                        w="100px"
-                        color="#000"
-                        fontFamily="Inter, sans-serif"
-                        fontSize="14px"
-                      >
-                        Usuario
-                      </Th>
-                      <Th
-                        w="100px"
-                        color="#000"
-                        fontFamily="Inter, sans-serif"
-                        fontSize="14px"
-                      >
-                        Rol
-                      </Th>
-                      <Th
-                        w="100px"
-                        color="#000"
-                        fontFamily="Inter, sans-serif"
-                        fontSize="14px"
-                      >
-                        Correo
-                      </Th>
-                      <Th
-                        w="100px"
-                        color="#000"
-                        fontFamily="Inter, sans-serif"
-                        fontSize="14px"
-                      >
-                        Creado
-                      </Th>
-                      <Th
-                        w="100px"
-                        color="#000"
-                        fontFamily="Inter, sans-serif"
-                        fontSize="14px"
-                      >
-                        Manejo
-                      </Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {docsUsers.map((doc) => (
-                      <Tr key={doc.id}>
-                        <Td fontWeight="500" fontSize="15px">
-                          {doc.id}
-                        </Td>
-                        <Td fontWeight="500" fontSize="15px">
-                          {doc.name}
-                        </Td>
-                        <Td fontWeight="500" fontSize="15px">
-                          {doc.username}
-                        </Td>
-                        <Td fontWeight="500" fontSize="15px">
-                          {doc.type === "A" ? "Admin" : "Trabajador"}
-                        </Td>
-                        <Td fontWeight="500" fontSize="15px">
-                          {doc.email}
-                        </Td>
-                        <Td fontWeight="500" fontSize="15px">
-                          {doc.date}
-                        </Td>
-                        <Td>
-                          <Menu>
-                            <MenuButton
-                              as={IconButton}
-                              aria-label="Options"
-                              backgroundColor="#e4531b"
-                              _hover={{ backgroundColor: "#83bb26" }}
-                              _active={{ backgroundColor: "#83bb26" }}
-                              icon={<EditIcon color="#fff" fontSize="20px" />}
-                              variant="outline"
-                            />
-                            <MenuList>
-                              <MenuItem icon={<InfoIcon />} isDisabled>
-                                Mas info
-                              </MenuItem>
-                              <MenuItem icon={<EditIcon />} isDisabled>
-                                Modificar
-                              </MenuItem>
-                              <MenuItem
-                                icon={<DeleteIcon />}
-                                onClick={() => handleDelete(doc.id, doc.name)}
-                              >
-                                Eliminar
-                              </MenuItem>
-                            </MenuList>
-                          </Menu>
-                        </Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
-              </TableContainer>
-            </div>
-          </div>
+
+          {loadingUsers ? (
+            <Loader />
+          ) : errorUsers ? (
+            <p>{errorUsers}</p>
+          ) : (
+            <>
+              <div className={s.settings}>
+                <div className={s.settings__table}>
+                  <TableContainer w="100%" height="100%">
+                    <Table w="100%" variant="striped" size="sm">
+                      <Thead>
+                        <Tr>
+                          <Th
+                            w="200px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            ID
+                          </Th>
+                          <Th
+                            w="260px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Nombre
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Usuario
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Rol
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Correo
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Creado
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Manejo
+                          </Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        {docsUsers.map((doc) => (
+                          <Tr key={doc.id}>
+                            <Td fontWeight="500" fontSize="15px">
+                              {doc.id}
+                            </Td>
+                            <Td fontWeight="500" fontSize="15px">
+                              {doc.name}
+                            </Td>
+                            <Td fontWeight="500" fontSize="15px">
+                              {doc.username}
+                            </Td>
+                            <Td fontWeight="500" fontSize="15px">
+                              {doc.type === "A" ? "Admin" : "Trabajador"}
+                            </Td>
+                            <Td fontWeight="500" fontSize="15px">
+                              {doc.email}
+                            </Td>
+                            <Td fontWeight="500" fontSize="15px">
+                              {doc.date}
+                            </Td>
+                            <Td>
+                              <Menu>
+                                <MenuButton
+                                  as={IconButton}
+                                  aria-label="Options"
+                                  backgroundColor="#e4531b"
+                                  _hover={{ backgroundColor: "#83bb26" }}
+                                  _active={{ backgroundColor: "#83bb26" }}
+                                  icon={
+                                    <EditIcon color="#fff" fontSize="20px" />
+                                  }
+                                  variant="outline"
+                                />
+                                <MenuList>
+                                  <MenuItem icon={<InfoIcon />} isDisabled>
+                                    Mas info
+                                  </MenuItem>
+                                  <MenuItem icon={<EditIcon />} isDisabled>
+                                    Modificar
+                                  </MenuItem>
+                                  <MenuItem
+                                    icon={<DeleteIcon />}
+                                    onClick={() =>
+                                      handleDelete(doc.id, doc.name)
+                                    }
+                                  >
+                                    Eliminar
+                                  </MenuItem>
+                                </MenuList>
+                              </Menu>
+                            </Td>
+                          </Tr>
+                        ))}
+                      </Tbody>
+                    </Table>
+                  </TableContainer>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

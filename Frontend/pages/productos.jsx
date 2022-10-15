@@ -69,30 +69,10 @@ function Productos() {
     getProducts,
   } = useProducts();
 
-  const {
-    docsProvs,
-    // loadingProvs,
-    // errorProvs,
-    // setLoadingProvs,
-    // getProveedores,
-  } = useProvs();
+  const { docsProvs } = useProvs();
 
-  const {
-    docsCategories,
-    // loadingCategories,
-    // numCategories,
-    // errorCategories,
-    // setLoadingCategories,
-    // getCategories,
-  } = useCategories();
-  const {
-    docsPets,
-    // loadingCategories,
-    // numCategories,
-    // errorCategories,
-    // setLoadingCategories,
-    // getCategories,
-  } = usePets();
+  const { docsCategories } = useCategories();
+  const { docsPets } = usePets();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
@@ -115,7 +95,6 @@ function Productos() {
       ...productData,
       [e.target.name]: e.target.value,
     });
-    console.log(productData);
   };
 
   // handle submit to post data

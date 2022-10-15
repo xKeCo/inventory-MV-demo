@@ -1,6 +1,7 @@
 .flex {
   display: flex;
 }
+
 .container {
   width: 100%;
   padding: 2rem 2.5rem;
@@ -10,7 +11,29 @@
 .title {
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
   color: #000;
+  margin: 2rem 1rem;
   transition: var(--main-transition);
+}
+
+.stock {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-start;
+}
+
+.stock__table {
+  width: 100%;
+}
+
+@media screen and (max-width: 950px) {
+  .container {
+    padding: 0;
+  }
+  .stock {
+    justify-content: center;
+    flex-wrap: wrap-reverse;
+    /* width: 100%; */
+    margin: 1rem;
+  }
 }

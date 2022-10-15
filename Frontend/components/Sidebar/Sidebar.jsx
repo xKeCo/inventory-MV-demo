@@ -266,7 +266,11 @@ function Sidebar() {
                       mb: "0",
                     })}
               >
-                <MenuGroup>
+                <MenuGroup
+                  title={`${auth.name} - ${
+                    auth && auth.type === "A" ? "Admin" : "Empleado"
+                  }`}
+                >
                   <Link href="/setting">
                     <a>
                       <MenuItem>Ajuste de cuenta</MenuItem>

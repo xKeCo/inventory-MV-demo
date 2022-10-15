@@ -57,6 +57,7 @@ function DrawerProducts({
                 <Input
                   isRequired
                   name="prod_id"
+                  ref={firstField}
                   placeholder="Ingrese nombre del proveedor"
                   onChange={handleChange}
                 />
@@ -66,7 +67,6 @@ function DrawerProducts({
                 <Input
                   isRequired
                   name="name"
-                  ref={firstField}
                   id="name"
                   placeholder="Ingrese nombre del proveedor"
                   onChange={handleChange}
@@ -79,7 +79,6 @@ function DrawerProducts({
                   isRequired
                   name="stock"
                   type="number"
-                  defaultValue={1}
                   min={0}
                   max={100}
                   onChange={(value) =>
@@ -99,7 +98,6 @@ function DrawerProducts({
                   <NumberInput
                     isRequired
                     name="peso"
-                    defaultValue={1}
                     precision={2}
                     step={0.2}
                     min={0}
@@ -115,10 +113,12 @@ function DrawerProducts({
                     </NumberInputStepper>
                   </NumberInput>
                   <Select
+                    isRequired
                     w="150px"
                     name="unidad_medida"
                     onChange={handleChange}
                   >
+                    <option value=""></option>
                     <option value="KG">KG</option>
                     <option value="LB">LB</option>
                   </Select>
@@ -130,7 +130,6 @@ function DrawerProducts({
                 <NumberInput
                   isRequired
                   name="price"
-                  defaultValue={1}
                   min={0}
                   max={1000000}
                   onChange={(value) =>
@@ -148,7 +147,8 @@ function DrawerProducts({
               <Box>
                 <FormLabel htmlFor="provid_fk">Proveedor</FormLabel>
 
-                <Select name="provid_fk" onChange={handleChange}>
+                <Select isRequired name="provid_fk" onChange={handleChange}>
+                  <option value=""></option>
                   {docsProvs.map((doc) => (
                     <option key={doc.id} value={doc.id}>
                       {doc.name}
@@ -159,7 +159,8 @@ function DrawerProducts({
               <Box>
                 <FormLabel htmlFor="categid_fk">Categoria</FormLabel>
 
-                <Select name="categid_fk" onChange={handleChange}>
+                <Select isRequired name="categid_fk" onChange={handleChange}>
+                  <option value=""></option>
                   {docsCategories.map((doc) => (
                     <option key={doc.id} value={doc.id}>
                       {doc.name}
@@ -170,7 +171,13 @@ function DrawerProducts({
               <Box>
                 <FormLabel htmlFor="mascotaid_fk">Mascota</FormLabel>
 
-                <Select name="mascotaid_fk" onChange={handleChange}>
+                <Select
+                  isRequired
+                  name="mascotaid_fk"
+                  onChange={handleChange}
+                  mb="3rem"
+                >
+                  <option value=""></option>
                   {docsPets.map((doc) => (
                     <option key={doc.id} value={doc.id}>
                       {doc.name}
