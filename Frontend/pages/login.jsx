@@ -1,5 +1,5 @@
 // React
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 // Next
 import Link from "next/link";
@@ -82,12 +82,10 @@ function Login() {
     }
   };
 
-  useEffect(() => {
-    // redirect to home if already logged in
-    if (auth) {
-      router.push("/");
-    }
-  }, [auth, setAuth, router]);
+  // redirect to home if already logged in
+  if (auth) {
+    router.push("/");
+  }
 
   return (
     <>

@@ -1,5 +1,5 @@
 // React
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 // Next
 import Link from "next/link";

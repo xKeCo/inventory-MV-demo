@@ -1,5 +1,5 @@
 // React
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 // Next
 import { useRouter } from "next/router";
@@ -57,12 +57,10 @@ function Productos() {
   // Router = Redirect
   const router = useRouter();
 
-  useEffect(() => {
-    // redirect to home if already logged in
-    if (!auth) {
-      router.push("/login");
-    }
-  }, [router]);
+  // redirect to home if already logged in
+  if (!auth) {
+    router.push("/login");
+  }
 
   // Get all products data
   const {

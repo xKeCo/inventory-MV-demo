@@ -1,5 +1,6 @@
 // React
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
+
 // Next
 import { useRouter } from "next/router";
 
@@ -52,22 +53,17 @@ function Setting() {
 
   // Data State = Users data
   const [userData, setUserData] = useState({
-    username: auth && auth.username,
     name: (auth && auth.name) || "",
     email: (auth && auth.email) || "",
-    password: "",
-    role: auth && auth.type,
   });
 
   // Loading state
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // redirect to login if it's not logged in
-    if (!auth) {
-      router.push("/login");
-    }
-  }, [router]);
+  // redirect to login if it's not logged in
+  if (!auth) {
+    router.push("/login");
+  }
 
   // Get users from db
   const { docsUsers, loadingUsers, errorUsers, setLoadingUsers, getUsers } =
@@ -96,7 +92,7 @@ function Setting() {
       ...userData,
       [e.target.name]: e.target.value,
     });
-    console.log(userData);
+    // console.log(userData);
   };
 
   // handle form submit = update user data
@@ -142,7 +138,7 @@ function Setting() {
                   </h1>
                   <form
                     className={s.settings__update__form}
-                    onSubmit={handleSubmit(auth && auth.user_id)}
+                    onSubmit={(e) => handleSubmit(e, auth.user_id)}
                   >
                     <FormControl
                       id="username"
@@ -192,44 +188,21 @@ function Setting() {
                         />
                       )}
                     </FormControl>
-
-                    <FormControl
-                      id="password"
-                      isRequired
-                      className={s.settings__update__form__item}
-                    >
-                      <p> Contrase&ntilde;a </p>
-                      <Input
-                        name="password"
-                        type="text"
-                        placeholder="Nueva contrase&ntilde;a"
-                        onChange={handleChange}
-                        maxWidth="300px"
-                      />
-                    </FormControl>
-                    <FormControl
-                      id="repeatPassword"
-                      isRequired
-                      className={s.settings__update__form__item}
-                    >
-                      <p>Repetir contrase&ntilde;a</p>
-                      <Input
-                        name="repeatPassword"
-                        type="text"
-                        placeholder="Repetir contrase&ntilde;a"
-                        onChange={handleChange}
-                        maxWidth="300px"
-                      />
-                    </FormControl>
                     <div className={s.settings__form__button__container}>
                       <button
                         className={
-                          loading
+                          loading ||
+                          (userData.name === auth.name &&
+                            userData.email === auth.email)
                             ? s.settings__form__button__disabled
                             : s.settings__form__button
                         }
                         type="submit"
-                        disabled={loading}
+                        disabled={
+                          loading ||
+                          (userData.name === auth.name &&
+                            userData.email === auth.email)
+                        }
                       >
                         {loading ? "Cargando..." : "Actualizar datos"}
                       </button>

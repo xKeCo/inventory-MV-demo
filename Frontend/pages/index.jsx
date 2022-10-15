@@ -1,5 +1,5 @@
 // React
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 // Next
 import { useRouter } from "next/router";
@@ -32,12 +32,10 @@ export default function Home() {
   // Router = Redirect
   const router = useRouter();
 
-  useEffect(() => {
-    // redirect to home if already logged in
-    if (!auth) {
-      router.push("/login");
-    }
-  }, [router]);
+  // redirect to home if already logged in
+  if (!auth) {
+    router.push("/login");
+  }
 
   return (
     <>

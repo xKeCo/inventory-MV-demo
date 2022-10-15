@@ -43,6 +43,7 @@
   width: 100%;
   gap: 1.5rem 2.5rem;
   flex-wrap: wrap;
+  /* flex-direction: column; */
   justify-content: flex-start;
   padding: 2rem 0;
   transition: var(--main-transition);
@@ -54,15 +55,16 @@
 }
 
 .settings__form__button__container {
+  max-width: 300px;
+  width: 100%;
   align-self: end;
 }
 
 .settings__form__button {
   background-color: var(--color-primary);
   color: var(--white);
-  /* width: 50px; */
+  width: 200px;
   height: 40px;
-  align-self: baseline;
   padding: 0.5rem;
   border-radius: 0.5rem;
   transition: var(--main-transition);
@@ -75,14 +77,17 @@
 
 .settings__form__button__disabled {
   background-color: #9b9b9b;
+  color: var(--white);
+  width: 200px;
+  height: 40px;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  color: var(--white);
   transition: var(--main-transition);
 }
 
 .settings__form__button__disabled:hover {
-  background-color: #9b9b9b;
+  background-color: #5e5e5e;
+  cursor: not-allowed;
   transition: var(--main-transition);
 }
 

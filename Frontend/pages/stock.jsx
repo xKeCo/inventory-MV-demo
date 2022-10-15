@@ -1,5 +1,5 @@
 // React
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 // Next
 import { useRouter } from "next/router";
@@ -42,12 +42,10 @@ function Stock() {
   // Get stock data from db
   const { docsStock, loadingStock, errorStock } = useStock();
 
-  useEffect(() => {
-    // redirect to login if it's not logged in
-    if (!auth) {
-      router.push("/login");
-    }
-  }, [router]);
+  // redirect to login if it's not logged in
+  if (!auth) {
+    router.push("/login");
+  }
 
   return (
     <>

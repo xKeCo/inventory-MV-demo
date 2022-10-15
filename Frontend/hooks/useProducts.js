@@ -1,6 +1,11 @@
-import axios from "axios";
+// React
 import { useEffect, useState } from "react";
+
+// React-hot-toast Notifications
 import { toast } from "react-hot-toast";
+
+// Axios
+import axios from "axios";
 
 const useProducts = () => {
   // State for products data
