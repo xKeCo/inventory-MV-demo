@@ -1,0 +1,26 @@
+.drawer__form__button {
+  background-color: var(--color-primary) !important;
+  color: var(--white);
+  transition: var(--main-transition) !important;
+  /* width: 50px; */
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.drawer__form__button:hover {
+  background-color: var(--color-secondary) !important;
+  transition: var(--main-transition) !important;
+}
+
+.drawer__form__button__disabled {
+  background-color: #9b9b9b !important;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--white);
+  transition: var(--main-transition) !important;
+}
+
+.drawer__form__button__disabled:hover {
+  background-color: #9b9b9b !important;
+  transition: var(--main-transition) !important;
+}
