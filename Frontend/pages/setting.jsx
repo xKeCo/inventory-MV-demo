@@ -53,8 +53,8 @@ function Setting() {
 
   // Data State = Users data
   const [userData, setUserData] = useState({
-    name: (auth && auth.name) || "",
-    email: (auth && auth.email) || "",
+    name: auth?.name || "",
+    email: auth?.email || "",
   });
 
   // Loading state
@@ -105,8 +105,13 @@ function Setting() {
         `https://mascotas-back.herokuapp.com/api/user/update/${id}`,
         userData
       );
+
       // router.push("/");
       setLoading(false);
+      getUsers();
+
+      console.log(userData);
+      console.log(auth);
       toast.success("Usuario actualizado con éxito");
     } catch (error) {
       toast.error(error.response.data.msg);
@@ -146,31 +151,27 @@ function Setting() {
                       className={s.settings__update__form__item}
                     >
                       <p>Usuario</p>
-                      {auth && (
-                        <Input
-                          disabled
-                          name="username"
-                          type="text"
-                          value={auth.username}
-                          maxWidth="300px"
-                        />
-                      )}
+                      <Input
+                        disabled
+                        name="username"
+                        type="text"
+                        value={auth?.username}
+                        maxWidth="300px"
+                      />
                     </FormControl>
                     <FormControl
                       id="name"
                       isRequired
                       className={s.settings__update__form__item}
                     >
-                      <p>Usuario</p>
-                      {auth && (
-                        <Input
-                          name="name"
-                          type="text"
-                          defaultValue={auth && auth.name}
-                          onChange={handleChange}
-                          maxWidth="300px"
-                        />
-                      )}
+                      <p>Nombre</p>
+                      <Input
+                        name="name"
+                        type="text"
+                        defaultValue={auth?.name}
+                        onChange={handleChange}
+                        maxWidth="300px"
+                      />
                     </FormControl>
                     <FormControl
                       id="email"
@@ -178,15 +179,13 @@ function Setting() {
                       className={s.settings__update__form__item}
                     >
                       <p>Correo electr&oacute;nico </p>
-                      {auth && (
-                        <Input
-                          name="email"
-                          type="text"
-                          defaultValue={auth && auth.email}
-                          onChange={handleChange}
-                          maxWidth="300px"
-                        />
-                      )}
+                      <Input
+                        name="email"
+                        type="text"
+                        defaultValue={auth?.email}
+                        onChange={handleChange}
+                        maxWidth="300px"
+                      />
                     </FormControl>
                     <div className={s.settings__form__button__container}>
                       <button

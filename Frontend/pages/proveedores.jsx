@@ -80,6 +80,8 @@ function Proveedores() {
     other_contact: "",
   });
 
+  const [oneProvData, setOneProvData] = useState(null);
+
   // handle input change = get data from inputs
   const handleChange = (e) => {
     setProvData({
@@ -91,15 +93,34 @@ function Proveedores() {
   // handle submit = send data to db
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      await axios.post(
-        "https://mascotas-back.herokuapp.com/api/provider/new",
-        provData
-      );
-      getProveedores();
-      setLoadingProvs(false);
-      onClose();
-      toast.success("Se ha agregado el nuevo proveedor");
+      if (oneProvData === null) {
+        await axios.post(
+          "https://mascotas-back.herokuapp.com/api/provider/new",
+          provData
+        );
+        getProveedores();
+        setLoadingProvs(false);
+        onClose();
+        toast.success("Se ha agregado el nuevo proveedor");
+      } else {
+        await axios.put(
+          `https://mascotas-back.herokuapp.com/api/provider/update/${oneProvData.id}`,
+          provData
+        );
+        getProveedores();
+        setLoadingProvs(false);
+        onClose();
+        toast.success(`Se ha editado el proveedor ${provData.name}`);
+      }
+
+      setOneProvData(null);
+      setProvData({
+        name: "",
+        number: "",
+        other_contact: "",
+      });
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.msg);
@@ -219,7 +240,14 @@ function Proveedores() {
                                   <MenuItem icon={<InfoIcon />} isDisabled>
                                     Mas info
                                   </MenuItem>
-                                  <MenuItem icon={<EditIcon />} isDisabled>
+                                  <MenuItem
+                                    icon={<EditIcon />}
+                                    onClick={() => {
+                                      setOneProvData(doc);
+                                      setProvData(doc);
+                                      onOpen();
+                                    }}
+                                  >
                                     Modificar
                                   </MenuItem>
                                   <MenuItem
@@ -247,11 +275,21 @@ function Proveedores() {
 
       <DrawerProvs
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={(event) => {
+          onClose(event);
+          setOneProvData(null);
+          setProvData({
+            name: "",
+            number: "",
+            other_contact: "",
+          });
+        }}
         firstField={firstField}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         loadingProvs={loadingProvs}
+        oneProvData={oneProvData}
+        provData={provData}
       />
     </>
   );
