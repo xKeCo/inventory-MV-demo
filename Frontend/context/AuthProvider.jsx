@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
         },
       };
       try {
-        const { data } = await axios(
+        const { data } = await axios.get(
           "https://mascotas-back.herokuapp.com/api/user/auth",
           config
         );

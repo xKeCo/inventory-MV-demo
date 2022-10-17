@@ -107,7 +107,6 @@ function Login() {
             </p>
           </div>
           <FormControl id="email" isRequired className={s.login__form}>
-            {/* <FormLabel>Usuario</FormLabel> */}
             <p>Usuario</p>
             <Input
               name="username"
@@ -117,7 +116,6 @@ function Login() {
             />
           </FormControl>
 
-          {/* <FormLabel>Contrase&ntilde;a</FormLabel> */}
           <p>Contrase&ntilde;a</p>
 
           <FormControl id="password" isRequired className={s.login__form}>

@@ -246,14 +246,14 @@ function Sidebar() {
                         : `${s.sidebar__user__menu} ${s.sidebar__user__menu__small}`
                     }
                   >
-                    <Avatar size="sm" name={`${auth ? auth.name : ""}`}>
+                    <Avatar size="sm" name={`${auth?.name || ""}`}>
                       <AvatarBadge boxSize="1.25em" bg="green.500" />
                     </Avatar>
                     {expanded && (
                       <p className={s.user__name}>
-                        {auth ? auth.name : ""} <br />
+                        {auth?.name || ""} <br />
                         <span className={s.user__role}>
-                          {auth && auth.type === "A" ? "Admin" : "Trabajador"}
+                          {auth?.type === "A" ? "Admin" : "Trabajador"}
                         </span>
                       </p>
                     )}
@@ -272,8 +272,8 @@ function Sidebar() {
                     })}
               >
                 <MenuGroup
-                  title={`${auth && auth.name} - ${
-                    auth && auth.type === "A" ? "Admin" : "Trabajador"
+                  title={`${auth?.name} - ${
+                    auth?.type === "A" ? "Admin" : "Trabajador"
                   }`}
                 >
                   <Link href="/setting">

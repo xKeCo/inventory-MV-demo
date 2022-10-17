@@ -77,14 +77,14 @@ function Navbar() {
         <div>
           <Menu>
             <MenuButton w="100%" h="100%">
-              <Avatar size="sm" name={`${auth ? auth.name : ""}`}>
+              <Avatar size="sm" name={`${auth?.name || ""}`}>
                 <AvatarBadge boxSize="1.25em" bg="green.500" />
               </Avatar>
             </MenuButton>
             <MenuList mt="0.8rem">
               <MenuGroup
-                title={`${auth && auth.name} - ${
-                  auth && auth.type === "A" ? "Admin" : "Trabajador"
+                title={`${auth?.name} - ${
+                  auth?.type === "A" ? "Admin" : "Trabajador"
                 }`}
               >
                 <Link href="/setting">

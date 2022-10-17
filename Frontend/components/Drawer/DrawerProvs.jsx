@@ -24,6 +24,8 @@ function DrawerProvs({
   handleChange,
   handleSubmit,
   loadingProvs,
+  oneProvData,
+  provData,
 }) {
   return (
     <Drawer
@@ -38,7 +40,7 @@ function DrawerProvs({
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">
-            Crear nuevo proveedor
+            {oneProvData ? "Editar proveedor" : "Crear nuevo proveedor"}
           </DrawerHeader>
 
           <DrawerBody>
@@ -52,6 +54,7 @@ function DrawerProvs({
                   id="name"
                   placeholder="Ingrese nombre del proveedor"
                   onChange={handleChange}
+                  defaultValue={oneProvData?.name || ""}
                 />
               </Box>
 
@@ -64,6 +67,7 @@ function DrawerProvs({
                   id="number"
                   placeholder="Contacto del proveedor"
                   onChange={handleChange}
+                  defaultValue={oneProvData?.number || ""}
                 />
               </Box>
 
@@ -75,6 +79,7 @@ function DrawerProvs({
                   name="other_contact"
                   placeholder="Otro medio de contacto"
                   onChange={handleChange}
+                  defaultValue={oneProvData?.other_contact || ""}
                 />
               </Box>
             </Stack>
@@ -91,9 +96,18 @@ function DrawerProvs({
                   : s.drawer__form__button
               }
               type="submit"
-              disabled={loadingProvs}
+              disabled={
+                loadingProvs ||
+                (provData.name === oneProvData?.name &&
+                  provData.number === oneProvData?.number &&
+                  provData.other_contact === oneProvData?.other_contact)
+              }
             >
-              {loadingProvs ? "Cargando..." : "Agregar proveedor"}
+              {loadingProvs
+                ? "Cargando..."
+                : oneProvData
+                ? "Actualizar proveedor"
+                : "Agregar proveedor"}
             </Button>
           </DrawerFooter>
         </DrawerContent>
