@@ -46,7 +46,17 @@ import { toast } from "react-hot-toast";
 
 function Setting() {
   // User context = User data
-  const { auth } = useContext(AuthContext);
+  const { auth, userAuth } = useContext(AuthContext);
+
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
   // Router = Redirect
   const router = useRouter();
@@ -73,7 +83,8 @@ function Setting() {
   const handleDelete = async (id, name) => {
     try {
       await axios.delete(
-        `https://mascotas-back.herokuapp.com/api/user/delete/${id}`
+        `https://mascotas-back.herokuapp.com/api/user/delete/${id}`,
+        config
       );
       getUsers();
       setLoadingUsers(false);
@@ -96,22 +107,22 @@ function Setting() {
   };
 
   // handle form submit = update user data
-  const handleSubmit = async (e, id) => {
+  const handleUpdate = async (e, id) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       await axios.put(
         `https://mascotas-back.herokuapp.com/api/user/update/${id}`,
-        userData
+        userData,
+        config
       );
 
       // router.push("/");
       setLoading(false);
       getUsers();
+      userAuth();
 
-      console.log(userData);
-      console.log(auth);
       toast.success("Usuario actualizado con éxito");
     } catch (error) {
       toast.error(error.response.data.msg);
@@ -143,7 +154,7 @@ function Setting() {
                   </h1>
                   <form
                     className={s.settings__update__form}
-                    onSubmit={(e) => handleSubmit(e, auth.user_id)}
+                    onSubmit={(e) => handleUpdate(e, auth.user_id)}
                   >
                     <FormControl
                       id="username"

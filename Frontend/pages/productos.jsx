@@ -54,6 +54,16 @@ function Productos() {
   // User context = User data
   const { auth } = useContext(AuthContext);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   // Router = Redirect
   const router = useRouter();
 
@@ -105,10 +115,12 @@ function Productos() {
   // handle submit to post data = send data to db
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       await axios.post(
         "https://mascotas-back.herokuapp.com/api/product/new",
-        productData
+        productData,
+        config
       );
       getProducts();
       onClose();
@@ -126,7 +138,8 @@ function Productos() {
   const handleDelete = async (id, name) => {
     try {
       await axios.delete(
-        `https://mascotas-back.herokuapp.com/api/product/delete/${id}`
+        `https://mascotas-back.herokuapp.com/api/product/delete/${id}`,
+        config
       );
       getProducts();
       setLoadingProducts(false);

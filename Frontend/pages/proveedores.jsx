@@ -51,6 +51,16 @@ function Proveedores() {
   // User context = User data
   const { auth } = useContext(AuthContext);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   // Router = Redirect
   const router = useRouter();
 
@@ -98,7 +108,8 @@ function Proveedores() {
       if (oneProvData === null) {
         await axios.post(
           "https://mascotas-back.herokuapp.com/api/provider/new",
-          provData
+          provData,
+          config
         );
         getProveedores();
         setLoadingProvs(false);
@@ -107,7 +118,8 @@ function Proveedores() {
       } else {
         await axios.put(
           `https://mascotas-back.herokuapp.com/api/provider/update/${oneProvData.id}`,
-          provData
+          provData,
+          config
         );
         getProveedores();
         setLoadingProvs(false);
@@ -133,7 +145,8 @@ function Proveedores() {
   const handleDelete = async (id, name) => {
     try {
       await axios.delete(
-        `https://mascotas-back.herokuapp.com/api/provider/delete/${id}`
+        `https://mascotas-back.herokuapp.com/api/provider/delete/${id}`,
+        config
       );
       getProveedores();
       setLoadingProvs(false);

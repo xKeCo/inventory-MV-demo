@@ -20,11 +20,22 @@ const useCategories = () => {
   // Error state
   const [errorCategories, setErrorCategories] = useState(null);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   // Fetch categories data
   const getCategories = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/category/all"
+        "https://mascotas-back.herokuapp.com/api/category/all",
+        config
       );
 
       const docs = data.response.map(({ categ_id, name, description }) => ({

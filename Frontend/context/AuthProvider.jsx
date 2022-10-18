@@ -16,40 +16,40 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(null);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [calledPush, setCalledPush] = useState(false);
 
-  useEffect(() => {
-    const userAuth = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
+  // Get current user data
+  const userAuth = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+      setLoading(false);
+      return;
+    }
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const { data } = await axios.get(
+        "https://mascotas-back.herokuapp.com/api/user/auth",
+        config
+      );
+      setAuth(data);
+      setLoading(false);
+    } catch (error) {
+      if (error.response.status === 404) {
+        localStorage.removeItem("token");
         router.push("/login");
         setLoading(false);
-        return;
       }
+      console.log("hola", error);
+    }
+  };
 
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      try {
-        const { data } = await axios.get(
-          "https://mascotas-back.herokuapp.com/api/user/auth",
-          config
-        );
-        setAuth(data);
-        setLoading(false);
-      } catch (error) {
-        if (error.response.status === 404) {
-          localStorage.removeItem("token");
-          router.push("/login");
-          setLoading(false);
-        }
-        console.log("hola", error);
-      }
-    };
-
+  useEffect(() => {
     userAuth();
   }, []);
 
@@ -58,6 +58,7 @@ const AuthProvider = ({ children }) => {
       value={{
         auth,
         setAuth,
+        userAuth,
       }}
     >
       {loading ? <Loader /> : children}

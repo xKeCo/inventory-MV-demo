@@ -17,11 +17,22 @@ const useUsers = () => {
   // error state
   const [errorUsers, setErrorUsers] = useState(null);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   // Fetch users data
   const getUsers = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/user/all"
+        "https://mascotas-back.herokuapp.com/api/user/all",
+        config
       );
 
       const docs = data.users.map(

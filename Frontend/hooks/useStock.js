@@ -20,11 +20,22 @@ const useStock = () => {
   // error state
   const [errorStock, setErrorStock] = useState(null);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   // Fetch stock data
   const getStock = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/stock/product"
+        "https://mascotas-back.herokuapp.com/api/stock/product",
+        config
       );
 
       const docs = data.result.map(

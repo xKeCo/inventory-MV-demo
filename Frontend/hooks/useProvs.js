@@ -20,11 +20,22 @@ const useProvs = () => {
   // Error state
   const [errorProvs, setErrorProvs] = useState(null);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   // Fetch provs data
   const getProveedores = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/provider/all"
+        "https://mascotas-back.herokuapp.com/api/provider/all",
+        config
       );
 
       const docs = data.query.map(

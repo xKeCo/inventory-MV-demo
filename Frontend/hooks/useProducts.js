@@ -20,10 +20,21 @@ const useProducts = () => {
   // Error state
   const [errorProducts, setErrorProducts] = useState(null);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/product/all"
+        "https://mascotas-back.herokuapp.com/api/product/all",
+        config
       );
 
       const docs = data.result.map(

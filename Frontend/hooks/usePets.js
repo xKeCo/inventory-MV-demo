@@ -20,11 +20,22 @@ const usePets = () => {
   // Error state
   const [errorPets, setErrorPets] = useState(null);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   // Fetch pets data
   const getCategories = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/pet/all"
+        "https://mascotas-back.herokuapp.com/api/pet/all",
+        config
       );
 
       const docs = data.result.map(({ mascota_id, name, description }) => ({
