@@ -50,7 +50,7 @@ const useCategories = () => {
     } catch (error) {
       setErrorCategories(error);
       setLoadingCategories(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

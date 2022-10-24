@@ -53,7 +53,7 @@ const useProvs = () => {
     } catch (error) {
       setErrorProvs(error);
       setLoadingProvs(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

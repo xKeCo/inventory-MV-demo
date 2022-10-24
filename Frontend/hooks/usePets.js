@@ -50,7 +50,7 @@ const usePets = () => {
     } catch (error) {
       setErrorPets(error);
       setLoadingPets(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

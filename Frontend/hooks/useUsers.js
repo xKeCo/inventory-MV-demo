@@ -50,7 +50,7 @@ const useUsers = () => {
     } catch (error) {
       setErrorUsers(error);
       setLoadingUsers(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

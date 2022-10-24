@@ -66,7 +66,7 @@ const useProducts = () => {
     } catch (error) {
       setErrorProducts(error);
       setLoadingProducts(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

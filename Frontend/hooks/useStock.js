@@ -67,7 +67,7 @@ const useStock = () => {
     } catch (error) {
       setErrorStock(error);
       setLoadingStock(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

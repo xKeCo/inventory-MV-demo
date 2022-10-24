@@ -181,7 +181,10 @@ function Proveedores() {
           {loadingProvs ? (
             <Loader />
           ) : errorProvs ? (
-            <h1>Error</h1>
+            <h1>
+              No se pueden mostrar los proveedores en este momento,
+              int&eacute;ntalo de nuevo mas tarde.
+            </h1>
           ) : (
             <>
               <div className={s.proveedores}>
