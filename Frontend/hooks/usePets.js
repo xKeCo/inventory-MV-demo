@@ -34,7 +34,7 @@ const usePets = () => {
   const getCategories = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/pet/all",
+        "https://mascotas-back-production.up.railway.app/api/pet/all",
         config
       );
 
@@ -50,7 +50,7 @@ const usePets = () => {
     } catch (error) {
       setErrorPets(error);
       setLoadingPets(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

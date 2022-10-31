@@ -33,7 +33,7 @@ const useProducts = () => {
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/product/all",
+        "https://mascotas-back-production.up.railway.app/api/product/all",
         config
       );
 
@@ -66,7 +66,7 @@ const useProducts = () => {
     } catch (error) {
       setErrorProducts(error);
       setLoadingProducts(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

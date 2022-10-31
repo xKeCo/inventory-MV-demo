@@ -31,7 +31,7 @@ const useUsers = () => {
   const getUsers = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/user/all",
+        "https://mascotas-back-production.up.railway.app/api/user/all",
         config
       );
 
@@ -50,7 +50,7 @@ const useUsers = () => {
     } catch (error) {
       setErrorUsers(error);
       setLoadingUsers(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

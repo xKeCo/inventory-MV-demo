@@ -104,6 +104,8 @@ function Productos() {
     mascotaid_fk: "",
   });
 
+  const [oneProductData, setOneProductData] = useState(null);
+
   // handle input change = get data from inputs
   const handleChange = (e) => {
     setProductData({
@@ -117,15 +119,40 @@ function Productos() {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "https://mascotas-back.herokuapp.com/api/product/new",
-        productData,
-        config
-      );
-      getProducts();
-      onClose();
-      setLoadingProducts(false);
-      toast.success("Se ha agregado el nuevo producto");
+      if (oneProductData === null) {
+        await axios.post(
+          "https://mascotas-back-production.up.railway.app/api/product/new",
+          productData,
+          config
+        );
+        getProducts();
+        onClose();
+        setLoadingProducts(false);
+        toast.success("Se ha agregado el nuevo producto");
+      } else {
+        await axios.put(
+          `https://mascotas-back-production.up.railway.app/api/provider/update/${oneProductData.id}`,
+          productData,
+          config
+        );
+        getProducts();
+        setLoadingProducts(false);
+        onClose();
+        toast.success(`Se ha editado el producto ${productData.name}`);
+      }
+
+      setOneProductData(null);
+      setProductData({
+        prod_id: "",
+        name: "",
+        stock: "",
+        peso: "",
+        unidad_medida: "",
+        price: "",
+        provid_fk: "",
+        categid_fk: "",
+        mascotaid_fk: "",
+      });
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.msg);
@@ -138,7 +165,7 @@ function Productos() {
   const handleDelete = async (id, name) => {
     try {
       await axios.delete(
-        `https://mascotas-back.herokuapp.com/api/product/delete/${id}`,
+        `https://mascotas-back-production.up.railway.app/api/product/delete/${id}`,
         config
       );
       getProducts();
@@ -151,6 +178,9 @@ function Productos() {
       setLoadingProducts(false);
     }
   };
+
+  // console.log(oneProductData, "oneProductData");
+  // console.log(productData, "productData");
 
   return (
     <>
@@ -309,10 +339,17 @@ function Productos() {
                                   variant="outline"
                                 />
                                 <MenuList>
-                                  <MenuItem icon={<InfoIcon />} isDisabled>
+                                  <MenuItem icon={<InfoIcon />}>
                                     Mas info
                                   </MenuItem>
-                                  <MenuItem icon={<EditIcon />} isDisabled>
+                                  <MenuItem
+                                    icon={<EditIcon />}
+                                    onClick={() => {
+                                      setOneProductData(doc);
+                                      setProductData(doc);
+                                      onOpen();
+                                    }}
+                                  >
                                     Modificar
                                   </MenuItem>
                                   <MenuItem
@@ -340,7 +377,21 @@ function Productos() {
 
       <DrawerProducts
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={(event) => {
+          onClose(event);
+          setOneProductData(null);
+          setProductData({
+            prod_id: "",
+            name: "",
+            stock: "",
+            peso: "",
+            unidad_medida: "",
+            price: "",
+            provid_fk: "",
+            categid_fk: "",
+            mascotaid_fk: "",
+          });
+        }}
         firstField={firstField}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
@@ -348,6 +399,8 @@ function Productos() {
         docsCategories={docsCategories}
         docsPets={docsPets}
         loadingProducts={loadingProducts}
+        oneProductData={oneProductData}
+        productData={productData}
       />
     </>
   );

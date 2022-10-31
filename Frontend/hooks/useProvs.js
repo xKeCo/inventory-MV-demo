@@ -34,7 +34,7 @@ const useProvs = () => {
   const getProveedores = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/provider/all",
+        "https://mascotas-back-production.up.railway.app/api/provider/all",
         config
       );
 
@@ -53,7 +53,7 @@ const useProvs = () => {
     } catch (error) {
       setErrorProvs(error);
       setLoadingProvs(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

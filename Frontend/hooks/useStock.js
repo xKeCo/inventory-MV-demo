@@ -34,7 +34,7 @@ const useStock = () => {
   const getStock = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/stock/product",
+        "https://mascotas-back-production.up.railway.app/api/stock/product",
         config
       );
 
@@ -67,7 +67,7 @@ const useStock = () => {
     } catch (error) {
       setErrorStock(error);
       setLoadingStock(false);
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

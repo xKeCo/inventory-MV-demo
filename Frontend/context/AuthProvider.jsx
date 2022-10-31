@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
     };
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/user/auth",
+        "https://mascotas-back-production.up.railway.app/api/user/auth",
         config
       );
       setAuth(data);

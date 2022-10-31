@@ -83,7 +83,7 @@ function Setting() {
   const handleDelete = async (id, name) => {
     try {
       await axios.delete(
-        `https://mascotas-back.herokuapp.com/api/user/delete/${id}`,
+        `https://mascotas-back-production.up.railway.app/api/user/delete/${id}`,
         config
       );
       getUsers();
@@ -113,7 +113,7 @@ function Setting() {
 
     try {
       await axios.put(
-        `https://mascotas-back.herokuapp.com/api/user/update/${id}`,
+        `https://mascotas-back-production.up.railway.app/api/user/update/${id}`,
         userData,
         config
       );

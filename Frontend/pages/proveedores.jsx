@@ -107,7 +107,7 @@ function Proveedores() {
     try {
       if (oneProvData === null) {
         await axios.post(
-          "https://mascotas-back.herokuapp.com/api/provider/new",
+          "https://mascotas-back-production.up.railway.app/api/provider/new",
           provData,
           config
         );
@@ -117,7 +117,7 @@ function Proveedores() {
         toast.success("Se ha agregado el nuevo proveedor");
       } else {
         await axios.put(
-          `https://mascotas-back.herokuapp.com/api/provider/update/${oneProvData.id}`,
+          `https://mascotas-back-production.up.railway.app/api/provider/update/${oneProvData.id}`,
           provData,
           config
         );
@@ -145,7 +145,7 @@ function Proveedores() {
   const handleDelete = async (id, name) => {
     try {
       await axios.delete(
-        `https://mascotas-back.herokuapp.com/api/provider/delete/${id}`,
+        `https://mascotas-back-production.up.railway.app/api/provider/delete/${id}`,
         config
       );
       getProveedores();

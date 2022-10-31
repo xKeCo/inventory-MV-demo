@@ -34,6 +34,8 @@ function DrawerProducts({
   docsCategories,
   docsPets,
   loadingProducts,
+  oneProductData,
+  productData,
 }) {
   return (
     <Drawer
@@ -48,7 +50,7 @@ function DrawerProducts({
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">
-            Crear nuevo producto
+            {oneProductData ? "Editar producto" : "Crear nuevo producto"}
           </DrawerHeader>
 
           <DrawerBody>
@@ -61,6 +63,7 @@ function DrawerProducts({
                   ref={firstField}
                   placeholder="Ingrese nombre del proveedor"
                   onChange={handleChange}
+                  defaultValue={oneProductData?.id || ""}
                 />
               </Box>
               <Box>
@@ -71,6 +74,7 @@ function DrawerProducts({
                   id="name"
                   placeholder="Ingrese nombre del proveedor"
                   onChange={handleChange}
+                  defaultValue={oneProductData?.name || ""}
                 />
               </Box>
 
@@ -82,6 +86,7 @@ function DrawerProducts({
                   type="number"
                   min={0}
                   max={100}
+                  defaultValue={oneProductData?.stock || ""}
                   onChange={(value) =>
                     handleChange({ target: { name: "stock", value } })
                   }
@@ -103,6 +108,7 @@ function DrawerProducts({
                     step={0.2}
                     min={0}
                     max={100}
+                    defaultValue={oneProductData?.peso || ""}
                     onChange={(value) =>
                       handleChange({ target: { name: "peso", value } })
                     }
@@ -118,6 +124,7 @@ function DrawerProducts({
                     w="150px"
                     name="unidad_medida"
                     onChange={handleChange}
+                    defaultValue={oneProductData?.unidad_medida || ""}
                   >
                     <option value=""></option>
                     <option value="KG">KG</option>
@@ -133,6 +140,7 @@ function DrawerProducts({
                   name="price"
                   min={0}
                   max={1000000}
+                  defaultValue={oneProductData?.price || ""}
                   onChange={(value) =>
                     handleChange({ target: { name: "price", value } })
                   }
@@ -148,7 +156,12 @@ function DrawerProducts({
               <Box>
                 <FormLabel htmlFor="provid_fk">Proveedor</FormLabel>
 
-                <Select isRequired name="provid_fk" onChange={handleChange}>
+                <Select
+                  isRequired
+                  name="provid_fk"
+                  defaultValue={oneProductData?.provName || ""}
+                  onChange={handleChange}
+                >
                   <option value=""></option>
                   {docsProvs.map((doc) => (
                     <option key={doc.id} value={doc.id}>
@@ -160,7 +173,12 @@ function DrawerProducts({
               <Box>
                 <FormLabel htmlFor="categid_fk">Categoria</FormLabel>
 
-                <Select isRequired name="categid_fk" onChange={handleChange}>
+                <Select
+                  isRequired
+                  name="categid_fk"
+                  onChange={handleChange}
+                  // defaultValue={oneProductData?.categoryName || ""}
+                >
                   <option value=""></option>
                   {docsCategories.map((doc) => (
                     <option key={doc.id} value={doc.id}>
@@ -175,8 +193,9 @@ function DrawerProducts({
                 <Select
                   isRequired
                   name="mascotaid_fk"
-                  onChange={handleChange}
                   mb="3rem"
+                  // defaultValue={oneProductData?.petName || ""}
+                  onChange={handleChange}
                 >
                   <option value=""></option>
                   {docsPets.map((doc) => (
@@ -200,7 +219,15 @@ function DrawerProducts({
                   : s.proveedor__form__button
               }
               type="submit"
-              disabled={loadingProducts}
+              disabled={
+                loadingProducts ||
+                (productData.id === oneProductData?.id &&
+                  productData.name === oneProductData?.name &&
+                  productData.stock === oneProductData?.stock &&
+                  productData.peso === oneProductData?.peso &&
+                  productData.unidad_medida === oneProductData?.unidad_medida &&
+                  productData.price === oneProductData?.price)
+              }
             >
               {loadingProducts ? "Cargando..." : "Agregar producto"}
             </Button>
