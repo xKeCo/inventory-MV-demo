@@ -204,7 +204,10 @@ function Productos() {
           {loadingProducts ? (
             <Loader />
           ) : errorProducts ? (
-            <h1>Error</h1>
+            <h1>
+              No se pueden mostrar los productos en este momento,
+              int&eacute;ntalo de nuevo mas tarde.
+            </h1>
           ) : (
             <>
               <div className={s.products}>

@@ -59,7 +59,10 @@ function Stock() {
           {loadingStock ? (
             <Loader />
           ) : errorStock ? (
-            <p>Error</p>
+            <h1>
+              No se pueden mostrar los productos con poco stock en este momento,
+              int&eacute;ntalo de nuevo mas tarde.
+            </h1>
           ) : (
             <>
               <div className={s.stock}>

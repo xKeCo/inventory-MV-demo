@@ -144,7 +144,10 @@ function Setting() {
           {loadingUsers ? (
             <Loader />
           ) : errorUsers ? (
-            <p>{errorUsers}</p>
+            <h1>
+              No se pueden mostrar los usuarios registrados en este momento,
+              int&eacute;ntalo de nuevo mas tarde.
+            </h1>
           ) : (
             <>
               <div className={s.settings}>
