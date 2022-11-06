@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 // Local Components
+
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Loader from "../components/Loader/Loader";
@@ -18,6 +19,7 @@ import SEO from "../components/SEO/SEO";
 import s from "../styles/Productos.module.css";
 
 // Hooks
+
 import useProducts from "../hooks/useProducts";
 import useCategories from "../hooks/useCategories";
 import useProvs from "../hooks/useProvs";
@@ -73,6 +75,7 @@ function Productos() {
   }
 
   // Get all products data
+
   const {
     docsProducts,
     loadingProducts,
@@ -93,15 +96,15 @@ function Productos() {
 
   // Products data to send
   const [productData, setProductData] = useState({
-    prod_id: "",
+    product_id: "",
     name: "",
     stock: "",
-    peso: "",
-    unidad_medida: "",
+    weigth: "",
+    measure: "",
     price: "",
-    provid_fk: "",
-    categid_fk: "",
-    mascotaid_fk: "",
+    provider_fk: "",
+    category_fk: "",
+    pet_fk: "",
   });
 
   const [oneProductData, setOneProductData] = useState(null);
@@ -130,8 +133,8 @@ function Productos() {
         setLoadingProducts(false);
         toast.success("Se ha agregado el nuevo producto");
       } else {
-        await axios.put(
-          `https://mascotas-back-production.up.railway.app/api/provider/update/${oneProductData.id}`,
+        await axios.patch(
+          `https://mascotas-back-production.up.railway.app/api/product/update/${oneProductData.id}`,
           productData,
           config
         );
@@ -143,15 +146,15 @@ function Productos() {
 
       setOneProductData(null);
       setProductData({
-        prod_id: "",
+        product_id: "",
         name: "",
         stock: "",
-        peso: "",
-        unidad_medida: "",
+        weigth: "",
+        measure: "",
         price: "",
-        provid_fk: "",
-        categid_fk: "",
-        mascotaid_fk: "",
+        provider_fk: "",
+        category_fk: "",
+        pet_fk: "",
       });
     } catch (error) {
       console.log(error);
@@ -164,8 +167,11 @@ function Productos() {
   // handle delete = delete product from db
   const handleDelete = async (id, name) => {
     try {
-      await axios.delete(
+      await axios.patch(
         `https://mascotas-back-production.up.railway.app/api/product/delete/${id}`,
+        {
+          is_active: false,
+        },
         config
       );
       getProducts();
@@ -178,9 +184,6 @@ function Productos() {
       setLoadingProducts(false);
     }
   };
-
-  // console.log(oneProductData, "oneProductData");
-  // console.log(productData, "productData");
 
   return (
     <>
@@ -246,7 +249,7 @@ function Productos() {
                             fontFamily="Inter, sans-serif"
                             fontSize="14px"
                           >
-                            Peso
+                            weigth
                           </Th>
                           <Th
                             w="100px"
@@ -311,10 +314,10 @@ function Productos() {
                               {doc.stock}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.peso}
+                              {doc.weigth}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.unidad_medida}
+                              {doc.measure}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
                               {doc.price}
@@ -384,15 +387,15 @@ function Productos() {
           onClose(event);
           setOneProductData(null);
           setProductData({
-            prod_id: "",
+            product_id: "",
             name: "",
             stock: "",
-            peso: "",
-            unidad_medida: "",
+            weigth: "",
+            measure: "",
             price: "",
-            provid_fk: "",
-            categid_fk: "",
-            mascotaid_fk: "",
+            provider_fk: "",
+            category_fk: "",
+            pet_fk: "",
           });
         }}
         firstField={firstField}

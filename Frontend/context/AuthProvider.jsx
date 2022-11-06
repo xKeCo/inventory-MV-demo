@@ -34,18 +34,17 @@ const AuthProvider = ({ children }) => {
     };
     try {
       const { data } = await axios.get(
-        "https://mascotas-back-production.up.railway.app/api/user/auth",
+        "https://mascotas-back-production.up.railway.app/api/auth/check-auth",
         config
       );
       setAuth(data);
       setLoading(false);
     } catch (error) {
       if (error.response.status === 404) {
-        localStorage.removeItem("token");
+        // localStorage.removeItem("token");
         router.push("/login");
         setLoading(false);
       }
-      console.log("hola", error);
     }
   };
 

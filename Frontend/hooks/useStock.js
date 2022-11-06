@@ -1,9 +1,6 @@
 // React
 import { useEffect, useState } from "react";
 
-// React-hot-toast Notifications
-import { toast } from "react-hot-toast";
-
 // Axios
 import axios from "axios";
 
@@ -34,7 +31,7 @@ const useStock = () => {
   const getStock = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back-production.up.railway.app/api/stock/product",
+        "https://mascotas-back-production.up.railway.app/api/stock/all",
         config
       );
 
@@ -67,7 +64,6 @@ const useStock = () => {
     } catch (error) {
       setErrorStock(error);
       setLoadingStock(false);
-      // toast.error(error.message);
     }
   };
 

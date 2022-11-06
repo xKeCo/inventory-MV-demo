@@ -86,7 +86,7 @@ function Proveedores() {
   // Provider data to send
   const [provData, setProvData] = useState({
     name: "",
-    number: "",
+    contact: "",
     other_contact: "",
   });
 
@@ -116,7 +116,7 @@ function Proveedores() {
         onClose();
         toast.success("Se ha agregado el nuevo proveedor");
       } else {
-        await axios.put(
+        await axios.patch(
           `https://mascotas-back-production.up.railway.app/api/provider/update/${oneProvData.id}`,
           provData,
           config
@@ -130,12 +130,12 @@ function Proveedores() {
       setOneProvData(null);
       setProvData({
         name: "",
-        number: "",
+        contact: "",
         other_contact: "",
       });
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.msg);
+      // toast.error(error.response.data.msg);
 
       setLoadingProvs(false);
     }
@@ -144,8 +144,11 @@ function Proveedores() {
   // handle delete = delete provider from db
   const handleDelete = async (id, name) => {
     try {
-      await axios.delete(
+      await axios.patch(
         `https://mascotas-back-production.up.railway.app/api/provider/delete/${id}`,
+        {
+          is_active: false,
+        },
         config
       );
       getProveedores();
@@ -234,7 +237,7 @@ function Proveedores() {
                               {doc.name}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.number}
+                              {doc.contact}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
                               {doc.other_contact}
@@ -296,7 +299,7 @@ function Proveedores() {
           setOneProvData(null);
           setProvData({
             name: "",
-            number: "",
+            contact: "",
             other_contact: "",
           });
         }}

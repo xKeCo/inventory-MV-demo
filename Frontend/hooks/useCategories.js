@@ -1,9 +1,6 @@
 // React
 import { useEffect, useState } from "react";
 
-// React-hot-toast Notifications
-import { toast } from "react-hot-toast";
-
 // Axios
 import axios from "axios";
 
@@ -38,8 +35,8 @@ const useCategories = () => {
         config
       );
 
-      const docs = data.response.map(({ categ_id, name, description }) => ({
-        id: categ_id,
+      const docs = data.response.map(({ category_id, name, description }) => ({
+        id: category_id,
         name,
         description,
       }));
@@ -50,7 +47,6 @@ const useCategories = () => {
     } catch (error) {
       setErrorCategories(error);
       setLoadingCategories(false);
-      // toast.error(error.message);
     }
   };
 

@@ -1,9 +1,6 @@
 // React
 import { useEffect, useState } from "react";
 
-// React-hot-toast Notifications
-import { toast } from "react-hot-toast";
-
 // Axios
 import axios from "axios";
 
@@ -38,8 +35,8 @@ const usePets = () => {
         config
       );
 
-      const docs = data.result.map(({ mascota_id, name, description }) => ({
-        id: mascota_id,
+      const docs = data.result.map(({ pet_id, name, description }) => ({
+        id: pet_id,
         name,
         description,
       }));
@@ -50,7 +47,6 @@ const usePets = () => {
     } catch (error) {
       setErrorPets(error);
       setLoadingPets(false);
-      // toast.error(error.message);
     }
   };
 

@@ -59,7 +59,7 @@ function DrawerProducts({
                 <FormLabel htmlFor="name">ID del producto</FormLabel>
                 <Input
                   isRequired
-                  name="prod_id"
+                  name="product_id"
                   ref={firstField}
                   placeholder="Ingrese nombre del proveedor"
                   onChange={handleChange}
@@ -99,18 +99,18 @@ function DrawerProducts({
                 </NumberInput>
               </Box>
               <Box>
-                <FormLabel htmlFor="peso">Peso</FormLabel>
+                <FormLabel htmlFor="weigth">Peso</FormLabel>
                 <Flex gap="1rem">
                   <NumberInput
                     isRequired
-                    name="peso"
+                    name="weigth"
                     precision={2}
                     step={0.2}
                     min={0}
                     max={100}
-                    defaultValue={oneProductData?.peso || ""}
+                    defaultValue={oneProductData?.weigth || ""}
                     onChange={(value) =>
-                      handleChange({ target: { name: "peso", value } })
+                      handleChange({ target: { name: "weigth", value } })
                     }
                   >
                     <NumberInputField />
@@ -122,9 +122,9 @@ function DrawerProducts({
                   <Select
                     isRequired
                     w="150px"
-                    name="unidad_medida"
+                    name="measure"
                     onChange={handleChange}
-                    defaultValue={oneProductData?.unidad_medida || ""}
+                    defaultValue={oneProductData?.measure || ""}
                   >
                     <option value=""></option>
                     <option value="KG">KG</option>
@@ -154,53 +154,47 @@ function DrawerProducts({
               </Box>
 
               <Box>
-                <FormLabel htmlFor="provid_fk">Proveedor</FormLabel>
+                <FormLabel htmlFor="provider_fk">Proveedor</FormLabel>
 
                 <Select
                   isRequired
-                  name="provid_fk"
+                  name="provider_fk"
                   defaultValue={oneProductData?.provName || ""}
                   onChange={handleChange}
                 >
                   <option value=""></option>
-                  {docsProvs.map((doc) => (
-                    <option key={doc.id} value={doc.id}>
-                      {doc.name}
+                  {docsProvs.map(({ id, name }) => (
+                    <option key={id} value={id}>
+                      {name}
                     </option>
                   ))}
                 </Select>
               </Box>
               <Box>
-                <FormLabel htmlFor="categid_fk">Categoria</FormLabel>
+                <FormLabel htmlFor="category_fk">Categoria</FormLabel>
 
-                <Select
-                  isRequired
-                  name="categid_fk"
-                  onChange={handleChange}
-                  // defaultValue={oneProductData?.categoryName || ""}
-                >
+                <Select isRequired name="category_fk" onChange={handleChange}>
                   <option value=""></option>
-                  {docsCategories.map((doc) => (
-                    <option key={doc.id} value={doc.id}>
-                      {doc.name}
+                  {docsCategories.map(({ id, name }) => (
+                    <option key={id} value={id}>
+                      {name}
                     </option>
                   ))}
                 </Select>
               </Box>
               <Box>
-                <FormLabel htmlFor="mascotaid_fk">Mascota</FormLabel>
+                <FormLabel htmlFor="pet_fk">Mascota</FormLabel>
 
                 <Select
                   isRequired
-                  name="mascotaid_fk"
+                  name="pet_fk"
                   mb="3rem"
-                  // defaultValue={oneProductData?.petName || ""}
                   onChange={handleChange}
                 >
                   <option value=""></option>
-                  {docsPets.map((doc) => (
-                    <option key={doc.id} value={doc.id}>
-                      {doc.name}
+                  {docsPets.map(({ id, name }) => (
+                    <option key={id} value={id}>
+                      {name}
                     </option>
                   ))}
                 </Select>
@@ -224,8 +218,8 @@ function DrawerProducts({
                 (productData.id === oneProductData?.id &&
                   productData.name === oneProductData?.name &&
                   productData.stock === oneProductData?.stock &&
-                  productData.peso === oneProductData?.peso &&
-                  productData.unidad_medida === oneProductData?.unidad_medida &&
+                  productData.weigth === oneProductData?.weigth &&
+                  productData.measure === oneProductData?.measure &&
                   productData.price === oneProductData?.price)
               }
             >

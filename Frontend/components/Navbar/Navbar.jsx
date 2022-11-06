@@ -88,9 +88,7 @@ function Navbar() {
                 }`}
               >
                 <Link href="/setting">
-                  <a>
-                    <MenuItem>Ajuste de cuenta</MenuItem>
-                  </a>
+                  <MenuItem>Ajuste de cuenta</MenuItem>
                 </Link>
               </MenuGroup>
               <MenuDivider />
@@ -127,126 +125,114 @@ function Navbar() {
             <div className={s.navbar__links__container}>
               <ul>
                 <Link href="/">
-                  <a>
-                    <li
-                      className={
-                        router.pathname == "/"
-                          ? `${s.navbar__link} ${s.active}`
-                          : `${s.navbar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/home.svg"
-                        alt="Home"
-                        width="16px"
-                        height="16px"
-                      />
-                      <p>Inicio</p>
-                    </li>
-                  </a>
+                  <li
+                    className={
+                      router.pathname == "/"
+                        ? `${s.navbar__link} ${s.active}`
+                        : `${s.navbar__link}`
+                    }
+                  >
+                    <img
+                      className={s.icon_image}
+                      src="/icons/home.svg"
+                      alt="Home"
+                      width="16px"
+                      height="16px"
+                    />
+                    <p>Inicio</p>
+                  </li>
                 </Link>
                 <Link href="/proveedores">
-                  <a>
-                    <li
-                      className={
-                        router.pathname == "/proveedores"
-                          ? `${s.navbar__link} ${s.active}`
-                          : `${s.navbar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/proveedores.svg"
-                        alt="Proveedores"
-                        width="16px"
-                        height="16px"
-                      />
+                  <li
+                    className={
+                      router.pathname == "/proveedores"
+                        ? `${s.navbar__link} ${s.active}`
+                        : `${s.navbar__link}`
+                    }
+                  >
+                    <img
+                      className={s.icon_image}
+                      src="/icons/proveedores.svg"
+                      alt="Proveedores"
+                      width="16px"
+                      height="16px"
+                    />
 
-                      <p>Proveedores</p>
-                    </li>
-                  </a>
+                    <p>Proveedores</p>
+                  </li>
                 </Link>
                 <Link href="/productos">
-                  <a>
-                    <li
-                      className={
-                        router.pathname == "/productos"
-                          ? `${s.navbar__link} ${s.active}`
-                          : `${s.navbar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/productos.svg"
-                        alt="Productos"
-                        width="16px"
-                        height="16px"
-                      />
-                      <p>Productos</p>
-                    </li>
-                  </a>
+                  <li
+                    className={
+                      router.pathname == "/productos"
+                        ? `${s.navbar__link} ${s.active}`
+                        : `${s.navbar__link}`
+                    }
+                  >
+                    <img
+                      className={s.icon_image}
+                      src="/icons/productos.svg"
+                      alt="Productos"
+                      width="16px"
+                      height="16px"
+                    />
+                    <p>Productos</p>
+                  </li>
                 </Link>
                 <Link href="/stock">
-                  <a>
-                    <li
-                      className={
-                        router.pathname == "/stock"
-                          ? `${s.navbar__link} ${s.active}`
-                          : `${s.navbar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/stock.svg"
-                        alt="Stock"
-                        width="16px"
-                        height="16px"
-                      />
-                      <p>Stock</p>
-                    </li>
-                  </a>
+                  <li
+                    className={
+                      router.pathname == "/stock"
+                        ? `${s.navbar__link} ${s.active}`
+                        : `${s.navbar__link}`
+                    }
+                  >
+                    <img
+                      className={s.icon_image}
+                      src="/icons/stock.svg"
+                      alt="Stock"
+                      width="16px"
+                      height="16px"
+                    />
+                    <p>Stock</p>
+                  </li>
                 </Link>
                 <Link href="/pedidos">
-                  <a>
-                    <li
-                      className={
-                        router.pathname == "/pedidos"
-                          ? `${s.navbar__link} ${s.active}`
-                          : `${s.navbar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/pedidos.svg"
-                        alt="Pedidos"
-                        width="16px"
-                        height="16px"
-                      />
-                      <p>Pedidos</p>
-                    </li>
-                  </a>
+                  <li
+                    className={
+                      router.pathname == "/pedidos"
+                        ? `${s.navbar__link} ${s.active}`
+                        : `${s.navbar__link}`
+                    }
+                  >
+                    <img
+                      className={s.icon_image}
+                      src="/icons/pedidos.svg"
+                      alt="Pedidos"
+                      width="16px"
+                      height="16px"
+                    />
+                    <p>Pedidos</p>
+                  </li>
                 </Link>
                 <Link href="/reportes">
-                  <a>
-                    <li
-                      className={
-                        router.pathname == "/reportes"
-                          ? `${s.navbar__link} ${s.active}`
-                          : `${s.navbar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/reportes.svg"
-                        alt="Reportes"
-                        width="16px"
-                        height="16px"
-                      />
+                  <li
+                    className={
+                      router.pathname == "/reportes"
+                        ? `${s.navbar__link} ${s.active}`
+                        : `${s.navbar__link}`
+                    }
+                  >
+                    <img
+                      className={s.icon_image}
+                      src="/icons/reportes.svg"
+                      alt="Reportes"
+                      width="16px"
+                      height="16px"
+                    />
 
-                      <p>Reportes</p>
-                    </li>
-                  </a>
+                    <p>Reportes</p>
+                  </li>
                 </Link>
               </ul>
             </div>

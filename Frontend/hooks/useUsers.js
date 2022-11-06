@@ -1,9 +1,6 @@
 // React
 import { useEffect, useState } from "react";
 
-// React-hot-toast Notifications
-import { toast } from "react-hot-toast";
-
 // Axios
 import axios from "axios";
 
@@ -36,13 +33,14 @@ const useUsers = () => {
       );
 
       const docs = data.users.map(
-        ({ user_id, username, name, email, type, created_at }) => ({
-          id: user_id.substring(0, 8),
+        ({ user_id, username, name, email, type, created_at, created_by }) => ({
+          id: user_id,
           username,
           name,
           email,
           type,
           date: created_at.substring(0, 10),
+          created_by,
         })
       );
       setDocsUsers(docs);
@@ -50,7 +48,6 @@ const useUsers = () => {
     } catch (error) {
       setErrorUsers(error);
       setLoadingUsers(false);
-      // toast.error(error.message);
     }
   };
 

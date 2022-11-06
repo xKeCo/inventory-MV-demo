@@ -1,9 +1,6 @@
 // React
 import { useEffect, useState } from "react";
 
-// React-hot-toast Notifications
-import { toast } from "react-hot-toast";
-
 // Axios
 import axios from "axios";
 
@@ -39,10 +36,10 @@ const useProvs = () => {
       );
 
       const docs = data.query.map(
-        ({ prov_id, name, number, other_contact }) => ({
-          id: prov_id,
+        ({ provider_id, name, contact, other_contact }) => ({
+          id: provider_id,
           name,
-          number,
+          contact,
           other_contact,
         })
       );
@@ -53,7 +50,6 @@ const useProvs = () => {
     } catch (error) {
       setErrorProvs(error);
       setLoadingProvs(false);
-      // toast.error(error.message);
     }
   };
 

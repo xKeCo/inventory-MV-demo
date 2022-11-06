@@ -1,9 +1,6 @@
 // React
 import { useEffect, useState } from "react";
 
-// React-hot-toast Notifications
-import { toast } from "react-hot-toast";
-
 // Axios
 import axios from "axios";
 
@@ -39,23 +36,25 @@ const useProducts = () => {
 
       const docs = data.result.map(
         ({
-          prod_id,
+          product_id,
           name,
           stock,
-          peso,
-          unidad_medida,
+          weigth,
+          measure,
           price,
           provider_name,
+          provider_id,
           category_name,
           pet_name,
         }) => ({
-          id: prod_id,
+          id: product_id,
           name,
           stock,
-          peso,
-          unidad_medida,
+          weigth,
+          measure,
           price,
           provName: provider_name,
+          provId: provider_id,
           categoryName: category_name,
           petName: pet_name,
         })
@@ -66,7 +65,6 @@ const useProducts = () => {
     } catch (error) {
       setErrorProducts(error);
       setLoadingProducts(false);
-      // toast.error(error.message);
     }
   };
 
