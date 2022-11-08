@@ -66,14 +66,6 @@ function Navbar() {
           icon={<HamburgerIcon />}
           onClick={onOpen}
         />
-        <div className={s.search__Container}>
-          <InputGroup>
-            <InputLeftElement pointerEvents="none">
-              <SearchIcon color="gray.500" />
-            </InputLeftElement>
-            <Input placeholder="Buscar" />
-          </InputGroup>
-        </div>
         <div>
           <Menu>
             <MenuButton w="100%" h="100%">

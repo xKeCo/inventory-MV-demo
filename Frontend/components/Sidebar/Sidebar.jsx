@@ -86,7 +86,7 @@ function Sidebar() {
                 <Tooltip label="Inicio" isDisabled={expanded} placement="right">
                   <li
                     className={
-                      router.pathname == "/"
+                      router.pathname === "/"
                         ? `${s.sidebar__link} ${s.active}`
                         : `${s.sidebar__link}`
                     }
@@ -108,7 +108,7 @@ function Sidebar() {
                 >
                   <li
                     className={
-                      router.pathname == "/proveedores"
+                      router.pathname === "/proveedores"
                         ? `${s.sidebar__link} ${s.active}`
                         : `${s.sidebar__link}`
                     }
@@ -131,7 +131,7 @@ function Sidebar() {
                 >
                   <li
                     className={
-                      router.pathname == "/productos"
+                      router.pathname === "/productos"
                         ? `${s.sidebar__link} ${s.active}`
                         : `${s.sidebar__link}`
                     }
@@ -153,7 +153,7 @@ function Sidebar() {
                 >
                   <li
                     className={
-                      router.pathname == "/orders"
+                      router.pathname === "/orders"
                         ? `${s.sidebar__link} ${s.active}`
                         : `${s.sidebar__link}`
                     }
@@ -175,7 +175,7 @@ function Sidebar() {
                 >
                   <li
                     className={
-                      router.pathname == "/pedidos"
+                      router.pathname === "/pedidos"
                         ? `${s.sidebar__link} ${s.active}`
                         : `${s.sidebar__link}`
                     }
@@ -197,7 +197,7 @@ function Sidebar() {
                 >
                   <li
                     className={
-                      router.pathname == "/reportes"
+                      router.pathname === "/reportes"
                         ? `${s.sidebar__link} ${s.active}`
                         : `${s.sidebar__link}`
                     }
@@ -216,7 +216,7 @@ function Sidebar() {
           </div>
         </div>
 
-        <div>
+        <div className={router.pathname === "/setting" && `${s.active}`}>
           <ul>
             <Menu>
               <Tooltip label="Cuenta" isDisabled={expanded} placement="right">
