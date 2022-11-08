@@ -20,6 +20,7 @@ import s from "../../styles/Order.module.css";
 
 // Hooks
 import useOrders from "../../hooks/useOrders";
+import useProvs from "../../hooks/useProvs";
 
 // Chakra UI
 import {
@@ -37,12 +38,16 @@ import {
   IconButton,
   MenuList,
   MenuItem,
+  Text,
 } from "@chakra-ui/react";
-import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import useProvs from "../../hooks/useProvs";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 // Chakra UI Icons
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
+
+// Axios
+import axios from "axios";
+
+// React hot toast
+import { toast } from "react-hot-toast";
 
 function Orders() {
   // Provider Data
@@ -109,6 +114,23 @@ function Orders() {
     }
   };
 
+  const handleDelete = (id) => {
+    try {
+      axios.patch(
+        `https://mascotas-back-production.up.railway.app/api/order/update-order-status/${id}`,
+        {
+          is_active: false,
+        },
+        config
+      );
+      getOrders();
+      toast.success(`Se ha eliminado la orden ${id}`);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.msg);
+    }
+  };
+
   // redirect to login if it's not logged in
   if (!auth) {
     router.push("/login");
@@ -142,8 +164,8 @@ function Orders() {
             </h1>
           ) : (
             <>
-              <div className={s.Order}>
-                <div className={s.Order__table}>
+              <div className={s.order}>
+                <div className={s.order__table}>
                   <TableContainer w="100%" height="100%">
                     <Table w="100%" variant="striped" size="sm">
                       <Thead>
@@ -218,7 +240,15 @@ function Orders() {
                               {doc.count}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.arrive ? "Recibido" : "En camino"}
+                              {doc.arrive ? (
+                                <Text fontSize="16px" color="green">
+                                  Recibido
+                                </Text>
+                              ) : (
+                                <Text fontSize="16px" color="black">
+                                  En camino
+                                </Text>
+                              )}
                             </Td>
                             <Td>
                               {doc.count > 0 ? (
@@ -241,11 +271,8 @@ function Orders() {
                                       </MenuItem>
                                     </Link>
                                     <MenuItem
-                                      isDisabled
                                       icon={<DeleteIcon />}
-                                      // onClick={() =>
-                                      //   handleDelete(doc.id, doc.name)
-                                      // }
+                                      onClick={() => handleDelete(doc.id)}
                                     >
                                       Eliminar
                                     </MenuItem>

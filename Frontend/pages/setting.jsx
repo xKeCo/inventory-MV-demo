@@ -12,6 +12,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import SEO from "../components/SEO/SEO";
 import Loader from "../components/Loader/Loader";
+import DrawerUsers from "../components/Drawer/DrawerUsers";
 
 // Hooks
 import useUsers from "../hooks/useUsers";
@@ -45,7 +46,6 @@ import axios from "axios";
 
 // react-hot-toast notifications
 import { toast } from "react-hot-toast";
-import DrawerUsers from "../components/Drawer/DrawerUsers";
 
 function Setting() {
   // User context = User data

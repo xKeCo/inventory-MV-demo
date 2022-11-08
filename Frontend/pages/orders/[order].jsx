@@ -3,20 +3,27 @@ import { useEffect, useContext } from "react";
 
 // Next
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 // Local Components
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar.jsx";
 import SEO from "../../components/SEO/SEO";
+import Loader from "../../components/Loader/Loader";
 
 // Context
 import AuthContext from "../../context/AuthProvider";
 
 // Styles
 import s from "../../styles/Order.module.css";
+
+// Hooks
 import useOrderByID from "../../hooks/useOrderByID";
-import Loader from "../../components/Loader/Loader";
+import useOrders from "../../hooks/useOrders";
+
+// Chakra UI
 import {
+  Button,
   IconButton,
   Menu,
   MenuButton,
@@ -30,8 +37,14 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+// Chakra UI Icons
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import Link from "next/link";
+
+// Axios
+import axios from "axios";
+
+// React hot toast
+import { toast } from "react-hot-toast";
 
 function Order() {
   // User context = User data
@@ -48,11 +61,54 @@ function Order() {
 
   const {
     docsOrderByID,
+    order_status,
+    setOrder_status,
     loadingOrderByID,
     errorOrderByID,
-    numOrderByID,
+    setLoadingOrderByID,
     getOrderByID,
   } = useOrderByID();
+
+  const { getOrders, setLoadingOrders } = useOrders();
+
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const handleArrived = async (e) => {
+    e.preventDefault();
+    setOrder_status(!order_status);
+
+    try {
+      await axios.patch(
+        `https://mascotas-back-production.up.railway.app/api/order/update-order/${ID}`,
+        {
+          order_status: !order_status,
+        },
+        config
+      );
+      getOrders();
+      setLoadingOrders(false);
+      setLoadingOrderByID(false);
+
+      if (!order_status) {
+        toast.success("Pedido marcado como entregado");
+      } else {
+        toast.error("Pedido marcado como no entregado");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data?.msg);
+      setLoadingOrders(false);
+      setLoadingOrderByID(false);
+    }
+  };
 
   useEffect(() => {
     getOrderByID(ID);
@@ -82,8 +138,29 @@ function Order() {
             </h1>
           ) : (
             <>
-              <div className={s.Order}>
-                <div className={s.Order__table}>
+              <div className={s.order}>
+                <div className={s.order__button__container}>
+                  <Link href={`/orders/add/${ID}`}>
+                    <Button
+                      className={s.order__arrive}
+                      colorScheme="blue"
+                      isDisabled={order_status}
+                    >
+                      Agregar productos
+                    </Button>
+                  </Link>
+                  <Button
+                    className={s.order__arrive}
+                    colorScheme={order_status ? "red" : "green"}
+                    onClick={handleArrived}
+                    isDisabled={order_status}
+                  >
+                    {order_status
+                      ? " Orden entregada"
+                      : "Marcar orden como entregada"}
+                  </Button>
+                </div>
+                <div className={s.order__table}>
                   <TableContainer w="100%" height="100%">
                     <Table w="100%" variant="striped" size="sm">
                       <Thead>
@@ -196,6 +273,7 @@ function Order() {
                             <Td fontWeight="500" fontSize="15px">
                               <Menu>
                                 <MenuButton
+                                  isDisabled
                                   as={IconButton}
                                   aria-label="Options"
                                   backgroundColor="#e4531b"

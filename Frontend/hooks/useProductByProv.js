@@ -50,7 +50,7 @@ const useProductByProv = () => {
           prodID: product_id,
           prodName: name,
           provName: provider_name,
-          price: price.substring(0, price.length - 3),
+          price,
           weigth,
           measure,
           stock,

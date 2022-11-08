@@ -52,6 +52,7 @@ const useOrders = () => {
           date: order_date.substring(0, 10),
         })
       );
+
       setDocsOrders(docs);
       setNumOrders(data.orders.length);
       setLoadingOrders(false);

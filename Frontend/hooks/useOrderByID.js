@@ -1,5 +1,5 @@
 // React
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Axios
 import axios from "axios";
@@ -7,6 +7,9 @@ import axios from "axios";
 const useOrderByID = () => {
   // State for Order data
   const [docsOrderByID, setDocsOrderByID] = useState([]);
+
+  // State for order status
+  const [order_status, setOrder_status] = useState(false);
 
   // Number of Order
   const [numOrderByID, setNumOrderByID] = useState(0);
@@ -34,6 +37,9 @@ const useOrderByID = () => {
         `https://mascotas-back-production.up.railway.app/api/order/order/${id}`,
         config
       );
+
+      setOrder_status(data.arrive.order_status);
+      console.log(order_status);
 
       const docs = data.orders.map(
         ({
@@ -73,6 +79,8 @@ const useOrderByID = () => {
     loadingOrderByID,
     numOrderByID,
     errorOrderByID,
+    order_status,
+    setOrder_status,
     setLoadingOrderByID,
     getOrderByID,
   };

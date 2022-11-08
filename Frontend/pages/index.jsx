@@ -61,7 +61,7 @@ export default function Home() {
               </div>
               <div className={s.summary__container__item}>
                 <h2 className={s.summary__item_title}>
-                  Productos con poco stock
+                  Cantidad de ordenes creadas
                 </h2>
                 <code className={s.summary__value}> {numOrders}</code>
               </div>
@@ -69,7 +69,7 @@ export default function Home() {
                 <h2 className={s.summary__item_title}>
                   Ultimo pedido generado
                 </h2>
-                <code className={s.summary__value}> 21/Agosto/2022 </code>
+                <code className={s.summary__value}> 11/09/2022 </code>
               </div>
             </div>
           </main>

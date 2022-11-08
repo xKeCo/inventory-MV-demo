@@ -8,13 +8,19 @@ import { useRouter } from "next/router";
 import Navbar from "../../../components/Navbar/Navbar";
 import Sidebar from "../../../components/Sidebar/Sidebar.jsx";
 import SEO from "../../../components/SEO/SEO";
+import Loader from "../../../components/Loader/Loader";
+import DrawerAddOrder from "../../../components/Drawer/DrawerAddOrder";
 
 // Context
 import AuthContext from "../../../context/AuthProvider.jsx";
 
 // Styles
 import s from "../../../styles/Order.module.css";
-import Loader from "../../../components/Loader/Loader";
+
+// Hooks
+import useProductByProv from "../../../hooks/useProductByProv";
+
+// Chakra UI
 import {
   Button,
   Table,
@@ -26,10 +32,12 @@ import {
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
-import useProductByProv from "../../../hooks/useProductByProv";
-import DrawerAddOrder from "../../../components/Drawer/DrawerAddOrder";
-import { toast } from "react-hot-toast";
+
+// Axios
 import axios from "axios";
+
+// React hot toast
+import { toast } from "react-hot-toast";
 
 function Order() {
   // User context = User data
@@ -42,6 +50,7 @@ function Order() {
     measure: "",
     created_by: auth.name,
   });
+  const [oneOrderData, setOneOrderData] = useState(null);
 
   // Get the token from local storage to verrify if the user is logged in
   const token = localStorage.getItem("token");
@@ -52,8 +61,6 @@ function Order() {
       Authorization: `Bearer ${token}`,
     },
   };
-
-  const [oneOrderData, setOneOrderData] = useState(null);
 
   // Chakra UI Drawer handler
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -67,6 +74,7 @@ function Order() {
     router.push("/login");
   }
 
+  // hanlde change in the form inputs
   const handleChange = (e) => {
     setOrderData({
       ...orderData,
@@ -89,9 +97,7 @@ function Order() {
       setLoadingProductByProv(false);
       toast.success("Se ha agregado el producto a la orden");
     } catch (error) {
-      console.log(error);
-      console.log(orderData);
-      // toast.error(error.response.data.msg);
+      toast.error(error.response.data.msg);
       setLoadingProductByProv(false);
     }
   };
@@ -132,13 +138,13 @@ function Order() {
             </h1>
           ) : (
             <>
-              <div className={s.Order}>
+              <div className={s.order}>
                 {docsProductByProv.length === 0 ? (
                   <h1 className={s.order__info__title}>
                     No hay productos ligados a este proveedor.
                   </h1>
                 ) : (
-                  <div className={s.Order__table}>
+                  <div className={s.order__table}>
                     <TableContainer w="100%" height="100%">
                       <Table w="100%" variant="striped" size="sm">
                         <Thead>
