@@ -127,9 +127,7 @@ function DrawerUsers({
             </Button>
             <Button
               className={
-                loadingUsers
-                  ? s.proveedor__form__button__disabled
-                  : s.proveedor__form__button
+                loadingUsers ? s.form__button__disabled : s.form__button
               }
               type="submit"
               disabled={

@@ -1,78 +1,95 @@
 // React
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 
 // Next
 import { useRouter } from "next/router";
 
 // Local Components
-import Navbar from "../components/Navbar/Navbar";
-import Loader from "../components/Loader/Loader";
-import Sidebar from "../components/Sidebar/Sidebar";
-import SEO from "../components/SEO/SEO";
+import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../../components/Sidebar/Sidebar.jsx";
+import SEO from "../../components/SEO/SEO";
 
 // Context
-import AuthContext from "../context/AuthProvider";
+import AuthContext from "../../context/AuthProvider";
 
 // Styles
-import s from "../styles/Stock.module.css";
-
-// Hooks
-import useStock from "../hooks/useStock";
-
-// Chakra UI
+import s from "../../styles/Order.module.css";
+import useOrderByID from "../../hooks/useOrderByID";
+import Loader from "../../components/Loader/Loader";
 import {
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
   TableContainer,
-  Button,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
 } from "@chakra-ui/react";
-// Chakra UI Icons
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import Link from "next/link";
 
-function Stock() {
+function Order() {
   // User context = User data
   const { auth } = useContext(AuthContext);
 
   // Router = Redirect
   const router = useRouter();
+  const ID = router.query.order;
 
-  // Get stock data from db
-  const { docsStock, loadingStock, errorStock } = useStock();
-
-  // redirect to login if it's not logged in
+  // redirect to home if already logged in
   if (!auth) {
     router.push("/login");
   }
 
+  const {
+    docsOrderByID,
+    loadingOrderByID,
+    errorOrderByID,
+    numOrderByID,
+    getOrderByID,
+  } = useOrderByID();
+
+  useEffect(() => {
+    getOrderByID(ID);
+  }, [ID]);
+
   return (
-    <>
-      <SEO title={"Stock"} />
+    <div>
+      <SEO title={"order"} />
 
       <div className={s.flex}>
         <Sidebar />
         <div className={s.container}>
           <Navbar />
-          <h1 className={s.title}>Stock</h1>
-          {loadingStock ? (
+          <div className={s.order__header__container}>
+            <h1 className={s.title}>Orden</h1>
+            <h2 className={s.order__info__title}>
+              Informaci&oacute;n de la orden - {router.query.order}
+            </h2>
+          </div>
+
+          {loadingOrderByID ? (
             <Loader />
-          ) : errorStock ? (
+          ) : errorOrderByID ? (
             <h1>
-              No se pueden mostrar los productos con poco stock en este momento,
-              int&eacute;ntalo de nuevo mas tarde.
+              No se pueden mostrar los productos de esta orden en estos
+              momentos, int&eacute;ntalo de nuevo mas tarde.
             </h1>
           ) : (
             <>
-              <div className={s.stock}>
-                <div className={s.stock__table}>
+              <div className={s.Order}>
+                <div className={s.Order__table}>
                   <TableContainer w="100%" height="100%">
                     <Table w="100%" variant="striped" size="sm">
                       <Thead>
                         <Tr>
                           <Th
-                            w="200px"
+                            w="150px"
                             color="#000"
                             fontFamily="Inter, sans-serif"
                             fontSize="14px"
@@ -85,7 +102,7 @@ function Stock() {
                             fontFamily="Inter, sans-serif"
                             fontSize="14px"
                           >
-                            Nombre
+                            Nombre del producto
                           </Th>
                           <Th
                             w="100px"
@@ -93,7 +110,23 @@ function Stock() {
                             fontFamily="Inter, sans-serif"
                             fontSize="14px"
                           >
-                            Cant
+                            Precio Unitario
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Cantidad
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Total
                           </Th>
                           <Th
                             w="100px"
@@ -117,31 +150,7 @@ function Stock() {
                             fontFamily="Inter, sans-serif"
                             fontSize="14px"
                           >
-                            Precio
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Prov
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Categor&iacute;a
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Mascota
+                            A&ntilde;adido por:
                           </Th>
                           <Th
                             w="100px"
@@ -154,39 +163,66 @@ function Stock() {
                         </Tr>
                       </Thead>
                       <Tbody>
-                        {docsStock.map((doc) => (
-                          <Tr key={doc.id}>
-                            <Td fontWeight="500" fontSize="15px">
-                              {doc.id}
+                        {docsOrderByID.map((doc) => (
+                          <Tr key={doc.orderDetailID}>
+                            <Td
+                              fontWeight="500"
+                              fontSize="15px"
+                              className={s.id}
+                            >
+                              {doc.orderDetailID}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.name}
+                              {doc.prodName}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.stock}
+                              {doc.unit_price}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.peso}
+                              {doc.quantity}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.unidad_medida}
+                              {doc.total}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.price}
+                              {doc.weigth}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.provName}
+                              {doc.measure}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.categoryName}
+                              {doc.adding_by}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.petName}
-                            </Td>
-                            <Td>
-                              <Button isDisabled colorScheme="blue" size="sm">
-                                A&ntilde;adir a pedido
-                              </Button>
+                              <Menu>
+                                <MenuButton
+                                  as={IconButton}
+                                  aria-label="Options"
+                                  backgroundColor="#e4531b"
+                                  _hover={{ backgroundColor: "#83bb26" }}
+                                  _active={{ backgroundColor: "#83bb26" }}
+                                  icon={
+                                    <EditIcon color="#fff" fontSize="20px" />
+                                  }
+                                  variant="outline"
+                                />
+                                <MenuList>
+                                  <Link href={`/orders/${doc.id}`}>
+                                    <MenuItem icon={<EditIcon />} isDisabled>
+                                      Modificar
+                                    </MenuItem>
+                                  </Link>
+                                  <MenuItem
+                                    isDisabled
+                                    icon={<DeleteIcon />}
+                                    // onClick={() =>
+                                    //   handleDelete(doc.id, doc.name)
+                                    // }
+                                  >
+                                    Eliminar
+                                  </MenuItem>
+                                </MenuList>
+                              </Menu>
                             </Td>
                           </Tr>
                         ))}
@@ -199,8 +235,8 @@ function Stock() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export default Stock;
+export default Order;

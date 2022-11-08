@@ -302,7 +302,7 @@ function Setting() {
                           onClick={onOpen}
                           className={s.settings__add__button}
                         >
-                          Nuevo proveedor
+                          Nuevo usuario
                         </Button>
                       </div>
                       <div className={s.settings__table}>

@@ -145,21 +145,25 @@ function Sidebar() {
                   </li>
                 </Tooltip>
               </Link>
-              <Link href="/stock">
-                <Tooltip label="Stock" isDisabled={expanded} placement="right">
+              <Link href="/orders">
+                <Tooltip
+                  label="Ordenes"
+                  isDisabled={expanded}
+                  placement="right"
+                >
                   <li
                     className={
-                      router.pathname == "/stock"
+                      router.pathname == "/orders"
                         ? `${s.sidebar__link} ${s.active}`
                         : `${s.sidebar__link}`
                     }
                   >
                     <img
                       className={s.icon_image}
-                      src="/icons/stock.svg"
-                      alt="Stock"
+                      src="/icons/order.svg"
+                      alt="order"
                     />
-                    {expanded && <p>Stock</p>}
+                    {expanded && <p>Ordenes</p>}
                   </li>
                 </Tooltip>
               </Link>

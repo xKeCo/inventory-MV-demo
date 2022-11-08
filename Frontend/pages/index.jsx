@@ -15,7 +15,7 @@ import SEO from "../components/SEO/SEO";
 // Hooks
 import useProducts from "../hooks/useProducts";
 import useProvs from "../hooks/useProvs";
-import useStock from "../hooks/useStock";
+import useOrders from "../hooks/useOrders";
 
 // Context
 import AuthContext from "../context/AuthProvider";
@@ -24,7 +24,7 @@ export default function Home() {
   // Get number of products, providers and stock
   const { numProducts } = useProducts();
   const { numProvs } = useProvs();
-  const { numStock } = useStock();
+  const { numOrders } = useOrders();
 
   // User context = User data
   const { auth } = useContext(AuthContext);
@@ -63,7 +63,7 @@ export default function Home() {
                 <h2 className={s.summary__item_title}>
                   Productos con poco stock
                 </h2>
-                <code className={s.summary__value}> {numStock}</code>
+                <code className={s.summary__value}> {numOrders}</code>
               </div>
               <div className={s.summary__container__item}>
                 <h2 className={s.summary__item_title}>

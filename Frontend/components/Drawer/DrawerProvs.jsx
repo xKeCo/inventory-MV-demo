@@ -91,9 +91,7 @@ function DrawerProvs({
             </Button>
             <Button
               className={
-                loadingProvs
-                  ? s.drawer__form__button__disabled
-                  : s.drawer__form__button
+                loadingProvs ? s.form__button__disabled : s.form__button
               }
               type="submit"
               disabled={

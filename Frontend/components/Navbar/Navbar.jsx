@@ -179,22 +179,22 @@ function Navbar() {
                     <p>Productos</p>
                   </li>
                 </Link>
-                <Link href="/stock">
+                <Link href="/orders">
                   <li
                     className={
-                      router.pathname == "/stock"
+                      router.pathname == "/orders"
                         ? `${s.navbar__link} ${s.active}`
                         : `${s.navbar__link}`
                     }
                   >
                     <img
                       className={s.icon_image}
-                      src="/icons/stock.svg"
-                      alt="Stock"
+                      src="/icons/order.svg"
+                      alt="Order"
                       width="16px"
                       height="16px"
                     />
-                    <p>Stock</p>
+                    <p>Ordenes</p>
                   </li>
                 </Link>
                 <Link href="/pedidos">

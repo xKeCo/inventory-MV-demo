@@ -159,7 +159,7 @@ function DrawerProducts({
                 <Select
                   isRequired
                   name="provider_fk"
-                  defaultValue={oneProductData?.provName || ""}
+                  // defaultValue={oneProductData?.provName || ""}
                   onChange={handleChange}
                 >
                   <option value=""></option>
@@ -173,7 +173,12 @@ function DrawerProducts({
               <Box>
                 <FormLabel htmlFor="category_fk">Categoria</FormLabel>
 
-                <Select isRequired name="category_fk" onChange={handleChange}>
+                <Select
+                  isRequired
+                  name="category_fk"
+                  onChange={handleChange}
+                  // defaultValue={oneProductData?.categoryName || ""}
+                >
                   <option value=""></option>
                   {docsCategories.map(({ id, name }) => (
                     <option key={id} value={id}>
@@ -189,6 +194,7 @@ function DrawerProducts({
                   isRequired
                   name="pet_fk"
                   mb="3rem"
+                  // defaultValue={oneProductData?.petName || ""}
                   onChange={handleChange}
                 >
                   <option value=""></option>
@@ -208,9 +214,7 @@ function DrawerProducts({
             </Button>
             <Button
               className={
-                loadingProducts
-                  ? s.proveedor__form__button__disabled
-                  : s.proveedor__form__button
+                loadingProducts ? s.form__button__disabled : s.form__button
               }
               type="submit"
               disabled={

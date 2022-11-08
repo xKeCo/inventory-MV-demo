@@ -44,7 +44,7 @@ import {
 } from "@chakra-ui/react";
 
 // Chakra UI Icons
-import { AddIcon, DeleteIcon, EditIcon, InfoIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
 // React Toast notifications
 import { toast } from "react-hot-toast";
@@ -249,7 +249,7 @@ function Productos() {
                             fontFamily="Inter, sans-serif"
                             fontSize="14px"
                           >
-                            weigth
+                            Peso
                           </Th>
                           <Th
                             w="100px"
@@ -345,9 +345,6 @@ function Productos() {
                                   variant="outline"
                                 />
                                 <MenuList>
-                                  <MenuItem icon={<InfoIcon />}>
-                                    Mas info
-                                  </MenuItem>
                                   <MenuItem
                                     icon={<EditIcon />}
                                     onClick={() => {
