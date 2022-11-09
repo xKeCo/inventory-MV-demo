@@ -117,7 +117,7 @@ function Orders() {
   const handleDelete = (id) => {
     try {
       axios.patch(
-        `https://mascotas-back-production.up.railway.app/api/order/update-order-status/${id}`,
+        `https://mascotas-back-production.up.railway.app/api/order/update-order/${id}`,
         {
           is_active: false,
         },

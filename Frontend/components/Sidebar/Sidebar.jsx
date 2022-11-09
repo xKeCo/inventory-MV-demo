@@ -216,7 +216,7 @@ function Sidebar() {
           </div>
         </div>
 
-        <div className={router.pathname === "/setting" && `${s.active}`}>
+        <div className={router.pathname == "/setting" ? `${s.active}` : ""}>
           <ul>
             <Menu>
               <Tooltip label="Cuenta" isDisabled={expanded} placement="right">

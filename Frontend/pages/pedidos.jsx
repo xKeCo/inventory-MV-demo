@@ -12,8 +12,30 @@ import SEO from "../components/SEO/SEO";
 // Context
 import AuthContext from "../context/AuthProvider";
 
+// Chakra UI
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+  Button,
+  Menu,
+  MenuButton,
+  IconButton,
+  MenuList,
+  MenuItem,
+  Text,
+} from "@chakra-ui/react";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+
 // Styles
 import s from "../styles/Pedidos.module.css";
+import useOrdersArrived from "../hooks/useOrdersArrived";
+import Loader from "../components/Loader/Loader";
+import Link from "next/link";
 
 function Pedidos() {
   // User context = User data
@@ -27,6 +49,14 @@ function Pedidos() {
     router.push("/login");
   }
 
+  const {
+    docsOrdersArrived,
+    loadingOrdersArrived,
+    errorOrdersArrived,
+    setLoadingOrdersArrived,
+    getOrdersArrived,
+  } = useOrdersArrived();
+
   return (
     <>
       <SEO title={"Pedidos"} />
@@ -35,7 +65,149 @@ function Pedidos() {
         <Sidebar />
         <div className={s.container}>
           <Navbar />
-          <h1 className={s.title}>Pedidos</h1>
+          <div className={s.pedidos__header__container}>
+            <h1 className={s.title}>Pedidos</h1>
+          </div>
+          {loadingOrdersArrived ? (
+            <Loader />
+          ) : errorOrdersArrived ? (
+            <h1>
+              No se pueden mostrar las ordenes recibidas en este momento,
+              int&eacute;ntalo de nuevo mas tarde.
+            </h1>
+          ) : (
+            <>
+              <div className={s.pedidos}>
+                <div className={s.pedidos__table}>
+                  <TableContainer w="100%" height="100%">
+                    <Table w="100%" variant="striped" size="sm">
+                      <Thead>
+                        <Tr>
+                          <Th
+                            w="150px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            ID
+                          </Th>
+                          <Th
+                            w="260px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Proveedor
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Fecha
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Cantidad
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Estado
+                          </Th>
+                          <Th
+                            w="100px"
+                            color="#000"
+                            fontFamily="Inter, sans-serif"
+                            fontSize="14px"
+                          >
+                            Manejo
+                          </Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        {docsOrdersArrived.map((doc) => (
+                          <Tr key={doc.id}>
+                            <Td
+                              fontWeight="500"
+                              fontSize="15px"
+                              className={s.id}
+                            >
+                              {doc.id}
+                            </Td>
+                            <Td fontWeight="500" fontSize="15px">
+                              {doc.provName}
+                            </Td>
+                            <Td fontWeight="500" fontSize="15px">
+                              {doc.date}
+                            </Td>
+                            <Td fontWeight="500" fontSize="15px">
+                              {doc.count}
+                            </Td>
+                            <Td fontWeight="500" fontSize="15px">
+                              {doc.arrive ? (
+                                <Text fontSize="16px" color="green">
+                                  Recibido
+                                </Text>
+                              ) : (
+                                <Text fontSize="16px" color="black">
+                                  En camino
+                                </Text>
+                              )}
+                            </Td>
+                            <Td>
+                              {doc.count > 0 ? (
+                                <Menu>
+                                  <MenuButton
+                                    as={IconButton}
+                                    aria-label="Options"
+                                    backgroundColor="#e4531b"
+                                    _hover={{ backgroundColor: "#83bb26" }}
+                                    _active={{ backgroundColor: "#83bb26" }}
+                                    icon={
+                                      <EditIcon color="#fff" fontSize="20px" />
+                                    }
+                                    variant="outline"
+                                  />
+                                  <MenuList>
+                                    <Link href={`/orders/${doc.id}`}>
+                                      <MenuItem icon={<EditIcon />}>
+                                        Mas info.
+                                      </MenuItem>
+                                    </Link>
+                                    <MenuItem
+                                      icon={<DeleteIcon />}
+                                      // onClick={() => handleDelete(doc.id)}
+                                    >
+                                      Eliminar
+                                    </MenuItem>
+                                  </MenuList>
+                                </Menu>
+                              ) : (
+                                <Link href={`/orders/add/${doc.id}`}>
+                                  <Button colorScheme="blue" size="sm">
+                                    Completar orden
+                                  </Button>
+                                </Link>
+                              )}
+                            </Td>
+                          </Tr>
+                        ))}
+                      </Tbody>
+                    </Table>
+                  </TableContainer>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>
