@@ -110,6 +110,18 @@ function Order() {
     }
   };
 
+  const tableHeader = [
+    "ID",
+    "Nombre del producto",
+    "Precio Unitario",
+    "Cantidad",
+    "Total",
+    "Peso",
+    "Unidad",
+    "Añadido por:",
+    "Manejo",
+  ];
+
   useEffect(() => {
     getOrderByID(ID);
   }, [ID]);
@@ -165,78 +177,16 @@ function Order() {
                     <Table w="100%" variant="striped" size="sm">
                       <Thead>
                         <Tr>
-                          <Th
-                            w="150px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            ID
-                          </Th>
-                          <Th
-                            w="260px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Nombre del producto
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Precio Unitario
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Cantidad
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Total
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Peso
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Unidad
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            A&ntilde;adido por:
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Manejo
-                          </Th>
+                          {tableHeader.map((header) => (
+                            <Th
+                              key={header}
+                              color="#000"
+                              fontFamily="Inter, sans-serif"
+                              fontSize="14px"
+                            >
+                              {header}
+                            </Th>
+                          ))}
                         </Tr>
                       </Thead>
                       <Tbody>

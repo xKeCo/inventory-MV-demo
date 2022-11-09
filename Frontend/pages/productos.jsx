@@ -185,6 +185,19 @@ function Productos() {
     }
   };
 
+  const tableHeader = [
+    "ID",
+    "Nombre",
+    "Cantidad",
+    "Peso",
+    "Unidad",
+    "Precio",
+    "Prov",
+    "Categoria",
+    "Mascota",
+    "Manejo",
+  ];
+
   return (
     <>
       <SEO title={"Productos"} />
@@ -219,86 +232,16 @@ function Productos() {
                     <Table w="100%" variant="striped" size="sm">
                       <Thead>
                         <Tr>
-                          <Th
-                            w="200px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            ID
-                          </Th>
-                          <Th
-                            w="260px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Nombre
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Cant
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Peso
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Unidad
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Precio
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Prov
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Categor&iacute;a
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Mascota
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Manejo
-                          </Th>
+                          {tableHeader.map((header) => (
+                            <Th
+                              key={header}
+                              color="#000"
+                              fontFamily="Inter, sans-serif"
+                              fontSize="14px"
+                            >
+                              {header}
+                            </Th>
+                          ))}
                         </Tr>
                       </Thead>
                       <Tbody>

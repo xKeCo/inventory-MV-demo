@@ -200,6 +200,17 @@ function Setting() {
     }
   };
 
+  const tableHeader = [
+    "ID",
+    "Nombre",
+    "Usuario",
+    "Rol",
+    "Correo",
+    "Creado en:",
+    "Creado por:",
+    "Manejo",
+  ];
+
   return (
     <>
       <SEO title={"Ajustes"} />
@@ -310,70 +321,16 @@ function Setting() {
                           <Table w="100%" variant="striped" size="sm">
                             <Thead>
                               <Tr>
-                                <Th
-                                  w="200px"
-                                  color="#000"
-                                  fontFamily="Inter, sans-serif"
-                                  fontSize="14px"
-                                >
-                                  ID
-                                </Th>
-                                <Th
-                                  w="260px"
-                                  color="#000"
-                                  fontFamily="Inter, sans-serif"
-                                  fontSize="14px"
-                                >
-                                  Nombre
-                                </Th>
-                                <Th
-                                  w="100px"
-                                  color="#000"
-                                  fontFamily="Inter, sans-serif"
-                                  fontSize="14px"
-                                >
-                                  Usuario
-                                </Th>
-                                <Th
-                                  w="100px"
-                                  color="#000"
-                                  fontFamily="Inter, sans-serif"
-                                  fontSize="14px"
-                                >
-                                  Rol
-                                </Th>
-                                <Th
-                                  w="100px"
-                                  color="#000"
-                                  fontFamily="Inter, sans-serif"
-                                  fontSize="14px"
-                                >
-                                  Correo
-                                </Th>
-                                <Th
-                                  w="100px"
-                                  color="#000"
-                                  fontFamily="Inter, sans-serif"
-                                  fontSize="14px"
-                                >
-                                  Creado en:
-                                </Th>
-                                <Th
-                                  w="100px"
-                                  color="#000"
-                                  fontFamily="Inter, sans-serif"
-                                  fontSize="14px"
-                                >
-                                  Creado por:
-                                </Th>
-                                <Th
-                                  w="100px"
-                                  color="#000"
-                                  fontFamily="Inter, sans-serif"
-                                  fontSize="14px"
-                                >
-                                  Manejo
-                                </Th>
+                                {tableHeader.map((header) => (
+                                  <Th
+                                    key={header}
+                                    color="#000"
+                                    fontFamily="Inter, sans-serif"
+                                    fontSize="14px"
+                                  >
+                                    {header}
+                                  </Th>
+                                ))}
                               </Tr>
                             </Thead>
                             <Tbody>

@@ -110,6 +110,17 @@ function Order() {
     getProductByProv,
   } = useProductByProv();
 
+  const tableHeader = [
+    "Nombre del producto",
+    "Precio Unitario",
+    "Actual",
+    "Mascota",
+    "Categoria",
+    "Peso",
+    "Unidad",
+    "Manejo",
+  ];
+
   useEffect(() => {
     getProductByProv(ID);
   }, [ID]);
@@ -149,70 +160,16 @@ function Order() {
                       <Table w="100%" variant="striped" size="sm">
                         <Thead>
                           <Tr>
-                            <Th
-                              w="260px"
-                              color="#000"
-                              fontFamily="Inter, sans-serif"
-                              fontSize="14px"
-                            >
-                              Nombre del producto
-                            </Th>
-                            <Th
-                              w="100px"
-                              color="#000"
-                              fontFamily="Inter, sans-serif"
-                              fontSize="14px"
-                            >
-                              Precio Unitario
-                            </Th>
-                            <Th
-                              w="100px"
-                              color="#000"
-                              fontFamily="Inter, sans-serif"
-                              fontSize="14px"
-                            >
-                              Actual
-                            </Th>
-                            <Th
-                              w="100px"
-                              color="#000"
-                              fontFamily="Inter, sans-serif"
-                              fontSize="14px"
-                            >
-                              MASCOTA
-                            </Th>
-                            <Th
-                              w="100px"
-                              color="#000"
-                              fontFamily="Inter, sans-serif"
-                              fontSize="14px"
-                            >
-                              CATEGORIA
-                            </Th>
-                            <Th
-                              w="100px"
-                              color="#000"
-                              fontFamily="Inter, sans-serif"
-                              fontSize="14px"
-                            >
-                              Peso
-                            </Th>
-                            <Th
-                              w="100px"
-                              color="#000"
-                              fontFamily="Inter, sans-serif"
-                              fontSize="14px"
-                            >
-                              Unidad
-                            </Th>
-                            <Th
-                              w="100px"
-                              color="#000"
-                              fontFamily="Inter, sans-serif"
-                              fontSize="14px"
-                            >
-                              Manejo
-                            </Th>
+                            {tableHeader.map((header) => (
+                              <Th
+                                key={header}
+                                color="#000"
+                                fontFamily="Inter, sans-serif"
+                                fontSize="14px"
+                              >
+                                {header}
+                              </Th>
+                            ))}
                           </Tr>
                         </Thead>
                         <Tbody>

@@ -1,5 +1,5 @@
 // React
-import { useContext } from "react";
+import { useRef, useEffect, useContext } from "react";
 
 // Next
 import { useRouter } from "next/router";
@@ -12,6 +12,9 @@ import SEO from "../components/SEO/SEO";
 // Context
 import AuthContext from "../context/AuthProvider";
 
+// Excel
+import { useDownloadExcel, downloadExcel } from "react-export-table-to-excel";
+
 // Chakra UI
 import {
   Table,
@@ -22,14 +25,8 @@ import {
   Td,
   TableContainer,
   Button,
-  Menu,
-  MenuButton,
-  IconButton,
-  MenuList,
-  MenuItem,
   Text,
 } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
 // Styles
 import s from "../styles/Pedidos.module.css";
@@ -53,9 +50,31 @@ function Pedidos() {
     docsOrdersArrived,
     loadingOrdersArrived,
     errorOrdersArrived,
-    setLoadingOrdersArrived,
     getOrdersArrived,
   } = useOrdersArrived();
+
+  // Ref of the table
+  const tableRef = useRef(null);
+
+  const tableHeader = [
+    "ID",
+    "Proveedor",
+    "Fecha",
+    "Cantidad",
+    "Estado",
+    "Manejo",
+  ];
+
+  // Donwload Excel
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: "Pedidos recibidos",
+    sheet: "Recibidos",
+  });
+
+  useEffect(() => {
+    getOrdersArrived();
+  }, []);
 
   return (
     <>
@@ -78,59 +97,29 @@ function Pedidos() {
           ) : (
             <>
               <div className={s.pedidos}>
+                <Button
+                  colorScheme="green"
+                  onClick={onDownload}
+                  className={s.order__arrive}
+                >
+                  Descargar reporte
+                </Button>
+
                 <div className={s.pedidos__table}>
-                  <TableContainer w="100%" height="100%">
+                  <TableContainer w="100%" height="100%" ref={tableRef}>
                     <Table w="100%" variant="striped" size="sm">
                       <Thead>
                         <Tr>
-                          <Th
-                            w="150px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            ID
-                          </Th>
-                          <Th
-                            w="260px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Proveedor
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Fecha
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Cantidad
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Estado
-                          </Th>
-                          <Th
-                            w="100px"
-                            color="#000"
-                            fontFamily="Inter, sans-serif"
-                            fontSize="14px"
-                          >
-                            Manejo
-                          </Th>
+                          {tableHeader.map((header) => (
+                            <Th
+                              key={header}
+                              color="#000"
+                              fontFamily="Inter, sans-serif"
+                              fontSize="14px"
+                            >
+                              {header}
+                            </Th>
+                          ))}
                         </Tr>
                       </Thead>
                       <Tbody>
