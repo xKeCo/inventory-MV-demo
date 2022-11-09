@@ -13,7 +13,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 import SEO from "../components/SEO/SEO";
 
 // Graphics
-import { Vertical } from "../components/Graphics/vertical";
+import { Vertical } from "../components/Graphics/Vertical";
 import { AreaGraph } from "../components/Graphics/AreaGraph";
 import { MultiAxis } from "../components/Graphics/MultiAxis";
 
