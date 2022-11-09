@@ -9,6 +9,7 @@ const useOrdersArrived = () => {
   const [docsOrdersArrived, setDocsOrdersArrived] = useState([]);
 
   // Number of Order
+  const [numOrdersArrived, setNumOrdersArrived] = useState(0);
 
   // Loading state
   const [loadingOrdersArrived, setLoadingOrdersArrived] = useState(true);
@@ -53,6 +54,7 @@ const useOrdersArrived = () => {
       );
 
       setDocsOrdersArrived(docs);
+      setNumOrdersArrived(data.orders.length);
       setLoadingOrdersArrived(false);
     } catch (error) {
       console.log(error);
@@ -69,6 +71,7 @@ const useOrdersArrived = () => {
     docsOrdersArrived,
     loadingOrdersArrived,
     errorOrdersArrived,
+    numOrdersArrived,
     setLoadingOrdersArrived,
     getOrdersArrived,
   };

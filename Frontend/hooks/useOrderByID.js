@@ -39,7 +39,6 @@ const useOrderByID = () => {
       );
 
       setOrder_status(data.arrive.order_status);
-      console.log(order_status);
 
       const docs = data.orders.map(
         ({

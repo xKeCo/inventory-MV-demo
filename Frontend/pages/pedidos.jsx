@@ -164,40 +164,11 @@ function Pedidos() {
                               )}
                             </Td>
                             <Td>
-                              {doc.count > 0 ? (
-                                <Menu>
-                                  <MenuButton
-                                    as={IconButton}
-                                    aria-label="Options"
-                                    backgroundColor="#e4531b"
-                                    _hover={{ backgroundColor: "#83bb26" }}
-                                    _active={{ backgroundColor: "#83bb26" }}
-                                    icon={
-                                      <EditIcon color="#fff" fontSize="20px" />
-                                    }
-                                    variant="outline"
-                                  />
-                                  <MenuList>
-                                    <Link href={`/orders/${doc.id}`}>
-                                      <MenuItem icon={<EditIcon />}>
-                                        Mas info.
-                                      </MenuItem>
-                                    </Link>
-                                    <MenuItem
-                                      icon={<DeleteIcon />}
-                                      // onClick={() => handleDelete(doc.id)}
-                                    >
-                                      Eliminar
-                                    </MenuItem>
-                                  </MenuList>
-                                </Menu>
-                              ) : (
-                                <Link href={`/orders/add/${doc.id}`}>
-                                  <Button colorScheme="blue" size="sm">
-                                    Completar orden
-                                  </Button>
-                                </Link>
-                              )}
+                              <Link href={`/orders/${doc.id}`}>
+                                <Button colorScheme="blue" size="sm">
+                                  Ver info.
+                                </Button>
+                              </Link>
                             </Td>
                           </Tr>
                         ))}

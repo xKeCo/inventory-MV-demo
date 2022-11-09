@@ -273,6 +273,7 @@ function Orders() {
                                     <MenuItem
                                       icon={<DeleteIcon />}
                                       onClick={() => handleDelete(doc.id)}
+                                      isDisabled
                                     >
                                       Eliminar
                                     </MenuItem>
