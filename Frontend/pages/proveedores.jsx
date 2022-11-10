@@ -51,6 +51,16 @@ function Proveedores() {
   // User context = User data
   const { auth } = useContext(AuthContext);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   // Router = Redirect
   const router = useRouter();
 
@@ -76,7 +86,7 @@ function Proveedores() {
   // Provider data to send
   const [provData, setProvData] = useState({
     name: "",
-    number: "",
+    contact: "",
     other_contact: "",
   });
 
@@ -97,17 +107,19 @@ function Proveedores() {
     try {
       if (oneProvData === null) {
         await axios.post(
-          "https://mascotas-back.herokuapp.com/api/provider/new",
-          provData
+          "https://mascotas-back-production.up.railway.app/api/provider/new",
+          provData,
+          config
         );
         getProveedores();
         setLoadingProvs(false);
         onClose();
         toast.success("Se ha agregado el nuevo proveedor");
       } else {
-        await axios.put(
-          `https://mascotas-back.herokuapp.com/api/provider/update/${oneProvData.id}`,
-          provData
+        await axios.patch(
+          `https://mascotas-back-production.up.railway.app/api/provider/update/${oneProvData.id}`,
+          provData,
+          config
         );
         getProveedores();
         setLoadingProvs(false);
@@ -118,12 +130,12 @@ function Proveedores() {
       setOneProvData(null);
       setProvData({
         name: "",
-        number: "",
+        contact: "",
         other_contact: "",
       });
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.msg);
+      // toast.error(error.response.data.msg);
 
       setLoadingProvs(false);
     }
@@ -132,8 +144,12 @@ function Proveedores() {
   // handle delete = delete provider from db
   const handleDelete = async (id, name) => {
     try {
-      await axios.delete(
-        `https://mascotas-back.herokuapp.com/api/provider/delete/${id}`
+      await axios.patch(
+        `https://mascotas-back-production.up.railway.app/api/provider/delete/${id}`,
+        {
+          is_active: false,
+        },
+        config
       );
       getProveedores();
       setLoadingProvs(false);
@@ -168,7 +184,10 @@ function Proveedores() {
           {loadingProvs ? (
             <Loader />
           ) : errorProvs ? (
-            <h1>Error</h1>
+            <h1>
+              No se pueden mostrar los proveedores en este momento,
+              int&eacute;ntalo de nuevo mas tarde.
+            </h1>
           ) : (
             <>
               <div className={s.proveedores}>
@@ -218,7 +237,7 @@ function Proveedores() {
                               {doc.name}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
-                              {doc.number}
+                              {doc.contact}
                             </Td>
                             <Td fontWeight="500" fontSize="15px">
                               {doc.other_contact}
@@ -280,7 +299,7 @@ function Proveedores() {
           setOneProvData(null);
           setProvData({
             name: "",
-            number: "",
+            contact: "",
             other_contact: "",
           });
         }}

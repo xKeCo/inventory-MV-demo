@@ -59,15 +59,15 @@ function DrawerProvs({
               </Box>
 
               <Box>
-                <FormLabel htmlFor="number">Contacto</FormLabel>
+                <FormLabel htmlFor="contact">Contacto</FormLabel>
                 <Input
                   isRequired
-                  name="number"
-                  type="number"
-                  id="number"
+                  name="contact"
+                  type="contact"
+                  id="contact"
                   placeholder="Contacto del proveedor"
                   onChange={handleChange}
-                  defaultValue={oneProvData?.number || ""}
+                  defaultValue={oneProvData?.contact || ""}
                 />
               </Box>
 
@@ -91,15 +91,13 @@ function DrawerProvs({
             </Button>
             <Button
               className={
-                loadingProvs
-                  ? s.drawer__form__button__disabled
-                  : s.drawer__form__button
+                loadingProvs ? s.form__button__disabled : s.form__button
               }
               type="submit"
               disabled={
                 loadingProvs ||
                 (provData.name === oneProvData?.name &&
-                  provData.number === oneProvData?.number &&
+                  provData.contact === oneProvData?.contact &&
                   provData.other_contact === oneProvData?.other_contact)
               }
             >

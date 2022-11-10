@@ -7,7 +7,7 @@
   padding: 2rem 2.5rem;
 }
 
-.pedidos__header__container {
+.order__header__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,31 +23,31 @@
   transition: var(--main-transition);
 }
 
-.pedidos__add__button {
+.order__add__button {
   background-color: var(--color-secondary) !important;
   color: var(--white);
   font-weight: 500 !important;
 }
 
-.pedidos__add__button:hover {
+.order__add__button:hover {
   background-color: var(--color-primary) !important;
 }
 
-.pedidos__info__title {
+.order__info__title {
   font-size: 1.2rem;
   font-weight: 500;
   color: #000;
   transition: var(--main-transition);
 }
 
-.pedidos {
+.order {
   display: flex;
   gap: 2rem;
   justify-content: flex-start;
   flex-direction: column;
 }
 
-.pedidos__table {
+.order__table {
   width: 100%;
 }
 
@@ -57,52 +57,44 @@
   text-overflow: ellipsis;
 }
 
-.newpedidos {
+.newOrder {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.newpedidos__submit {
+.newOrder__submit {
   display: flex;
   gap: 1rem;
   flex-direction: row;
 }
 
-.pedidos__arrive {
+.order__arrive {
   max-width: 300px !important;
 }
 
-.pedidos__button__container {
+.order__button__container {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-}
-.order__arrive {
-  max-width: 200px !important;
 }
 
 @media screen and (max-width: 950px) {
   .container {
     padding: 0;
   }
-  .pedidos {
+  .order {
     justify-content: center;
     flex-wrap: wrap-reverse;
     margin: 1rem;
   }
 
-  .pedidos__header__container {
+  .order__header__container {
     margin: 2rem 1rem;
   }
-  .pedidos__button__container {
+  .order__button__container {
     flex-direction: column-reverse;
   }
-  .pedidos__arrive {
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-
   .order__arrive {
     max-width: 100% !important;
     width: 100% !important;
@@ -110,7 +102,7 @@
 }
 
 @media screen and (max-width: 450px) {
-  .pedidos__add__button {
+  .order__add__button {
     width: 100%;
   }
 }

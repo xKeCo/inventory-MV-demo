@@ -1,4 +1,4 @@
-.drawer__form__button {
+.form__button {
   background-color: var(--color-primary) !important;
   color: var(--white);
   transition: var(--main-transition) !important;
@@ -7,12 +7,12 @@
   border-radius: 0.5rem;
 }
 
-.drawer__form__button:hover {
+.form__button:hover {
   background-color: var(--color-secondary) !important;
   transition: var(--main-transition) !important;
 }
 
-.drawer__form__button__disabled {
+.form__button__disabled {
   background-color: #9b9b9b !important;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -20,7 +20,7 @@
   transition: var(--main-transition) !important;
 }
 
-.drawer__form__button__disabled:hover {
+.form__button__disabled:hover {
   background-color: #9b9b9b !important;
   transition: var(--main-transition) !important;
 }

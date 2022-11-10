@@ -1,9 +1,6 @@
 // React
 import { useEffect, useState } from "react";
 
-// React-hot-toast Notifications
-import { toast } from "react-hot-toast";
-
 // Axios
 import axios from "axios";
 
@@ -20,31 +17,44 @@ const useProducts = () => {
   // Error state
   const [errorProducts, setErrorProducts] = useState(null);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/product/all"
+        "https://mascotas-back-production.up.railway.app/api/product/all",
+        config
       );
 
       const docs = data.result.map(
         ({
-          prod_id,
+          product_id,
           name,
           stock,
-          peso,
-          unidad_medida,
+          weigth,
+          measure,
           price,
           provider_name,
+          provider_id,
           category_name,
           pet_name,
         }) => ({
-          id: prod_id,
+          id: product_id,
           name,
           stock,
-          peso,
-          unidad_medida,
+          weigth,
+          measure,
           price,
           provName: provider_name,
+          provId: provider_id,
           categoryName: category_name,
           petName: pet_name,
         })
@@ -55,7 +65,6 @@ const useProducts = () => {
     } catch (error) {
       setErrorProducts(error);
       setLoadingProducts(false);
-      toast.error(error.message);
     }
   };
 

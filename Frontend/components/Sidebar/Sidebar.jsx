@@ -57,7 +57,6 @@ function Sidebar() {
         }
       >
         <div>
-          {/* <Link href="/"> */}
           <div
             className={
               expanded
@@ -80,161 +79,144 @@ function Sidebar() {
               }}
             />
           </div>
-          {/* </Link> */}
 
           <div className={s.sidebar__links__container}>
             <ul>
               <Link href="/">
-                <a>
-                  <Tooltip
-                    label="Inicio"
-                    isDisabled={expanded}
-                    placement="right"
+                <Tooltip label="Inicio" isDisabled={expanded} placement="right">
+                  <li
+                    className={
+                      router.pathname === "/"
+                        ? `${s.sidebar__link} ${s.active}`
+                        : `${s.sidebar__link}`
+                    }
                   >
-                    <li
-                      className={
-                        router.pathname == "/"
-                          ? `${s.sidebar__link} ${s.active}`
-                          : `${s.sidebar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/home.svg"
-                        alt="Home"
-                      />
-                      {expanded && <p>Inicio</p>}
-                    </li>
-                  </Tooltip>
-                </a>
+                    <img
+                      className={s.icon_image}
+                      src="/icons/home.svg"
+                      alt="Home"
+                    />
+                    {expanded && <p>Inicio</p>}
+                  </li>
+                </Tooltip>
               </Link>
               <Link href="/proveedores">
-                <a>
-                  <Tooltip
-                    label="Proveedores"
-                    isDisabled={expanded}
-                    placement="right"
+                <Tooltip
+                  label="Proveedores"
+                  isDisabled={expanded}
+                  placement="right"
+                >
+                  <li
+                    className={
+                      router.pathname === "/proveedores"
+                        ? `${s.sidebar__link} ${s.active}`
+                        : `${s.sidebar__link}`
+                    }
                   >
-                    <li
-                      className={
-                        router.pathname == "/proveedores"
-                          ? `${s.sidebar__link} ${s.active}`
-                          : `${s.sidebar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/proveedores.svg"
-                        alt="Proveedores"
-                      />
+                    <img
+                      className={s.icon_image}
+                      src="/icons/proveedores.svg"
+                      alt="Proveedores"
+                    />
 
-                      {expanded && <p>Proveedores</p>}
-                    </li>
-                  </Tooltip>
-                </a>
+                    {expanded && <p>Proveedores</p>}
+                  </li>
+                </Tooltip>
               </Link>
               <Link href="/productos">
-                <a>
-                  <Tooltip
-                    label="Productos"
-                    isDisabled={expanded}
-                    placement="right"
+                <Tooltip
+                  label="Productos"
+                  isDisabled={expanded}
+                  placement="right"
+                >
+                  <li
+                    className={
+                      router.pathname === "/productos"
+                        ? `${s.sidebar__link} ${s.active}`
+                        : `${s.sidebar__link}`
+                    }
                   >
-                    <li
-                      className={
-                        router.pathname == "/productos"
-                          ? `${s.sidebar__link} ${s.active}`
-                          : `${s.sidebar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/productos.svg"
-                        alt="Productos"
-                      />
-                      {expanded && <p>Productos</p>}
-                    </li>
-                  </Tooltip>
-                </a>
+                    <img
+                      className={s.icon_image}
+                      src="/icons/productos.svg"
+                      alt="Productos"
+                    />
+                    {expanded && <p>Productos</p>}
+                  </li>
+                </Tooltip>
               </Link>
-              <Link href="/stock">
-                <a>
-                  <Tooltip
-                    label="Stock"
-                    isDisabled={expanded}
-                    placement="right"
+              <Link href="/orders">
+                <Tooltip
+                  label="Ordenes"
+                  isDisabled={expanded}
+                  placement="right"
+                >
+                  <li
+                    className={
+                      router.pathname === "/orders"
+                        ? `${s.sidebar__link} ${s.active}`
+                        : `${s.sidebar__link}`
+                    }
                   >
-                    <li
-                      className={
-                        router.pathname == "/stock"
-                          ? `${s.sidebar__link} ${s.active}`
-                          : `${s.sidebar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/stock.svg"
-                        alt="Stock"
-                      />
-                      {expanded && <p>Stock</p>}
-                    </li>
-                  </Tooltip>
-                </a>
+                    <img
+                      className={s.icon_image}
+                      src="/icons/order.svg"
+                      alt="order"
+                    />
+                    {expanded && <p>Ordenes</p>}
+                  </li>
+                </Tooltip>
               </Link>
               <Link href="/pedidos">
-                <a>
-                  <Tooltip
-                    label="Pedidos"
-                    isDisabled={expanded}
-                    placement="right"
+                <Tooltip
+                  label="Pedidos"
+                  isDisabled={expanded}
+                  placement="right"
+                >
+                  <li
+                    className={
+                      router.pathname === "/pedidos"
+                        ? `${s.sidebar__link} ${s.active}`
+                        : `${s.sidebar__link}`
+                    }
                   >
-                    <li
-                      className={
-                        router.pathname == "/pedidos"
-                          ? `${s.sidebar__link} ${s.active}`
-                          : `${s.sidebar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/pedidos.svg"
-                        alt="Pedidos"
-                      />
-                      {expanded && <p>Pedidos</p>}
-                    </li>
-                  </Tooltip>
-                </a>
+                    <img
+                      className={s.icon_image}
+                      src="/icons/pedidos.svg"
+                      alt="Pedidos"
+                    />
+                    {expanded && <p>Pedidos</p>}
+                  </li>
+                </Tooltip>
               </Link>
               <Link href="/reportes">
-                <a>
-                  <Tooltip
-                    label="Reportes"
-                    isDisabled={expanded}
-                    placement="right"
+                <Tooltip
+                  label="Reportes"
+                  isDisabled={expanded}
+                  placement="right"
+                >
+                  <li
+                    className={
+                      router.pathname === "/reportes"
+                        ? `${s.sidebar__link} ${s.active}`
+                        : `${s.sidebar__link}`
+                    }
                   >
-                    <li
-                      className={
-                        router.pathname == "/reportes"
-                          ? `${s.sidebar__link} ${s.active}`
-                          : `${s.sidebar__link}`
-                      }
-                    >
-                      <img
-                        className={s.icon_image}
-                        src="/icons/reportes.svg"
-                        alt="Reportes"
-                      />
+                    <img
+                      className={s.icon_image}
+                      src="/icons/reportes.svg"
+                      alt="Reportes"
+                    />
 
-                      {expanded && <p>Reportes</p>}
-                    </li>
-                  </Tooltip>
-                </a>
+                    {expanded && <p>Reportes</p>}
+                  </li>
+                </Tooltip>
               </Link>
             </ul>
           </div>
         </div>
 
-        <div>
+        <div className={router.pathname == "/setting" ? `${s.active}` : ""}>
           <ul>
             <Menu>
               <Tooltip label="Cuenta" isDisabled={expanded} placement="right">
@@ -277,9 +259,7 @@ function Sidebar() {
                   }`}
                 >
                   <Link href="/setting">
-                    <a>
-                      <MenuItem>Ajuste de cuenta</MenuItem>
-                    </a>
+                    <MenuItem>Ajuste de cuenta</MenuItem>
                   </Link>
                   <MenuDivider />
                   <MenuItem onClick={signOut} color="#FF0000" fontWeight="500">

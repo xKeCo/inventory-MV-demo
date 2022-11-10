@@ -34,6 +34,8 @@ function DrawerProducts({
   docsCategories,
   docsPets,
   loadingProducts,
+  oneProductData,
+  productData,
 }) {
   return (
     <Drawer
@@ -48,7 +50,7 @@ function DrawerProducts({
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">
-            Crear nuevo producto
+            {oneProductData ? "Editar producto" : "Crear nuevo producto"}
           </DrawerHeader>
 
           <DrawerBody>
@@ -57,10 +59,11 @@ function DrawerProducts({
                 <FormLabel htmlFor="name">ID del producto</FormLabel>
                 <Input
                   isRequired
-                  name="prod_id"
+                  name="product_id"
                   ref={firstField}
                   placeholder="Ingrese nombre del proveedor"
                   onChange={handleChange}
+                  defaultValue={oneProductData?.id || ""}
                 />
               </Box>
               <Box>
@@ -71,6 +74,7 @@ function DrawerProducts({
                   id="name"
                   placeholder="Ingrese nombre del proveedor"
                   onChange={handleChange}
+                  defaultValue={oneProductData?.name || ""}
                 />
               </Box>
 
@@ -82,6 +86,7 @@ function DrawerProducts({
                   type="number"
                   min={0}
                   max={100}
+                  defaultValue={oneProductData?.stock || ""}
                   onChange={(value) =>
                     handleChange({ target: { name: "stock", value } })
                   }
@@ -94,17 +99,18 @@ function DrawerProducts({
                 </NumberInput>
               </Box>
               <Box>
-                <FormLabel htmlFor="peso">Peso</FormLabel>
+                <FormLabel htmlFor="weigth">Peso</FormLabel>
                 <Flex gap="1rem">
                   <NumberInput
                     isRequired
-                    name="peso"
+                    name="weigth"
                     precision={2}
                     step={0.2}
                     min={0}
                     max={100}
+                    defaultValue={oneProductData?.weigth || ""}
                     onChange={(value) =>
-                      handleChange({ target: { name: "peso", value } })
+                      handleChange({ target: { name: "weigth", value } })
                     }
                   >
                     <NumberInputField />
@@ -116,8 +122,9 @@ function DrawerProducts({
                   <Select
                     isRequired
                     w="150px"
-                    name="unidad_medida"
+                    name="measure"
                     onChange={handleChange}
+                    defaultValue={oneProductData?.measure || ""}
                   >
                     <option value=""></option>
                     <option value="KG">KG</option>
@@ -133,6 +140,7 @@ function DrawerProducts({
                   name="price"
                   min={0}
                   max={1000000}
+                  defaultValue={oneProductData?.price || ""}
                   onChange={(value) =>
                     handleChange({ target: { name: "price", value } })
                   }
@@ -146,42 +154,53 @@ function DrawerProducts({
               </Box>
 
               <Box>
-                <FormLabel htmlFor="provid_fk">Proveedor</FormLabel>
-
-                <Select isRequired name="provid_fk" onChange={handleChange}>
-                  <option value=""></option>
-                  {docsProvs.map((doc) => (
-                    <option key={doc.id} value={doc.id}>
-                      {doc.name}
-                    </option>
-                  ))}
-                </Select>
-              </Box>
-              <Box>
-                <FormLabel htmlFor="categid_fk">Categoria</FormLabel>
-
-                <Select isRequired name="categid_fk" onChange={handleChange}>
-                  <option value=""></option>
-                  {docsCategories.map((doc) => (
-                    <option key={doc.id} value={doc.id}>
-                      {doc.name}
-                    </option>
-                  ))}
-                </Select>
-              </Box>
-              <Box>
-                <FormLabel htmlFor="mascotaid_fk">Mascota</FormLabel>
+                <FormLabel htmlFor="provider_fk">Proveedor</FormLabel>
 
                 <Select
                   isRequired
-                  name="mascotaid_fk"
+                  name="provider_fk"
+                  // defaultValue={oneProductData?.provName || ""}
                   onChange={handleChange}
-                  mb="3rem"
                 >
                   <option value=""></option>
-                  {docsPets.map((doc) => (
-                    <option key={doc.id} value={doc.id}>
-                      {doc.name}
+                  {docsProvs.map(({ id, name }) => (
+                    <option key={id} value={id}>
+                      {name}
+                    </option>
+                  ))}
+                </Select>
+              </Box>
+              <Box>
+                <FormLabel htmlFor="category_fk">Categoria</FormLabel>
+
+                <Select
+                  isRequired
+                  name="category_fk"
+                  onChange={handleChange}
+                  // defaultValue={oneProductData?.categoryName || ""}
+                >
+                  <option value=""></option>
+                  {docsCategories.map(({ id, name }) => (
+                    <option key={id} value={id}>
+                      {name}
+                    </option>
+                  ))}
+                </Select>
+              </Box>
+              <Box>
+                <FormLabel htmlFor="pet_fk">Mascota</FormLabel>
+
+                <Select
+                  isRequired
+                  name="pet_fk"
+                  mb="3rem"
+                  // defaultValue={oneProductData?.petName || ""}
+                  onChange={handleChange}
+                >
+                  <option value=""></option>
+                  {docsPets.map(({ id, name }) => (
+                    <option key={id} value={id}>
+                      {name}
                     </option>
                   ))}
                 </Select>
@@ -195,12 +214,18 @@ function DrawerProducts({
             </Button>
             <Button
               className={
-                loadingProducts
-                  ? s.proveedor__form__button__disabled
-                  : s.proveedor__form__button
+                loadingProducts ? s.form__button__disabled : s.form__button
               }
               type="submit"
-              disabled={loadingProducts}
+              disabled={
+                loadingProducts ||
+                (productData.id === oneProductData?.id &&
+                  productData.name === oneProductData?.name &&
+                  productData.stock === oneProductData?.stock &&
+                  productData.weigth === oneProductData?.weigth &&
+                  productData.measure === oneProductData?.measure &&
+                  productData.price === oneProductData?.price)
+              }
             >
               {loadingProducts ? "Cargando..." : "Agregar producto"}
             </Button>

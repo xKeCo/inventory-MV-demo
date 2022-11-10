@@ -61,7 +61,7 @@ function ResetPassword() {
 
     try {
       await axios.post(
-        "https://mascotas-back.herokuapp.com/api/user/reset-password",
+        "https://mascotas-back-production.up.railway.app/api/auth/reset-password",
         username
       );
       // router.push("/");

@@ -1,9 +1,6 @@
 // React
 import { useEffect, useState } from "react";
 
-// React-hot-toast Notifications
-import { toast } from "react-hot-toast";
-
 // Axios
 import axios from "axios";
 
@@ -20,15 +17,26 @@ const usePets = () => {
   // Error state
   const [errorPets, setErrorPets] = useState(null);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   // Fetch pets data
   const getCategories = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/pet/all"
+        "https://mascotas-back-production.up.railway.app/api/pet/all",
+        config
       );
 
-      const docs = data.result.map(({ mascota_id, name, description }) => ({
-        id: mascota_id,
+      const docs = data.result.map(({ pet_id, name, description }) => ({
+        id: pet_id,
         name,
         description,
       }));
@@ -39,7 +47,6 @@ const usePets = () => {
     } catch (error) {
       setErrorPets(error);
       setLoadingPets(false);
-      toast.error(error.message);
     }
   };
 

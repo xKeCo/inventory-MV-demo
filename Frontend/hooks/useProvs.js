@@ -1,9 +1,6 @@
 // React
 import { useEffect, useState } from "react";
 
-// React-hot-toast Notifications
-import { toast } from "react-hot-toast";
-
 // Axios
 import axios from "axios";
 
@@ -20,18 +17,29 @@ const useProvs = () => {
   // Error state
   const [errorProvs, setErrorProvs] = useState(null);
 
+  // Get the token from local storage to verrify if the user is logged in
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   // Fetch provs data
   const getProveedores = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back.herokuapp.com/api/provider/all"
+        "https://mascotas-back-production.up.railway.app/api/provider/all",
+        config
       );
 
       const docs = data.query.map(
-        ({ prov_id, name, number, other_contact }) => ({
-          id: prov_id,
+        ({ provider_id, name, contact, other_contact }) => ({
+          id: provider_id,
           name,
-          number,
+          contact,
           other_contact,
         })
       );
@@ -42,7 +50,6 @@ const useProvs = () => {
     } catch (error) {
       setErrorProvs(error);
       setLoadingProvs(false);
-      toast.error(error.message);
     }
   };
 
