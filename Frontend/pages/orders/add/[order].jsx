@@ -5,20 +5,22 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 
 // Local Components
-import Navbar from "../../../components/Navbar/Navbar";
-import Sidebar from "../../../components/Sidebar/Sidebar.jsx";
-import SEO from "../../../components/SEO/SEO";
-import Loader from "../../../components/Loader/Loader";
-import DrawerAddOrder from "../../../components/Drawer/DrawerAddOrder";
+import {
+  Navbar,
+  Sidebar,
+  SEO,
+  Loader,
+  DrawerAddOrder,
+} from "../../../components/";
 
 // Context
-import AuthContext from "../../../context/AuthProvider.jsx";
+import AuthContext from "../../../context/AuthProvider";
 
 // Styles
 import s from "../../../styles/Order.module.css";
 
 // Hooks
-import useProductByProv from "../../../hooks/useProductByProv";
+import { useProductByProv } from "../../../hooks/";
 
 // Chakra UI
 import {
@@ -88,7 +90,7 @@ function Order() {
 
     try {
       await axios.post(
-        `https://mascotas-back-production.up.railway.app/api/order/order/${ID}`,
+        `https://mascotas-back.onrender.com/api/order/order/${ID}`,
         orderData,
         config
       );

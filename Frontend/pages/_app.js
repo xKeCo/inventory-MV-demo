@@ -5,7 +5,7 @@ import {
 } from "@chakra-ui/react";
 import theme from "../theme/theme";
 
-import { AuthProvider } from "../context/AuthProvider.jsx";
+import { AuthProvider } from "../context/AuthProvider";
 import { Toaster } from "react-hot-toast";
 import { AppProvider } from "../context/AppProvider";
 

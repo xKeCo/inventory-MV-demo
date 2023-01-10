@@ -3,29 +3,26 @@ import { useContext } from "react";
 
 // Next
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 // Styles
 import s from "../styles/Home.module.css";
 
 // Local Components
-import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/Sidebar/Sidebar";
-import SEO from "../components/SEO/SEO";
-
-// Graphics
-import { Vertical } from "../components/Graphics/Vertical";
-import { AreaGraph } from "../components/Graphics/AreaGraph";
-import { MultiAxis } from "../components/Graphics/MultiAxis";
+import {
+  SEO,
+  Sidebar,
+  Navbar,
+  Vertical,
+  AreaGraph,
+  MultiAxis,
+} from "../components";
 
 // Hooks
-import useProducts from "../hooks/useProducts";
-import useProvs from "../hooks/useProvs";
-import useOrders from "../hooks/useOrders";
+import { useProducts, useProvs, useOrders, useOrdersArrived } from "../hooks/";
 
 // Context
 import AuthContext from "../context/AuthProvider";
-import useOrdersArrived from "../hooks/useOrdersArrived";
-import Link from "next/link";
 
 export default function Home() {
   // Get number of products, providers and stock

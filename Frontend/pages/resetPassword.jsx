@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 // Local Components
-import SEO from "../components/SEO/SEO";
+import { SEO } from "../components/";
 
 // Context
 import AuthContext from "../context/AuthProvider";
@@ -61,7 +61,7 @@ function ResetPassword() {
 
     try {
       await axios.post(
-        "https://mascotas-back-production.up.railway.app/api/auth/reset-password",
+        "https://mascotas-back.onrender.com/api/auth/reset-password",
         username
       );
       // router.push("/");

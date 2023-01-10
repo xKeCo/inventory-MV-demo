@@ -6,10 +6,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 // Local Components
-import Navbar from "../../components/Navbar/Navbar";
-import Sidebar from "../../components/Sidebar/Sidebar.jsx";
-import SEO from "../../components/SEO/SEO";
-import Loader from "../../components/Loader/Loader";
+import { Navbar, Sidebar, SEO, Loader } from "../../components/";
 
 // Context
 import AuthContext from "../../context/AuthProvider";
@@ -18,8 +15,7 @@ import AuthContext from "../../context/AuthProvider";
 import s from "../../styles/Order.module.css";
 
 // Hooks
-import useOrderByID from "../../hooks/useOrderByID";
-import useOrders from "../../hooks/useOrders";
+import { useOrderByID, useOrders } from "../../hooks/";
 
 // Chakra UI
 import {
@@ -87,7 +83,7 @@ function Order() {
 
     try {
       await axios.patch(
-        `https://mascotas-back-production.up.railway.app/api/order/update-order/${ID}`,
+        `https://mascotas-back.onrender.com/api/order/update-order/${ID}`,
         {
           order_status: !order_status,
         },

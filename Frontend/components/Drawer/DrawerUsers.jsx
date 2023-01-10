@@ -18,7 +18,7 @@ import {
 // Styles
 import s from "./Drawers.module.css";
 
-function DrawerUsers({
+export function DrawerUsers({
   isOpen,
   onClose,
   firstField,
@@ -146,5 +146,3 @@ function DrawerUsers({
     </Drawer>
   );
 }
-
-export default DrawerUsers;

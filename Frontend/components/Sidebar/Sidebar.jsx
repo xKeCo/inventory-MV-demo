@@ -28,7 +28,7 @@ import s from "./Sidebar.module.css";
 import AppContext from "../../context/AppProvider";
 import AuthContext from "../../context/AuthProvider";
 
-function Sidebar() {
+export function Sidebar() {
   // User context = User data
   const { auth, setAuth } = useContext(AuthContext);
 
@@ -274,5 +274,3 @@ function Sidebar() {
     </>
   );
 }
-
-export default Sidebar;

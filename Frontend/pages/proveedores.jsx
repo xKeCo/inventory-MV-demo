@@ -8,17 +8,13 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 // Local Components
-import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Loader from "../components/Loader/Loader";
-import DrawerProvs from "../components/Drawer/DrawerProvs";
-import SEO from "../components/SEO/SEO";
+import { Navbar, Sidebar, Loader, DrawerProvs, SEO } from "../components/";
 
 // Styles
 import s from "../styles/Proveedores.module.css";
 
 // Hooks
-import useProvs from "../hooks/useProvs";
+import { useProvs } from "../hooks";
 
 // Chakra UI
 import {
@@ -107,7 +103,7 @@ function Proveedores() {
     try {
       if (oneProvData === null) {
         await axios.post(
-          "https://mascotas-back-production.up.railway.app/api/provider/new",
+          "https://mascotas-back.onrender.com/api/provider/new",
           provData,
           config
         );
@@ -117,7 +113,7 @@ function Proveedores() {
         toast.success("Se ha agregado el nuevo proveedor");
       } else {
         await axios.patch(
-          `https://mascotas-back-production.up.railway.app/api/provider/update/${oneProvData.id}`,
+          `https://mascotas-back.onrender.com/api/provider/update/${oneProvData.id}`,
           provData,
           config
         );
@@ -145,7 +141,7 @@ function Proveedores() {
   const handleDelete = async (id, name) => {
     try {
       await axios.patch(
-        `https://mascotas-back-production.up.railway.app/api/provider/delete/${id}`,
+        `https://mascotas-back.onrender.com/api/provider/delete/${id}`,
         {
           is_active: false,
         },

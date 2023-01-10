@@ -3,17 +3,16 @@ import { useRef, useEffect, useContext } from "react";
 
 // Next
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 // Local Components
-import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/Sidebar/Sidebar";
-import SEO from "../components/SEO/SEO";
+import { Loader, Navbar, Sidebar, SEO } from "../components/";
 
 // Context
 import AuthContext from "../context/AuthProvider";
 
 // Excel
-import { useDownloadExcel, downloadExcel } from "react-export-table-to-excel";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 // Chakra UI
 import {
@@ -30,9 +29,9 @@ import {
 
 // Styles
 import s from "../styles/Pedidos.module.css";
-import useOrdersArrived from "../hooks/useOrdersArrived";
-import Loader from "../components/Loader/Loader";
-import Link from "next/link";
+
+// Hooks
+import { useOrdersArrived } from "../hooks/";
 
 function Pedidos() {
   // User context = User data

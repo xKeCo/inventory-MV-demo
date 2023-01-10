@@ -3,7 +3,7 @@
 // Next
 import Head from "next/head";
 
-function SEO({ title }) {
+export function SEO({ title }) {
   return (
     <Head>
       <title>Mascotas del Valle - {title} </title>
@@ -15,5 +15,3 @@ function SEO({ title }) {
     </Head>
   );
 }
-
-export default SEO;

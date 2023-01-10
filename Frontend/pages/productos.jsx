@@ -8,22 +8,13 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 // Local Components
-
-import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Loader from "../components/Loader/Loader";
-import DrawerProducts from "../components/Drawer/DrawerProducts";
-import SEO from "../components/SEO/SEO";
+import { Navbar, Sidebar, Loader, DrawerProducts, SEO } from "../components/";
 
 // Styles
 import s from "../styles/Productos.module.css";
 
 // Hooks
-
-import useProducts from "../hooks/useProducts";
-import useCategories from "../hooks/useCategories";
-import useProvs from "../hooks/useProvs";
-import usePets from "../hooks/usePets";
+import { useProducts, useCategories, useProvs, usePets } from "../hooks/";
 
 // Chakra UI
 import {
@@ -124,7 +115,7 @@ function Productos() {
     try {
       if (oneProductData === null) {
         await axios.post(
-          "https://mascotas-back-production.up.railway.app/api/product/new",
+          "https://mascotas-back.onrender.com/api/product/new",
           productData,
           config
         );
@@ -134,7 +125,7 @@ function Productos() {
         toast.success("Se ha agregado el nuevo producto");
       } else {
         await axios.patch(
-          `https://mascotas-back-production.up.railway.app/api/product/update/${oneProductData.id}`,
+          `https://mascotas-back.onrender.com/api/product/update/${oneProductData.id}`,
           productData,
           config
         );
@@ -168,7 +159,7 @@ function Productos() {
   const handleDelete = async (id, name) => {
     try {
       await axios.patch(
-        `https://mascotas-back-production.up.railway.app/api/product/delete/${id}`,
+        `https://mascotas-back.onrender.com/api/product/delete/${id}`,
         {
           is_active: false,
         },

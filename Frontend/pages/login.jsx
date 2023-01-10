@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import s from "../styles/Login.module.css";
 
 // Local Components
-import SEO from "../components/SEO/SEO";
+import { SEO } from "../components/";
 
 // Chakra UI
 import {
@@ -26,7 +26,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
 
 // Context
-import AuthContext from "../context/AuthProvider.jsx";
+import AuthContext from "../context/AuthProvider";
 
 // Toast notifications
 import { toast } from "react-hot-toast";
@@ -66,7 +66,7 @@ function Login() {
 
     try {
       const { data } = await axios.post(
-        "https://mascotas-back-production.up.railway.app/api/auth/login",
+        "https://mascotas-back.onrender.com/api/auth/login",
         credentials
       );
 

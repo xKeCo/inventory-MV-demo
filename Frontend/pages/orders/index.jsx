@@ -6,11 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 // Local Components
-import Navbar from "../../components/Navbar/Navbar";
-import Loader from "../../components/Loader/Loader";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import SEO from "../../components/SEO/SEO";
-import DrawerOrder from "../../components/Drawer/DrawerOrder";
+import { Navbar, Loader, Sidebar, SEO, DrawerOrder } from "../../components/";
 
 // Context
 import AuthContext from "../../context/AuthProvider";
@@ -19,8 +15,7 @@ import AuthContext from "../../context/AuthProvider";
 import s from "../../styles/Order.module.css";
 
 // Hooks
-import useOrders from "../../hooks/useOrders";
-import useProvs from "../../hooks/useProvs";
+import { useOrders, useProvs } from "../../hooks/";
 
 // Chakra UI
 import {
@@ -40,6 +35,7 @@ import {
   MenuItem,
   Text,
 } from "@chakra-ui/react";
+
 // Chakra UI Icons
 import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
@@ -99,7 +95,7 @@ function Orders() {
 
     try {
       await axios.post(
-        "https://mascotas-back-production.up.railway.app/api/order/new",
+        "https://mascotas-back.onrender.com/api/order/new",
         orderData,
         config
       );
@@ -117,7 +113,7 @@ function Orders() {
   const handleDelete = (id) => {
     try {
       axios.patch(
-        `https://mascotas-back-production.up.railway.app/api/order/update-order/${id}`,
+        `https://mascotas-back.onrender.com/api/order/update-order/${id}`,
         {
           is_active: false,
         },

@@ -4,7 +4,7 @@ import { Spinner } from "@chakra-ui/react";
 // Styles
 import s from "./Loader.module.css";
 
-function Loader() {
+export function Loader() {
   return (
     <div className={s.loader__Container}>
       <Spinner
@@ -17,5 +17,3 @@ function Loader() {
     </div>
   );
 }
-
-export default Loader;

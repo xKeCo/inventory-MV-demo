@@ -8,15 +8,12 @@ import { useRouter } from "next/router";
 import AuthContext from "../context/AuthProvider";
 
 // Local Components
-import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/Sidebar/Sidebar";
-import SEO from "../components/SEO/SEO";
-import Loader from "../components/Loader/Loader";
-import DrawerUsers from "../components/Drawer/DrawerUsers";
+import { Navbar, Sidebar, SEO, Loader, DrawerUsers } from "../components/";
 
 // Hooks
-import useUsers from "../hooks/useUsers";
+import { useUsers } from "../hooks";
 
+// Chakra UI
 import {
   Table,
   Thead,
@@ -101,7 +98,7 @@ function Setting() {
   const handleDelete = async (id, name) => {
     try {
       await axios.patch(
-        `https://mascotas-back-production.up.railway.app/api/user/delete/${id}`,
+        `https://mascotas-back.onrender.com/api/user/delete/${id}`,
         {
           is_active: false,
         },
@@ -140,7 +137,7 @@ function Setting() {
     try {
       if (oneProvData === null) {
         await axios.post(
-          "https://mascotas-back-production.up.railway.app/api/user/create",
+          "https://mascotas-back.onrender.com/api/user/create",
           userDataUser,
           config
         );
@@ -150,7 +147,7 @@ function Setting() {
         toast.success("Se ha agregado el nuevo usuario");
       } else {
         await axios.patch(
-          `https://mascotas-back-production.up.railway.app/api/user/update/${oneProvData.id}`,
+          `https://mascotas-back.onrender.com/api/user/update/${oneProvData.id}`,
           userDataUser,
           config
         );
@@ -183,7 +180,7 @@ function Setting() {
 
     try {
       await axios.patch(
-        `https://mascotas-back-production.up.railway.app/api/user/update/${id}`,
+        `https://mascotas-back.onrender.com/api/user/update/${id}`,
         userData,
         config
       );

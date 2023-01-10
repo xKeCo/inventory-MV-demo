@@ -17,7 +17,7 @@ import {
 // Styles
 import s from "./Drawers.module.css";
 
-function DrawerProvs({
+export function DrawerProvs({
   isOpen,
   onClose,
   firstField,
@@ -113,5 +113,3 @@ function DrawerProvs({
     </Drawer>
   );
 }
-
-export default DrawerProvs;

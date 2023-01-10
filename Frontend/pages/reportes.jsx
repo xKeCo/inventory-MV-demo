@@ -5,9 +5,7 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 
 // Local Components
-import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/Sidebar/Sidebar";
-import SEO from "../components/SEO/SEO";
+import { Navbar, Sidebar, SEO } from "../components/";
 
 // Context
 import AuthContext from "../context/AuthProvider";

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 // Local components
-import Loader from "../components/Loader/Loader";
+import { Loader } from "../components";
 
 const AuthContext = createContext();
 
@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
     };
     try {
       const { data } = await axios.get(
-        "https://mascotas-back-production.up.railway.app/api/auth/check-auth",
+        "https://mascotas-back.onrender.com/api/auth/check-auth",
         config
       );
       setAuth(data);

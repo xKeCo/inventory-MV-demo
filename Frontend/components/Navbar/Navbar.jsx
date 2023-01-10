@@ -16,9 +16,6 @@ import {
   MenuItem,
   MenuGroup,
   MenuDivider,
-  Input,
-  InputGroup,
-  InputLeftElement,
   IconButton,
   Drawer,
   DrawerBody,
@@ -32,12 +29,12 @@ import {
 } from "@chakra-ui/react";
 
 // Chakra UI Icons
-import { SearchIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
-// Local Components
+// Context
 import AuthContext from "../../context/AuthProvider";
 
-function Navbar() {
+export function Navbar() {
   // User context = User data
   const { auth, setAuth } = useContext(AuthContext);
 
@@ -234,5 +231,3 @@ function Navbar() {
     </>
   );
 }
-
-export default Navbar;

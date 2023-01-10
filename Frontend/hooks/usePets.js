@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 
-const usePets = () => {
+export const usePets = () => {
   // State for pets data
   const [docsPets, setDocsPets] = useState([]);
 
@@ -31,7 +31,7 @@ const usePets = () => {
   const getCategories = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back-production.up.railway.app/api/pet/all",
+        "https://mascotas-back.onrender.com/api/pet/all",
         config
       );
 
@@ -63,5 +63,3 @@ const usePets = () => {
     getCategories,
   };
 };
-
-export default usePets;

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 
-const useUsers = () => {
+export const useUsers = () => {
   // State for users data
   const [docsUsers, setDocsUsers] = useState([]);
 
@@ -28,7 +28,7 @@ const useUsers = () => {
   const getUsers = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back-production.up.railway.app/api/user/all",
+        "https://mascotas-back.onrender.com/api/user/all",
         config
       );
 
@@ -63,5 +63,3 @@ const useUsers = () => {
     getUsers,
   };
 };
-
-export default useUsers;

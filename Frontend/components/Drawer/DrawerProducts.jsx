@@ -24,7 +24,7 @@ import {
 // Styles
 import s from "./Drawers.module.css";
 
-function DrawerProducts({
+export function DrawerProducts({
   isOpen,
   onClose,
   firstField,
@@ -235,5 +235,3 @@ function DrawerProducts({
     </Drawer>
   );
 }
-
-export default DrawerProducts;

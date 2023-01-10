@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 
-const useCategories = () => {
+export const useCategories = () => {
   // State for categories data
   const [docsCategories, setDocsCategories] = useState([]);
 
@@ -20,6 +20,8 @@ const useCategories = () => {
   // Get the token from local storage to verrify if the user is logged in
   const token = localStorage.getItem("token");
 
+  // console.log(token);
+
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -31,7 +33,7 @@ const useCategories = () => {
   const getCategories = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back-production.up.railway.app/api/category/all",
+        "https://mascotas-back.onrender.com/api/category/all",
         config
       );
 
@@ -63,5 +65,3 @@ const useCategories = () => {
     getCategories,
   };
 };
-
-export default useCategories;

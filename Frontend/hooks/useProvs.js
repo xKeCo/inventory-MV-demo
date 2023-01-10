@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 
-const useProvs = () => {
+export const useProvs = () => {
   // State for provs data
   const [docsProvs, setDocsProvs] = useState([]);
 
@@ -31,7 +31,7 @@ const useProvs = () => {
   const getProveedores = async () => {
     try {
       const { data } = await axios.get(
-        "https://mascotas-back-production.up.railway.app/api/provider/all",
+        "https://mascotas-back.onrender.com/api/provider/all",
         config
       );
 
@@ -66,5 +66,3 @@ const useProvs = () => {
     getProveedores,
   };
 };
-
-export default useProvs;

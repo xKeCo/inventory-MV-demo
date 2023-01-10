@@ -17,7 +17,7 @@ import {
 // Styles
 import s from "./Drawers.module.css";
 
-function DrawerOrder({
+export function DrawerOrder({
   isOpen,
   onClose,
   handleChange,
@@ -73,5 +73,3 @@ function DrawerOrder({
     </Drawer>
   );
 }
-
-export default DrawerOrder;
